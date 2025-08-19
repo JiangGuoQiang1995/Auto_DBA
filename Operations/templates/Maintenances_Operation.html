@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+操作中心-维护事件处理
+{% endblock %}
+
+{% block content %}
+<div class="main-content d-flex flex-column min-vh-100">
+  <div class="table-responsive">
+    <h2>维护事件列表</h2>
+    <table class="table table-striped table-bordered">
+        <button class="el-button el-button--primary el-button-mini" type="button">
+            <span>新增</span>
+        </button>
+        <thead>
+            <tr>
+              <th scope="col">数据库类型</th>
+              <th scope="col">实例名</th>
+              <th scope="col">维护事件类型</th>
+              <th scope="col">操作类型</th>
+              <th scope="col">事件起止时间</th>
+              <th scope="col">告警是否屏蔽</th>
+              <th scope="col">操作</th>
+              <thead>
+            <tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>RDS MySQL</td>
+              <td>cn1rds001</td>
+              <td>EC2 maintenance</td>
+              <td>reboot instance</td>
+              <td>2025-04-15~2025-04-30</td>
+              <td>N</td>
+              <td class="el-table_2_column_20 is-hidden" rowspan="1" colspan="1">
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                  <span>应用</span>
+                </button>
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                    <span>忽略</span>
+                  </button>
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                  <span>屏蔽告警</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>Cassandra</td>
+              <td>cn1cas03-05</td>
+              <td>system update</td>
+              <td>apply maintenance</td>
+              <td>2025-04-12~2025-04-15</td>
+              <td>Y</td>
+              <td class="el-table_2_column_20 is-hidden" rowspan="1" colspan="1">
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                  <span>应用</span>
+                </button>
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                    <span>忽略</span>
+                  </button>
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                  <span>屏蔽告警</span>
+                </button>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

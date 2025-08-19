@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+记录中心-故障
+{% endblock %}
+
+{% block content %}
+<div class="main-content d-flex flex-column min-vh-100">
+  <div class="table-responsive">
+    <h2>故障列表</h2>
+    <table class="table table-striped table-bordered">
+        <div>
+            <button class="el-button el-button--primary el-button-mini" type="button" data-bs-toggle="modal" data-bs-target="#AddOption">
+              <span>新增记录</span>
+            </button>
+        </div>
+        <thead>
+            <tr>
+              <th scope="col">故障编号</th>
+              <th scope="col">故障描述</th>
+              <th scope="col" title="致命/严重/一般/无影响">故障评级</th>
+              <th scope="col" title="造成故障的模块">故障模块</th>
+              <th scope="col">故障影响范围</th>
+              <th scope="col" title="故障影响的时间">故障起止时间</th>
+              <th scope="col">故障表象</th>
+              <th scope="col">故障原因</th>
+              <th scope="col">解决措施</th>
+              <th scope="col">操作</th>
+              <thead>
+            <tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>Event-001</td>
+              <td>MySQL数据库主键溢出</td>
+              <td>严重</td>
+              <td>RDS MySQL</td>
+              <td>消息推送业务、商城订单业务、设备寻找业务</td>
+              <td>2025-03-18 ~ 2025-03-21</td>
+              <td>业务主数据库可读不可写，用户能够正常使用，能够查询到过往记录，但是无法注册新用户</td>
+              <td>
+                <li>1、MySQL数据库主键使用已经达到int类型支持的最大值，导致业务数据库可读不可写</li>
+                <li>2、业务代码逻辑漏洞：当新增数据时，占用的主键ID一但插入失败，就会跳过该尚未使用的ID，造成</li>
+                <li>   数据库会出现主键ID增长跳跃的现象，而不是线性增长，造成数据库“虚满”。</li>
+              </td>
+              <td>
+                <li>解决措施：</li>
+                <li>    1、完善MySQL相关数据库指标监控，新增对主键ID的使用值、使用率、增长趋势的监控</li>
+                <li>    2、开发更新代码，解决“数据库主键ID非线性增长的‘跳跃’问题”</li>
+              </td>
+              <td class="el-table_2_column_20 is-hidden" rowspan="1" colspan="1">
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                  <span>更新</span>
+                </button>
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                    <span>评价</span>
+                </button>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

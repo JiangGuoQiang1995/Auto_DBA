@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Jiang Auto_DBA homepage
+{% endblock %}
+
+{% block content %}
+<style>
+	h1 {
+		line-height: 60px;
+		height: 60px;
+		background: #146402;
+		text-align: center;
+		font-weight: bold;
+		color: #eee;
+		font-size: 14px;
+	}
+	.chart {
+		height: 600px;
+	}
+</style>
+
+<div id="my_style" class="main-content chart">
+  <!--主体内容-->
+</div>
+<script type="text/javascript">
+	var chartDom = document.getElementById('my_style');
+	var myChart = echarts.init(chartDom);
+	var option;
+
+	option = {
+		graphic: {
+			elements: [
+				{
+					type: 'text',
+					left: 'center',
+					top: 'center',
+					style: {
+						text: 'JiangGuoQiang Auto_DBA',
+						fontSize: 80,
+						fontWeight: 'bold',
+						lineDash: [0, 200],
+						lineDashOffset: 0,
+						fill: 'transparent',
+						stroke: '#000',
+						lineWidth: 1
+					},
+					keyframeAnimation: {
+						duration: 3000,
+						loop: true,
+						keyframes: [
+							{
+								percent: 0.7,
+								style: {
+									fill: 'transparent',
+									lineDashOffset: 200,
+									lineDash: [200, 0]
+								}
+							},
+							{
+								percent: 0.8,
+								style: {
+									fill: 'transparent'
+								}
+							},
+							{
+								percent: 1,
+								style: {
+									fill: 'black'
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	};
+	option && myChart.setOption(option);
+</script>
+{% endblock %}      

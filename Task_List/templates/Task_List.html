@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+任务中心-巡检&故障演练
+{% endblock %}
+
+{% block content %}
+<div class="main-content d-flex flex-column min-vh-100">
+  <div class="table-responsive">
+    <h2>任务列表</h2>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+              <th scope="col">任务工单号</th>
+              <th scope="col">任务标题</th>
+              <th scope="col" title="紧急/重要/常规/学习">任务重要程度</th>
+              <th scope="col" title="已派发/接收/进行中/完成/核对/未通过/完结">任务状态</th>
+              <th scope="col">任务截止日期</th>
+              <th scope="col">操作</th>
+              <thead>
+            <tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>Jiang_DBA0101</td>
+              <td>RDS MySQL实例容量扩充任务</td>
+              <td>重要</td>
+              <td>已派发</td>
+              <td>2025-05-20</td>
+              <td class="el-table_2_column_20 is-hidden" rowspan="1" colspan="1">
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                  <span>更新</span>
+                </button>
+                <button class="el-button el-button--primary el-button-mini" type="button">
+                    <span>派发</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+                <td>Jiang_DBA0102</td>
+                <td>基于KeepAlive的数据库高可用方案研究</td>
+                <td>学习</td>
+                <td>进行中</td>
+                <td>2025-06-30</td>
+                <td class="el-table_2_column_20 is-hidden" rowspan="1" colspan="1">
+                    <button class="el-button el-button--primary el-button-mini" type="button">
+                        <span>更新</span>
+                    </button>
+                    <button class="el-button el-button--primary el-button-mini" type="button">
+                        <span>派发</span>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>Jiang_DBA0103</td>
+                <td>Cassandra数据库监控指标完善</td>
+                <td>一般</td>
+                <td>完成</td>
+                <td>2025-04-12</td>
+                <td class="el-table_2_column_20 is-hidden" rowspan="1" colspan="1">
+                    <button class="el-button el-button--primary el-button-mini" type="button">
+                        <span>更新</span>
+                    </button>
+                    <button class="el-button el-button--primary el-button-mini" type="button">
+                        <span>派发</span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
