@@ -1,0 +1,70 @@
+/****************************************************************************
+*  The VSSHELL Interfaces
+*  Copyright (c) Microsoft Corporation, All Rights Reserved
+****************************************************************************/
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+
+import "oaidl.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "vsshell171.idl";
+import "objext.idl";
+import "olecm.idl";
+import "VsPlatformUI.idl";
+import "basetsd.h";
+import "oleidl.idl";
+import "servprov.idl";
+import "docobj.idl";
+import "designer.idl";
+import "textmgr.idl";
+import "oleipc.idl";
+import "wtypes.idl";
+
+#endif
+
+#ifndef PROXYSTUB_BUILD
+#include "vscookie.h"
+#endif
+
+//--------------------------------------------------------------------------------------------
+// Extending __VSSPROPID11 (vsshell163.idl).
+// See previous version of vsshellXX.idl for previous enumeration values.
+//--------------------------------------------------------------------------------------------
+enum __VSSPROPID12
+{
+    VSSPROPID_ShutdownStarting = -9087, // int, a value from __VSShellMode.
+
+    // !!!! NOTE !!!!   THIS MUST BE THE SAME AS THE LAST PROP DEFINED
+    // when this is extended in the next version idl, uses of it must be changed to the new value
+    VSSPROPID_FIRST12 = -9087
+};
+
+//----------------------------------------------------------------------
+// IVsAsyncRunningDocumentTable2
+//----------------------------------------------------------------------
+[uuid(5115a04f-6c9f-4732-a9ae-02976e85f414)]
+interface IVsAsyncRunningDocumentTable2 : IVsAsyncRunningDocumentTable
+{
+    // This method can be used by a docdata that implements IVsProvideAsyncSaveState to
+    // update the state object it supplied via IVsProvideAsyncSaveState.GetAsyncSaveState.
+    // It might want to do this if the state object changed, say, while processing the
+    // OnBeforeSave[Async] event.
+    HRESULT UpdateAsyncSaveState(
+        [in] IVsProvideAsyncSaveState* pProvider,
+        [in] IUnknown* punkState);
+
+    HRESULT UnlockDocumentAsync(
+        [in] VSRDTFLAGS grfRDTLockType,
+        [in] VSCOOKIE dwCookie,
+        [out, retval] IVsTask** saveTask);
+};

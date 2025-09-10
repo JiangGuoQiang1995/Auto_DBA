@@ -1,0 +1,112 @@
+//=----------------------------------------------------------------------------
+// Microsoft Visual Studio
+//
+// Microsoft Confidential
+// Copyright (c) Microsoft Corporation.  All Rights Reserved.
+//
+// File:     VSShell1711.idl
+// Contents: the shell interfaces for the entire Dev17 cycle.
+//
+//
+// Current Owner:
+//=----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+
+#include "vsshelluuids.h" // for uuid_VsPreserveSigAttribute
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "context.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "vsshell153.idl";
+import "vsshell155.idl";
+import "vsshell156.idl";
+import "vsshell157.idl";
+import "vsshell158.idl";
+import "vsshell160.idl";
+import "vsshell161.idl";
+import "vsshell162.idl";
+import "vsshell169.idl";
+import "vsshell1610.idl";
+import "VsPlatformUI.idl";
+
+
+// Excluding DTE related includes for C builds as they contain C++ only constructs
+// and they produce compile errors while building the proxy DLL (msenvXXXp).
+cpp_quote("#ifdef __cplusplus")
+cpp_quote("#include \"dte.h\"")
+cpp_quote("#include \"textmgr2.h\"")
+cpp_quote("#include \"guiddef.h\"")
+cpp_quote("#endif // __cplusplus")
+
+#endif
+
+[v1_enum] enum __VSOSEFLAGS3
+{
+    OSE_AvoidExternalEditors = 0x80000000
+};
+
+#ifndef PROXYSTUB_BUILD
+
+// Describes the state of a given UI context.
+[v1_enum] enum __UIContextState
+{
+    // The UI context is unknown to the system. This means it has never been set. Unknown UI contexts are implicitly considered to have a state of <see cref="Inactive"/>. If all you care about is active or not, this can be considered Inactive. Though this value allows you to differentiate
+    // a UI context having been set to inactive vs being implicitly inactive.
+    UIContextState_NeverSet = 0x0,
+
+    // The UI context is set to an active state.
+    UIContextState_Active   = 0x1,
+
+    // The UI context is set to an inactive state.
+    UIContextState_Inactive = 0x2
+};
+
+typedef DWORD UIContextState;
+
+//----------------------------------------------------------------------------
+// IVsUIContextManager
+//----------------------------------------------------------------------------
+[
+    uuid(eceae828-2b6f-48ad-be7d-61b99c2ec466),
+        version(1.0),
+        pointer_default(unique)
+]
+interface IVsUIContextManager : IUnknown
+{
+    [propget] HRESULT AreUIContextsAvailable([out, retval] VARIANT_BOOL *pfAvailable);
+
+    HRESULT GetUIContextState([in] REFGUID uiContext, [out, retval] UIContextState *pState);
+
+    HRESULT SetUIContextState([in] REFGUID uiContext, [in] VARIANT_BOOL isActive);
+
+    HRESULT AdviseUIContextEvents([in] IVsUIContextEvents *callback, [out, retval] VSCOOKIE *pCookie);
+
+    HRESULT AdviseSpecificUIContextEvents([in] IVsUIContextEvents *callback, [in] REFGUID uiContext, [out, retval] VSCOOKIE *pCookie);
+
+    HRESULT UnadviseUIContextEvents([in] VSCOOKIE cookie);
+}
+
+#endif // END PROXYSTUB_BUILD
+
+cpp_quote("extern const __declspec(selectany) GUID SID_SVsUIContextManager = { 0xf215afcd, 0xdc11, 0x4dc5, { 0x99, 0xd4, 0x9d, 0x0b, 0x6b, 0xc8, 0x49, 0x57 } };")
+
+[v1_enum] enum __VSBLDCFGPROPID2
+{
+    VSBLDCFGPROPID_LAST2 = -15999,
+    VSBLDCFGPROPID_SupportsMTClean = -15999
+};
+
+typedef DWORD VSBLDCFGPROPID2;

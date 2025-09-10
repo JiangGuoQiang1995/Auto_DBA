@@ -1,0 +1,72 @@
+// msdbg1711.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+#ifdef DEBUGGER_PIA_BUILD
+#define XINT32 int
+#else
+#define XINT32 ULONG32
+#endif
+
+enum enum_MODULE1711_FLAGS
+{
+    //// ---------------------------------------------------------------------
+    //// VS 8.0 values
+    //MODULE100_FLAG_NONE = 0x0000,
+    //MODULE100_FLAG_SYSTEM = 0x0001,
+    //MODULE100_FLAG_SYMBOLS = 0x0002,
+    //MODULE100_FLAG_64BIT = 0x0004,
+
+    ////
+    //// If the engine knows a module about optimizations it needs to set
+    //// either of these flags, if it does not the module window will assume
+    //// it does not
+    ////
+
+    //MODULE100_FLAG_OPTIMIZED = 0x0008,
+    //MODULE100_FLAG_UNOPTIMIZED = 0x0010,
+
+    //// ---------------------------------------------------------------------
+    //// VS 9.0 values
+
+    //// ---------------------------------------------------------------------
+    //// VS 10.0 values
+    //MODULE100_FLAG_ENGINEWILLLOADSYMS = 0x0020,
+    //MODULE100_FLAG_SYMBOLSUNAVAILABLE = 0x0040, // The engine cannot load symbols at this time
+
+    //// ---------------------------------------------------------------------
+    //// VS 17.2 values
+    //MODULE172_FLAG_SYMBOLS_DECOMPILED = 0x0080, // the symbols are the result of a decompilation
+    //MODULE172_FLAG_SYMBOLS_RELOADABLE = 0x0100,  // the symbols have the potential to be reloaded in favor of a higher fidelity symbol file, i.e. decompiled can be reloaded for the real symbols
+    
+    //// ---------------------------------------------------------------------
+    //// VS 17.5 values
+    //MODULE175_FLAG_SYMBOLS_PARTIALLY_DECOMPILED = 0x0200, // The symbols are the result of partial decompilation.
+
+    //// ---------------------------------------------------------------------
+    //// VS 17.11 values
+
+    // The engine is capable of providing information about sources contained in the symbols associated for this module.  If an
+    //  engine does not return this flag, the absence of the various _AVAILABLE flags should NOT be interpreted to mean that
+    //  source information is unavailable, and consumers should fall back to checking for source information by attempting
+    //  to retrieve it directly (e.g. via IDebugSourceLinkModule.GetSourceLinkDataAsync)
+    MODULE1711_FLAG_SYMBOLS_SOURCE_INFO_SUPPORTED = 0x0400,
+    MODULE1711_FLAG_SYMBOLS_SOURCE_LINK_AVAILABLE = 0x0800, // The symbols for this module contain Source Link information
+    MODULE1711_FLAG_SYMBOLS_SOURCE_SERVER_AVAILABLE = 0x1000, // The symbols for this module contain Source Server information
+    MODULE1711_FLAG_SYMBOLS_EMBEDDED_SOURCE_AVAILABLE = 0x2000 // The symbols for this module contain embedded source documents
+};
+typedef DWORD MODULE1711_FLAGS;

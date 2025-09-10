@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SPWorkflowPkg"
+    targetNamespace="http://schemas.microsoft.com/sharepoint/2012/app/workflow"
+    elementFormDefault="qualified"
+    xmlns="http://schemas.microsoft.com/sharepoint/2012/app/workflow"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:simpleType name="notEmptyString"> 
+    <xs:restriction base="xs:string"> 
+      <xs:minLength value="1"/> 
+    </xs:restriction> 
+  </xs:simpleType> 
+  <xs:simpleType name="guid"> 
+	<xs:restriction base="xs:string"> 
+	  <xs:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/> 
+      </xs:restriction> 
+	</xs:simpleType>   
+  <xs:simpleType name="restrictAssociationToType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NoRestriction"></xs:enumeration>
+      <xs:enumeration value="List"></xs:enumeration>
+      <xs:enumeration value="Site"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="workflowStartEventType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WorkflowStart"></xs:enumeration>
+      <xs:enumeration value="ItemAdded"></xs:enumeration>
+      <xs:enumeration value="ItemUpdated"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="configValueScope">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WorkflowAssociation"></xs:enumeration>
+      <xs:enumeration value="WorkflowInstance"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="configValues">
+      <xs:sequence>
+        <xs:element name="ConfigValue" type="configValue" maxOccurs="unbounded"></xs:element>
+      </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="configValue">
+    <xs:all>
+      <xs:element name="Name" type="notEmptyString"></xs:element>
+      <xs:element name="Scope" type="configValueScope"></xs:element>
+      <xs:element name="Value" type="notEmptyString" minOccurs="0"></xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:element name="WorkflowDefinition" >
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="Id" type="guid"></xs:element>
+        <xs:element name="DisplayName" type="notEmptyString"></xs:element>
+        <xs:element name="Description" type="xs:string" minOccurs="0" default=""></xs:element>
+        <xs:element name="RestrictAssociationToType" type="restrictAssociationToType"></xs:element>
+        <xs:element name="RestrictAssociationToId" type="xs:string" minOccurs="0" default=""></xs:element>
+        <xs:element name="InitiationUrl" type="xs:anyURI" minOccurs="0" default=""></xs:element>
+        <xs:element name="AssociationUrl" type="xs:anyURI" minOccurs="0" default=""></xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WorkflowAssociation" >
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="Id" type="guid"></xs:element>
+        <xs:element name="DisplayName" type="notEmptyString"></xs:element>
+        <xs:element name="Description" type="xs:string" minOccurs="0" default=""></xs:element>
+        <xs:element name="EventType" type="workflowStartEventType"></xs:element>
+        <xs:element name="EventSourceGUID" type="xs:string"></xs:element>
+        <xs:element name="Enabled" type="xs:boolean" minOccurs="0" default="true"></xs:element>
+        <xs:element name="HistoryListId" type="xs:string" default="" minOccurs="0"></xs:element>
+        <xs:element name="TaskListId" type="xs:string" minOccurs="0" default=""></xs:element>
+        <xs:element name="ConfigValues" type="configValues" minOccurs="0"></xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

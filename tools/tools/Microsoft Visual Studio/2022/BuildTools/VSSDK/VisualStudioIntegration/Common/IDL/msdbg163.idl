@@ -1,0 +1,29 @@
+// msdbg163.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+
+// This enum extends enum_FRAMEINFO_FLAGS.  enum_FRAMEINFO_FLAGS has exhausted all the possible bits of a 32-bit integer,
+// so any new flags must use enum_FRAMEINFO_FLAGS_EXTENDED instead.
+enum FRAMEINFO_FLAGS_EX163
+{
+    /******************************************
+    FIF_EX_INCLUDE_ASYNC_FRAMES   = 0x1,
+    FIF_EX_SHOW_TASK_IDS          = 0x2,
+    ******************************************/
+    FIF_EX_FUNCNAME_HIDE_TEMPLATE_ARGS = 0x4, // Hide template arguments
+};

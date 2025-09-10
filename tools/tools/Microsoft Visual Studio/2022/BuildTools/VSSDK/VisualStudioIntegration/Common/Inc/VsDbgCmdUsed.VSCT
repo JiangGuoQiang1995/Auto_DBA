@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h"/>
+  <!-- #include "stdidcmd.h" -->
+  <Extern href="vsshlids.h"/>
+  <!-- #include "vsshlids.h" -->
+  <Extern href="virtkeys.h"/>
+  <!-- #include "virtkeys.h" -->
+  <Extern href="VSDbgCmd.h"/>
+  <!-- #include "VSDbgCmd.h" -->
+  <!--  -->
+  <!-- #define _CTC_GUIDS_ -->
+  <Extern href="VsDebugGuids.h"/>
+  <!-- #include "VsDebugGuids.h" -->
+  <!--  -->
+  <UsedCommands>
+    <!-- CMDUSED_SECTION -->
+    <!--     //Button -->
+    <!--  -->
+    <UsedCommand guid="guidVSStd97" id="cmdidStart"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidStartNoDebug"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidReattach"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidPause"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidStop"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidStopEvaluatingExpression"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidDetachDebugger"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidTriggerAppPrefetch"/>
+    <!--  -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidAppPrelaunch"/>
+    <!--  -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidDebugForAccessibility"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidRestart"/>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidApplyCodeChanges"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidStopApplyCodeChanges"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidHotReload"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidHotReloadOnFileSave"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidHotReloadRestart"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidHotReloadFileSave"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidHotReloadSettings"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidHotReloadMenuGroupExecution"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidHotReloadMenuGroupSetting"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidHotReloadMenuController"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidHotReloadMenuGroupAnchor"/>
+    </UsedCommands>
+    <UsedCommand guid="guidVSStd2K" id="ECMD_PROJSTARTDEBUG"/>
+    <UsedCommand guid="guidVSStd2K" id="ECMD_PROJSTARTNODEBUG"/>
+    <UsedCommand guid="guidVSStd2K" id="ECMD_PROJSTEPINTO"/>
+    <!--  -->
+    <!--     // Note that the icons for ShowNextStatement and SetNextStatement are *correctly* set backwards. -->
+    <UsedCommand guid="guidVSStd97" id="cmdidShowNextStatement"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidReverseExecute"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidReverseStepInto"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidReverseStepOver"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidReverseStepOut"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidStepInto"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidStepOver"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidStepOut"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidSetNextStatement"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidStepFilterToggle"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidRunToCursor"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidForceRunToCursor"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidRunThreadsToCursor"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidRunCurrentTileToCursor"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidGoToDisassembly"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakWhenValueChanges"/>
+    <!--  -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidIsObjectFavorite"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidShowOnlyFavorites"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidShowFavoritesNames"/>
+    <!--  -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidEnableExtendedSideEffects"/>
+    <!--  -->
+    <UsedCommand guid="guidVSStd97" id="cmdidAddWatch"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidAddParallelWatch"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidAddWatchExpression"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidQuickWatch"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidQuickWatchExpression"/>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidNewBreakpointGroup"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidNewFunctionBreakpoint"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidNewAddressBreakpoint"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidNewDataBreakpoint"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidInsertConditionalBreakpoint"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidInsertTracepoint"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidInsertTemporaryBreakpoint"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidInsertDependentBreakpoint"/>
+    </UsedCommands>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointSettings"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointSettingsCondition"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointSettingsAction"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointSettingsQuick"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointConstraints"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointEditLabels"/>
+    </UsedCommands>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidInsertTemporaryBreakpointFromGutterContextMenu"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidInsertConditionalBreakpointFromGutterContextMenu"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidInsertTracepointFromGutterContextMenu"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidInsertDependentBreakpointFromGutterContextMenu"/>
+    </UsedCommands>
+    <UsedCommand guid="guidVSStd97" id="cmdidInsertBreakpoint"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidEnableBreakpoint"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidToggleBreakpoint"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidDeleteBreakpoint"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidWriteCrashDump"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowShow"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidShowDebugOutput"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidDebuggerOptions"/>
+    <!--      -->
+    <UsedCommands>
+      <UsedCommand guid="guidVSStd97" id="cmdidAutosWindow" />
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutosRealFuncEval"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutosSearchNext"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutosSearchPrevious"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutosSearchFocus"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutosSearchDepth"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutosSearchDepthList"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutosShowOnlyFavorites"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutosShowFavoritesNames"/>
+    </UsedCommands>
+    <UsedCommands>
+      <UsedCommand  guid="guidVSStd97" id="cmdidLocalsWindow" />
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidLocalsRealFuncEval"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidLocalsSearchNext"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidLocalsSearchPrevious"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidLocalsSearchFocus"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidLocalsSearchDepth"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidLocalsSearchDepthList"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidLocalsShowOnlyFavorites"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidLocalsShowFavoritesNames"/>
+    </UsedCommands>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchWindowShow1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchWindowShow2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchWindowShow3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchWindowShow4"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchRealFuncEval"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchRealFuncEval1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchRealFuncEval2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchRealFuncEval3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchRealFuncEval4"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchNext"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchPrevious"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepth"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepthList"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchNext1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchPrevious1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepth1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepthList1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchNext2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchPrevious2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepth2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepthList2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchNext3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchPrevious3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepth3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepthList3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchNext4"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchPrevious4"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepth4"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchDepthList4"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowOnlyFavorites"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowOnlyFavorites1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowOnlyFavorites2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowOnlyFavorites3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowOnlyFavorites4"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowFavoritesNames"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowFavoritesNames1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowFavoritesNames2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowFavoritesNames3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchShowFavoritesNames4"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidWatchSearchFocus"/>
+    </UsedCommands>
+    <UsedCommand guid="guidVSStd97" id="cmdidImmediateWindow"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidCallStack"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidModulesWindowShow"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidDisasmWindowShow"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidRegisterWindowShow"/>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryWindowShow1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryWindowShow2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryWindowShow3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryWindowShow4"/>
+    </UsedCommands>
+    <!-- #endif     -->
+    <!--  -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidStepUnitLine"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidStepUnitStatement"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidStepUnitInstruction"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidDeleteWatch"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidCollapseWatch"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidElasticColumn"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidCreateObjectID"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidDestroyObjectID"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidCopyExpression"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidCopyValue"/>
+    <!--  -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidThreadIpMarkerSwitchContext"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidThreadIpMarkerFlagUnflag"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidThreadIpMarkersSwitchContext"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidThreadIpMarkersSwitchContextFirst"/>
+    <!--    <UsedCommand guid="guidVSDebugCommand" id="cmdidThreadIpMarkersFlag"/> -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidThreadIpMarkersFlagFirst"/>
+    <!--    <UsedCommand guid="guidVSDebugCommand" id="cmdidThreadIpMarkersUnflag"/> -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidThreadIpMarkersUnflagFirst"/>
+    <!--  -->
+    <UsedCommand guid="guidVSStd97" id="cmdidDisplayRadix"/>
+
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidOutputOnException"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidOutputOnStepFilter"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidOutputOnModuleLoad"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidOutputOnModuleUnload"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidOutputOnProcessDestroy"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidOutputOnThreadDestroy"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidOutputOnOutputDebugString"/>
+    <!--      -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidJustMyCode"/>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidToggleDisassembly"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowDisasmAddress"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowDisasmSource"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowDisasmCodeBytes"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowDisasmSymbolNames"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowDisasmLineNumbers"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowDisasmToolbar"/>
+    </UsedCommands>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowDelete"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowDeleteAllMatching" />
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowToggleAllMatching"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowGoToSource"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowGoToDisassembly"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowGoToBreakpoint"/>
+      <!--  -->
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnLabel"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnName"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnCondition"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnHitCount"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnLanguage"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnFunction"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnFile"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnAddress"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnData"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnProcess"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnConstraints"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowColumnAction"/>
+
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnLabel"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnName"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnCondition"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnHitCount"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnLanguage"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnFunction"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnFile"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnAddress"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnData"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnProcess"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnConstraints"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByColumnAction"/>
+
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortByNone"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortAscending"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowSortDescending"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowUndo"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowRedo"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowExport" />
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowExportSelected" />
+    </UsedCommands>
+    <UsedCommands>
+      <!--     // Memory window cmdid's for ALL instances of the memory window -->
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowNoData"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidOneByteInt"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidTwoByteInt"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidFourByteInt"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidEightByteInt"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidFloat"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidDouble"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidFormatHex"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidFormatSigned"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidFormatUnsigned"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidFormatBigEndian"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowNoText"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowAnsiText"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowUnicodeText"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutoReevaluate"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowToolbar"/>
+      <!--  -->
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutoReevaluate1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutoReevaluate2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutoReevaluate3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAutoReevaluate4"/>
+    </UsedCommands>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidSetCurrentFrame"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackTypes"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackNames"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackValues"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackModules"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackLineOffset"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackByteOffset"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackTemplateArguments"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowExternalCode"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCrossThreadCallStack"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidUnwindFromException"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidDeoptimizeFrame"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallstackShowFrameType"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCopyWithSourcePaths"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidGoToModule"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackSearchNext"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackSearchPrevious"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackSearchFocus"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackShowAllThreads"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCallStackShowExternalCode"/>
+    </UsedCommands>
+     <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidGoToSource"/>
+    </UsedCommands>
+
+    <!--  -->
+    <!--     // commands available in the command window only -->
+    <UsedCommand guid="guidVSStd97" id="cmdidEvaluateExpression"/>
+    <UsedCommand guid="guidVSStd97" id="cmdidEvaluateStatement"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidSetDebuggerLogging"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidListCallStack"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidListDisassembly"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidListMemory"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidListThreads"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidListModules"/>
+
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidListRegisters"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidListSource"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidSetRadix"/>
+
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidSetCurrentStackFrame"/>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidDisableAllBreakpoints"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidEnableAllBreakpoints"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidToggleAllBreakpoints"/>
+      <UsedCommand guid="guidVSStd97" id="cmdidClearBreakpoints"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointExport"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowImport"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowFilterFocus" />
+    </UsedCommands>
+    <!-- #endif     -->
+    <!--  -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidSymbolPath"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidSymbolOptions"/>
+    <!--  -->
+    <!--    // breakpoint groups -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowRemoveFromBreakpointGroup"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowAddToNewBreakpointGroup"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidRemoveFromBreakpointGroup"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidAddToNewBreakpointGroup"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidSetAsDefaultBreakpointGroup"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidUnsetAsDefaultBreakpointGroup"/>
+
+    <!--  -->
+    <!--     // hidden commands -->
+    <UsedCommand guid="guidVSStd97" id="cmdidEditorWidgetClick"/>
+    <UsedCommand guid="guidVSStd2K" id="cmdidUpdateMarkerSpans"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidExitDebuggerDeploymentBuild"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidProcessRefreshRequest"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidRegWinGroupFirst"/>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidStepIntoSpecificFirst"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowStepIntoSpecificMenu"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidBreakpointsWindowAddToBreakpointGroupFirst"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAddToBreakpointGroupFirst"/>
+    </UsedCommands>
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidLoadSymbolsFromCurrentPath"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidSymbolLoadInfo"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidSymbolsIncludeExclude"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidDecompileSource"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidExtractEmbeddedSource"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidShowAllModules"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidModulesWindowFilterFocus" />
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidModulesWindowClearSearchFilter" />
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCopyModuleName"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCopyModulePath"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCopyModuleDirectory"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCopyModuleSymbolFile"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCopyModuleVersion"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidCopyModuleBaseAddress"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidOpenFileLocationModule"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidOpenFileLocationSymbols"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidOpenVisualizer"/>
+    </UsedCommands>
+    <!--  -->
+    <!--     //Combos -->
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryExpression1"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryColumns1"/>
+      <!--  -->
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryExpression2"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryColumns2"/>
+      <!--  -->
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryExpression3"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryColumns3"/>
+      <!--  -->
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryExpression4"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidMemoryColumns4"/>
+    </UsedCommands>
+    <!--  -->
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidStepUnitList"/>
+    <!--  -->
+    <UsedCommands>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidProcessList"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAppPackageAppsControl"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAppPackageAppsMenuGroup"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAppPackageAppsMenuGroupTarget"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidThreadList"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidToggleCurrentThreadFlag" />
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidToggleFlaggedThreads" />
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidToggleShowCurrentProcessOnly" />
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidStackFrameList"/>
+    </UsedCommands>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidDisasmExpression"/>
+    <UsedCommand guid="guidVSDebugCommand" id="cmdidAnalyzeWithCopilot"/>
+   
+    <!-- 
+      The following UsedCommands are in VS:src\appid\inc\SharedCmdUsed.vsct
+      because they are conditional based on which AppID is building (devenv, blend, etc).
+    <UsedCommand Condition="!defined(No_TerminateAll)" guid="guidVSDebugCommand" id="cmdidTerminateAll"/>
+    <UsedCommand Condition="!defined(No_AttachProcess)" guid="guidVSStd97" id="cmdidDebugProcesses"/>
+    <UsedCommand Condition="!defined(No_AttachProcess)" guid="guidVSStd97" id="cmdidToolsDebugProcesses"/>
+    <UsedCommand Condition="!defined(No_AttachProcess)" guid="guidVSDebugCommand" id="cmdidSetCurrentProcess"/>
+    <UsedCommand Condition="!defined(No_LaunchAppx)"  guid="guidVSDebugCommand" id="cmdidLaunchAppx"/>
+    <UsedCommands Condition="!defined(No_AttachedProcsWindow)" >
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsWindowShow"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsStartProcess"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsPauseProcess"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsStepIntoProcess"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsStepOverProcess"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsStepOutProcess"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsDetachProcess"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsTerminateProcess"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsDetachOnStop"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidSingleProcStepInto"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidSingleProcStepOver"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidSingleProcStepOut"/>
+    </UsedCommands>
+    <UsedCommand Condition="!defined(No_AttachedProcsWindow)" guid="guidVSDebugCommand" id="cmdidListProcesses"/>
+    <UsedCommands Condition="!defined(No_AttachedProcsWindow)" >
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsColumnName"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsColumnID"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsColumnPath"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsColumnTitle"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsColumnMachine"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsColumnState"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsColumnTransport"/>
+      <UsedCommand guid="guidVSDebugCommand" id="cmdidAttachedProcsColumnTransportQualifier"/>
+    </UsedCommands>
+    <UsedCommand Condition="!defined(No_ProgramToDebugShow)" guid="guidRazorCmdSet" id="cmdidToolsProgramToDebug"/>
+    -->
+
+  </UsedCommands>
+  <!-- CMDUSED_END -->
+</CommandTable>

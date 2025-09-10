@@ -1,0 +1,121 @@
+//=----------------------------------------------------------------------------
+// Microsoft Visual Studio
+//
+// Microsoft Confidential
+// Copyright (c) Microsoft Corporation.  All Rights Reserved.
+//
+// File:     VSShell178.idl
+// Contents: the shell interfaces for the entire Dev17 cycle.
+//
+//
+// Current Owner:
+//=----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+
+#include "vsshelluuids.h" // for uuid_VsPreserveSigAttribute
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "context.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "vsshell153.idl";
+import "vsshell155.idl";
+import "vsshell156.idl";
+import "vsshell157.idl";
+import "vsshell158.idl";
+import "vsshell160.idl";
+import "vsshell161.idl";
+import "vsshell162.idl";
+import "vsshell169.idl";
+import "vsshell1610.idl";
+import "VsPlatformUI.idl";
+
+import "textfind100.idl";
+
+// Excluding DTE related includes for C builds as they contain C++ only constructs
+// and they produce compile errors while building the proxy DLL (msenvXXXp).
+cpp_quote("#ifdef __cplusplus")
+cpp_quote("#include \"dte.h\"")
+cpp_quote("#include \"textmgr2.h\"")
+cpp_quote("#include \"guiddef.h\"")
+cpp_quote("#endif // __cplusplus")
+
+#endif
+
+[v1_enum] enum _VSRDTFLAGSUPPER
+{
+    RDT_InitializationFailed = 0x00000001
+};
+
+typedef DWORD VSRDTFLAGSUPPER;
+
+[v1_enum] enum __FRAMESHOW5
+{
+    FRAMESHOW_LoadingWindowActivated = 0x0F,
+    FRAMESHOW_LoadingWindowShown     = 0x10,
+};
+
+//----------------------------------------------------------------------------
+// IVsRunningDocTableEvents8
+//----------------------------------------------------------------------------
+[
+    uuid(962b1102-ac20-4519-8c94-b3e30c3ea038),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsRunningDocTableEvents8 : IUnknown
+{
+    HRESULT OnBeforeLoadingDocumentWindowShow([in] VSCOOKIE dwDocumentCookie, [in] VARIANT_BOOL fIsFirstShow, [in] IVsWindowFrame *pFrame);
+}
+
+//----------------------------------------------------------------------------
+// IVsAsyncRunningDocumentTable4
+//----------------------------------------------------------------------------
+[
+    uuid(2b731902-8e20-4219-8294-9539ffdf2a80),
+        version(1.0),
+        pointer_default(unique)
+]
+interface IVsAsyncRunningDocumentTable4 : IUnknown
+{
+    HRESULT GetDocumentDataAsync([in] VSCOOKIE dwDocumentCookie, [out, retval] IVsTask** ppTask);
+}
+
+//----------------------------------------------------------------------------
+// IVsRunningDocumentTable7
+//----------------------------------------------------------------------------
+[
+    uuid(c84c8c02-dc20-4f19-a794-a14070b3c2cf),
+        version(1.0),
+        pointer_default(unique)
+]
+interface IVsRunningDocumentTable7 : IUnknown
+{
+    HRESULT GetDocumentFlagsEx([in]VSCOOKIE dwDocumentCookie, [out] VSRDTFLAGSUPPER* pgrfUpperFlags, [out] VSRDTFLAGS* pgrfLowerFlags);
+}
+
+//----------------------------------------------------------------------------
+// IVsAsyncDeferredDocView2
+//----------------------------------------------------------------------------
+[
+    uuid(f5339b02-5620-4819-9b94-7225835024f9),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsAsyncDeferredDocView2 : IUnknown
+{
+    HRESULT LoadDocViewAsync([in] IUnknown *pDocData, [in] GUID guidCommandUIContext, [out, retval] IVsTask **res);
+}
+

@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<xs:schema targetNamespace="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:tns="//schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" version="1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation >The following schema for Microsoft Visual Studio Command Tables describes the syntax for defining commands in xml. Microsoft does not make any representation or warranty regarding the schema or any product or item developed based on the schema. The schema is provided to you on an AS IS basis. Microsoft disclaims all express, implied and statutory warranties, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and freedom from infringement. Without limiting the generality of the foregoing, Microsoft does not make any warranty of any kind that any item developed based on the schema, or any portion of the schema, will not infringe any copyright, patent, trade secret, or other intellectual property right of any person or entity in any country. It is your responsibility to seek licenses for such intellectual property rights where appropriate. MICROSOFT SHALL NOT BE LIABLE FOR ANY DAMAGES OF ANY KIND ARISING OUT OF OR IN CONNECTION WITH THE USE OF THE SCHEMA, INCLUDING WITHOUT LIMITATION, ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL (INCLUDING ANY LOST PROFITS), PUNITIVE OR SPECIAL DAMAGES, WHETHER OR NOT MICROSOFT HAS BEEN ADVISED OF SUCH DAMAGES. (c) Microsoft Corporation. All rights reserved.</xs:documentation>
+  </xs:annotation>
+  <!---->
+  <xs:complexType name="annotated" mixed="false">
+    <xs:annotation>
+      <xs:documentation ><!-- _locID_text="annotated" _locComment="" -->This type is extended by all types which allow annotation.  A derived type may contain as many of AppInfo or Documentation nodes in its 'Annotation' element as you wish.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="Annotation" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="Condition" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <!---->
+  <xs:element name="AppInfo">
+    <xs:annotation>
+      <xs:documentation ><!-- _locID_text="AppInfo" _locComment="" -->AppInfo may include any valid CDATA or xml.  The first instance of AppInfo is reserved and should be empty if present.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:any processContents="lax" namespace="##any" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+      <xs:anyAttribute namespace="##other" processContents="lax" />
+    </xs:complexType>
+  </xs:element>
+  <!---->
+  <xs:element name="Documentation">
+    <xs:annotation>
+      <xs:documentation ><!-- _locID_text="Documentation" _locComment="" -->Documentation may include any valid CDATA or xml.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:any processContents="lax" namespace="##any" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+      <xs:anyAttribute namespace="##other" processContents="lax" />
+    </xs:complexType>
+  </xs:element>
+  <!---->
+  <xs:element name="Annotation">
+    <xs:annotation>
+      <xs:documentation >
+        <!-- _locID_text="Annotation" _locComment="" -->Comments inserted in Documentation amd AppInfo elements will be preserved by command table editing tools.  The first instance of AppInfo is reserved.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="false">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="AppInfo" />
+        <xs:element ref="Documentation" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <!---->
+  <xs:complexType abstract="false" name="CommandStrings">
+    <xs:all>
+      <xs:element name="ButtonText" type="xs:string" />
+      <xs:element minOccurs="0" name="ToolTipText" type="xs:string" />
+      <xs:element minOccurs="0" name="MenuText" type="xs:string" />
+      <xs:element minOccurs="0" name="CommandName" type="xs:string" />
+      <xs:element minOccurs="0" name="CanonicalName" type="xs:string" />
+      <xs:element minOccurs="0" name="LocCanonicalName" type="xs:string" />
+    </xs:all>
+    <xs:attribute name="language" type="xs:language" use="optional">
+      <xs:annotation>
+        <xs:documentation ><!-- _locID_text="strings-language" _locComment="" -->Override the default language of the command table for this string set</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <!---->
+  <xs:simpleType name="ButtonTypeList">
+    <xs:list itemType="ButtonType" />
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="ComboTypeList">
+    <xs:list itemType="ComboType" />
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="ButtonType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Button" />
+      <xs:enumeration value="MenuButton" />
+      <xs:enumeration value="SplitDropDown" />
+      <xs:enumeration value="Swatch" />
+      <xs:enumeration value="AppID" />
+      <xs:enumeration value="Shared" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="ComboType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="DropDownCombo" />
+      <xs:enumeration value="DynamicCombo" />
+      <xs:enumeration value="IndexCombo" />
+      <xs:enumeration value="MRUCombo" />
+      <xs:enumeration value="AppID" />
+      <xs:enumeration value="Shared" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="MenuType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Context" />
+      <xs:enumeration value="Menu" />
+      <xs:enumeration value="MenuController" />
+      <xs:enumeration value="MenuControllerLatched" />
+      <xs:enumeration value="Toolbar" />
+      <xs:enumeration value="ToolWindowToolbar" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="GroupFlag">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Dynamic" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="MenuFlag">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="AlwaysCreate" />
+      <xs:enumeration value="DefaultDocked" />
+      <xs:enumeration value="DefaultInvisible" />
+      <xs:enumeration value="DontCache" />
+      <xs:enumeration value="DynamicVisibility" />
+      <xs:enumeration value="AllowVisibilityChangeOnToolBar" />
+      <xs:enumeration value="IconAndText" />
+      <xs:enumeration value="IconIsMoniker" />
+      <xs:enumeration value="NoCustomize" />
+      <xs:enumeration value="NotInTBList" />
+      <xs:enumeration value="NoToolbarClose" />
+      <xs:enumeration value="TextChanges" />
+      <xs:enumeration value="TextIsAnchorCommand" />
+      <xs:enumeration value="TogglePatternAvailable" />
+      <xs:enumeration value="SelectionPatternAvailable" />
+      <xs:enumeration value="AllowClientRole" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="ComboFlag">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="CaseSensitive" />
+      <xs:enumeration value="CommandWellOnly" />
+      <xs:enumeration value="ComboCommitsOnDrop" />
+      <xs:enumeration value="DefaultDisabled" />
+      <xs:enumeration value="DefaultInvisible" />
+      <xs:enumeration value="DynamicVisibility" />
+      <xs:enumeration value="AllowVisibilityChangeOnToolBar" />
+      <xs:enumeration value="FilterKeys" />
+      <xs:enumeration value="IconAndText" />
+      <xs:enumeration value="IconIsMoniker" />
+      <xs:enumeration value="NoAutoComplete" />
+      <xs:enumeration value="NoButtonCustomize" />
+      <xs:enumeration value="NoCustomize" />
+      <xs:enumeration value="NoKeyCustomize" />
+      <xs:enumeration value="StretchHorizontally" />
+      <xs:enumeration value="AllowClientRole" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="ButtonFlag">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="AllowParams" />
+      <xs:enumeration value="CommandWellOnly" />
+      <xs:enumeration value="DefaultDisabled" />
+      <xs:enumeration value="DefaultInvisible" />
+      <xs:enumeration value="DontCache" />
+      <xs:enumeration value="DynamicItemStart" />
+      <xs:enumeration value="DynamicVisibility" />
+      <xs:enumeration value="AllowVisibilityChangeOnToolBar" />
+      <xs:enumeration value="FixMenuController" />
+      <xs:enumeration value="IconAndText" />
+      <xs:enumeration value="IconIsMoniker" />
+      <xs:enumeration value="NoButtonCustomize" />
+      <xs:enumeration value="NoCustomize" />
+      <xs:enumeration value="NoKeyCustomize" />
+      <xs:enumeration value="NoShowOnMenuController" />
+      <xs:enumeration value="Pict" />
+      <xs:enumeration value="PostExec" />
+      <xs:enumeration value="ProfferedCmd" />
+      <xs:enumeration value="RouteToDocs" />
+      <xs:enumeration value="TextCascadeUseBtn" />
+      <xs:enumeration value="TextMenuUseButton" />
+      <xs:enumeration value="TextChanges" />
+      <xs:enumeration value="TextChangesButton" />
+      <xs:enumeration value="TextContextUseButton" />
+      <xs:enumeration value="TextMenuCtrlUseMenu" />
+      <xs:enumeration value="TextMenuUseButton" />
+      <xs:enumeration value="TextOnly" />
+      <xs:enumeration value="TogglePatternAvailable" />
+      <xs:enumeration value="SelectionPatternAvailable" />
+      <xs:enumeration value="DynamicAutomationName" />
+      <xs:enumeration value="AllowClientRole" />
+      <xs:enumeration value="RemoteCommandOverride" />
+      <xs:enumeration value="AsyncFromUIInvocation" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:attributeGroup name="Guid-ID">
+    <xs:attribute name="guid" type="xs:string" use="required" />
+    <xs:attribute name="id" type="xs:string" use="required" />
+  </xs:attributeGroup>
+  <!---->
+  <xs:complexType name="Guid-ID">
+    <xs:attributeGroup ref="Guid-ID" />
+  </xs:complexType>
+  <!---->
+  <xs:attributeGroup name="CommandAttributes">
+    <xs:attributeGroup ref="Guid-ID" />
+    <xs:attribute name="priority" type="xs:string" use="optional" vs:snippet="yes" default="100">
+      <xs:annotation>
+        <xs:documentation ><!-- _locID_text="priority" _locComment="" -->When a &lt;Parent&gt; element is not specified, priority is optional and will be ignored.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="deprecatedLowPriority" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation ><!-- _locID_text="deprecatedLowPriority" _locComment="" -->This field is provided for backward compatibility.  The priority is stored in the high word of a 32 bit value and deprecatedLowPriority is stored in the low word.  This is to support legacy CTC ports that used the priority 0x0000.0x0000 syntax.  The low word of the priority is reserved.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="toolbarPriorityInBand" type="xs:string" use="optional" default="0">
+      <xs:annotation>
+        <xs:documentation >
+          <!-- _locID_text="toolbarPriorityInBand" _locComment="" -->Controls the relative ordering of a toolbar within a band when docked.  Higher values will move a toolbar to the right when oriented horizontally, or down when oriented vertically.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+
+  </xs:attributeGroup>
+  <!---->
+  <xs:attributeGroup name="MenuAttributes">
+    <xs:attributeGroup ref="CommandAttributes" />
+    <xs:attribute name="type" type="MenuType" default="Menu" vs:snippet="yes" use="optional"/>
+  </xs:attributeGroup>
+  <!---->
+  <xs:attributeGroup name="GroupAttributes">
+    <xs:attributeGroup ref="CommandAttributes" />
+  </xs:attributeGroup>
+  <!---->
+  <xs:attributeGroup name="ButtonAttributes">
+    <xs:attributeGroup ref="CommandAttributes" />
+    <xs:attribute name="type" type="ButtonTypeList" default="Button" vs:snippet="yes" use="optional"/>
+  </xs:attributeGroup>
+  <!---->
+  <xs:attributeGroup name="ComboAttributes">
+    <xs:attributeGroup ref="CommandAttributes" />
+    <xs:attribute name="type" type="ComboTypeList" default="DynamicCombo" vs:snippet="yes" use="optional"/>
+    <xs:attribute name="defaultWidth" type="xs:unsignedInt" use="required" />
+    <xs:attribute name="idCommandList" type="xs:string" use="required" />
+  </xs:attributeGroup>
+  <!---->
+  <xs:complexType abstract="false" name="Button">
+    <xs:complexContent>
+      <xs:extension base="annotated">
+        <xs:sequence>
+          <xs:element name="Parent" type="Guid-ID" minOccurs="0" />
+          <xs:element name="Icon" type="Guid-ID" minOccurs="0" />
+          <xs:element name="CommandFlag" type="ButtonFlag" minOccurs="0" maxOccurs="unbounded" default="DynamicVisibility" />
+          <xs:element name="Strings" type="CommandStrings" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attributeGroup ref="ButtonAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!---->
+  <xs:complexType abstract="false" name="Combo">
+    <xs:complexContent>
+      <xs:extension base="annotated">
+        <xs:sequence>
+          <xs:element name="Parent" type="Guid-ID" minOccurs="0" />
+          <xs:element name="CommandFlag" type="ComboFlag" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="Strings" type="CommandStrings" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attributeGroup ref="ComboAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!---->
+  <xs:complexType abstract="false" name="Menu">
+    <xs:complexContent>
+      <xs:extension base="annotated">
+        <xs:sequence>
+          <xs:element name="Parent" type="Guid-ID" minOccurs="0" />
+          <xs:element name="CommandFlag" type="MenuFlag" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="Strings" type="CommandStrings" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="MenuAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!---->
+  <xs:complexType abstract="false" name="Group">
+    <xs:complexContent>
+      <xs:extension base="annotated">
+        <xs:sequence>
+          <xs:element name="Parent" type="Guid-ID" minOccurs="0" />
+          <xs:element name="GroupFlag" type="GroupFlag" minOccurs="0" maxOccurs="unbounded" default="Dynamic" />
+        </xs:sequence>
+        <xs:attributeGroup ref="GroupAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!---->
+  <xs:complexType abstract="false" name="Placement">
+    <xs:complexContent>
+      <xs:extension base="annotated">
+        <xs:sequence>
+          <xs:element name="Parent" type="Guid-ID" minOccurs="1" />
+        </xs:sequence>
+        <xs:attributeGroup ref="CommandAttributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!---->
+  <xs:complexType abstract="false" name="Visibility">
+    <xs:complexContent>
+      <xs:extension base="annotated">
+        <xs:attributeGroup ref="Guid-ID" />
+        <xs:attribute name="context" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!---->
+  <xs:simpleType name="KeyModifierList">
+    <xs:list itemType="KeyModifier" />
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="KeyModifier">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Alt" />
+      <xs:enumeration value="Control" />
+      <xs:enumeration value="Shift" />
+      <xs:enumeration value="A" />
+      <xs:enumeration value="C" />
+      <xs:enumeration value="S" />
+      <xs:enumeration value="ALT" />
+      <xs:enumeration value="CONTROL" />
+      <xs:enumeration value="SHIFT" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Merge four kinds of specifying a key stroke -->
+  <!-- Hex number, single character, VK_*, or decimal number -->
+  <xs:simpleType name="KeyCode">
+    <xs:union memberTypes="HexKeyStroke KeyStroke VKCode xs:int" />
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="KeyStroke">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Za-z0-9]" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="HexKeyStroke">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="0[xX][A-Fa-f0-9]{1,2}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="VKCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="VK_ACCEPT" />
+      <xs:enumeration value="VK_ADD" />
+      <xs:enumeration value="VK_APPS" />
+      <xs:enumeration value="VK_ATTN" />
+      <xs:enumeration value="VK_BACK" />
+      <xs:enumeration value="VK_BROWSER_BACK" />
+      <xs:enumeration value="VK_BROWSER_FAVORITES" />
+      <xs:enumeration value="VK_BROWSER_FORWARD" />
+      <xs:enumeration value="VK_BROWSER_HOME" />
+      <xs:enumeration value="VK_BROWSER_REFRESH" />
+      <xs:enumeration value="VK_BROWSER_SEARCH" />
+      <xs:enumeration value="VK_BROWSER_STOP" />
+      <xs:enumeration value="VK_CANCEL" />
+      <xs:enumeration value="VK_CAPITAL" />
+      <xs:enumeration value="VK_CLEAR" />
+      <xs:enumeration value="VK_CONTROL" />
+      <xs:enumeration value="VK_CONVERT" />
+      <xs:enumeration value="VK_CRSEL" />
+      <xs:enumeration value="VK_DECIMAL" />
+      <xs:enumeration value="VK_DELETE" />
+      <xs:enumeration value="VK_DIVIDE" />
+      <xs:enumeration value="VK_DOWN" />
+      <xs:enumeration value="VK_END" />
+      <xs:enumeration value="VK_EREOF" />
+      <xs:enumeration value="VK_ESCAPE" />
+      <xs:enumeration value="VK_EXECUTE" />
+      <xs:enumeration value="VK_EXSEL" />
+      <xs:enumeration value="VK_F1" />
+      <xs:enumeration value="VK_F10" />
+      <xs:enumeration value="VK_F11" />
+      <xs:enumeration value="VK_F12" />
+      <xs:enumeration value="VK_F13" />
+      <xs:enumeration value="VK_F14" />
+      <xs:enumeration value="VK_F15" />
+      <xs:enumeration value="VK_F16" />
+      <xs:enumeration value="VK_F17" />
+      <xs:enumeration value="VK_F18" />
+      <xs:enumeration value="VK_F19" />
+      <xs:enumeration value="VK_F2" />
+      <xs:enumeration value="VK_F20" />
+      <xs:enumeration value="VK_F21" />
+      <xs:enumeration value="VK_F22" />
+      <xs:enumeration value="VK_F23" />
+      <xs:enumeration value="VK_F24" />
+      <xs:enumeration value="VK_F3" />
+      <xs:enumeration value="VK_F4" />
+      <xs:enumeration value="VK_F5" />
+      <xs:enumeration value="VK_F6" />
+      <xs:enumeration value="VK_F7" />
+      <xs:enumeration value="VK_F8" />
+      <xs:enumeration value="VK_F9" />
+      <xs:enumeration value="VK_FINAL" />
+      <xs:enumeration value="VK_HANGUEL" />
+      <xs:enumeration value="VK_HANGUL" />
+      <xs:enumeration value="VK_HANJA" />
+      <xs:enumeration value="VK_HELP" />
+      <xs:enumeration value="VK_HOME" />
+      <xs:enumeration value="VK_INSERT" />
+      <xs:enumeration value="VK_JUNJA" />
+      <xs:enumeration value="VK_KANA" />
+      <xs:enumeration value="VK_KANJI" />
+      <xs:enumeration value="VK_LAUNCH_APP1" />
+      <xs:enumeration value="VK_LAUNCH_APP2" />
+      <xs:enumeration value="VK_LAUNCH_MAIL" />
+      <xs:enumeration value="VK_LAUNCH_MEDIA_SELECT" />
+      <xs:enumeration value="VK_LBUTTON" />
+      <xs:enumeration value="VK_LCONTROL" />
+      <xs:enumeration value="VK_LEFT" />
+      <xs:enumeration value="VK_LMENU" />
+      <xs:enumeration value="VK_LSHIFT" />
+      <xs:enumeration value="VK_LWIN" />
+      <xs:enumeration value="VK_MBUTTON" />
+      <xs:enumeration value="VK_MEDIA_NEXT_TRACK" />
+      <xs:enumeration value="VK_MEDIA_PLAY_PAUSE" />
+      <xs:enumeration value="VK_MEDIA_PREV_TRACK" />
+      <xs:enumeration value="VK_MEDIA_STOP" />
+      <xs:enumeration value="VK_MENU" />
+      <xs:enumeration value="VK_MODECHANGE" />
+      <xs:enumeration value="VK_MULTIPLY" />
+      <xs:enumeration value="VK_NEXT" />
+      <xs:enumeration value="VK_NONAME" />
+      <xs:enumeration value="VK_NONCONVERT" />
+      <xs:enumeration value="VK_NUMLOCK" />
+      <xs:enumeration value="VK_NUMPAD0" />
+      <xs:enumeration value="VK_NUMPAD1" />
+      <xs:enumeration value="VK_NUMPAD2" />
+      <xs:enumeration value="VK_NUMPAD3" />
+      <xs:enumeration value="VK_NUMPAD4" />
+      <xs:enumeration value="VK_NUMPAD5" />
+      <xs:enumeration value="VK_NUMPAD6" />
+      <xs:enumeration value="VK_NUMPAD7" />
+      <xs:enumeration value="VK_NUMPAD8" />
+      <xs:enumeration value="VK_NUMPAD9" />
+      <xs:enumeration value="VK_OEM_1" />
+      <xs:enumeration value="VK_OEM_102" />
+      <xs:enumeration value="VK_OEM_2" />
+      <xs:enumeration value="VK_OEM_3" />
+      <xs:enumeration value="VK_OEM_4" />
+      <xs:enumeration value="VK_OEM_5" />
+      <xs:enumeration value="VK_OEM_6" />
+      <xs:enumeration value="VK_OEM_7" />
+      <xs:enumeration value="VK_OEM_8" />
+      <xs:enumeration value="VK_OEM_CLEAR" />
+      <xs:enumeration value="VK_OEM_COMMA" />
+      <xs:enumeration value="VK_OEM_MINUS" />
+      <xs:enumeration value="VK_OEM_PERIOD" />
+      <xs:enumeration value="VK_OEM_PLUS" />
+      <xs:enumeration value="VK_PA1" />
+      <xs:enumeration value="VK_PACKET" />
+      <xs:enumeration value="VK_PAUSE" />
+      <xs:enumeration value="VK_PLAY" />
+      <xs:enumeration value="VK_PRINT" />
+      <xs:enumeration value="VK_PRIOR" />
+      <xs:enumeration value="VK_PROCESSKEY" />
+      <xs:enumeration value="VK_RBUTTON" />
+      <xs:enumeration value="VK_RCONTROL" />
+      <xs:enumeration value="VK_RETURN" />
+      <xs:enumeration value="VK_RIGHT" />
+      <xs:enumeration value="VK_RMENU" />
+      <xs:enumeration value="VK_RSHIFT" />
+      <xs:enumeration value="VK_RWIN" />
+      <xs:enumeration value="VK_SCROLL" />
+      <xs:enumeration value="VK_SELECT" />
+      <xs:enumeration value="VK_SEPARATOR" />
+      <xs:enumeration value="VK_SHIFT" />
+      <xs:enumeration value="VK_SLEEP" />
+      <xs:enumeration value="VK_SNAPSHOT" />
+      <xs:enumeration value="VK_SPACE" />
+      <xs:enumeration value="VK_SUBTRACT" />
+      <xs:enumeration value="VK_TAB" />
+      <xs:enumeration value="VK_UP" />
+      <xs:enumeration value="VK_VOLUME_DOWN" />
+      <xs:enumeration value="VK_VOLUME_MUTE" />
+      <xs:enumeration value="VK_VOLUME_UP" />
+      <xs:enumeration value="VK_XBUTTON1" />
+      <xs:enumeration value="VK_XBUTTON2" />
+      <xs:enumeration value="VK_ZOOM" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:complexType abstract="false" name="KeyBinding">
+    <xs:complexContent>
+      <xs:extension base="annotated">
+        <xs:attributeGroup ref="Guid-ID" />
+        <xs:attribute name="editor" type="xs:string" use="required" />
+        <xs:attribute name="emulator" type="xs:string" />
+        <xs:attribute name="keyChord" type="xs:string">
+          <xs:annotation>
+            <xs:documentation ><!-- _locID_text="keyChord" _locComment="" -->'KeyChord' is depreciated because it can not be validated at design time by xsd, use Key1, Mod1, Key2, Mod2</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <!-- possible alternate use-->
+        <xs:attribute name="key1" type="KeyCode" use="required" vs:snippet="yes" vs:help="A key code may be a single character, hex value, or a VK_ constant">
+          <xs:annotation>
+            <xs:documentation ><!-- _locID_text="KeyBinding-key1" _locComment="" -->A key code may be a single character, hex value, or a VK_ constant</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="mod1" type="KeyModifierList" vs:snippet="yes">
+          <xs:annotation>
+            <xs:documentation ><!-- _locID_text="KeyBinding-mod1" _locComment="" -->Key modifier may be a combination of 'Control', 'Alt' and 'Shift' delimited by space</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="key2" type="KeyCode" vs:snippet="yes" vs:help="A key code may be a single character, hex value, or a VK_ constant">
+          <xs:annotation>
+            <xs:documentation ><!-- _locID_text="KeyBinding-key2" _locComment="" -->A key code may be a single character, hex value, or a VK_* constant</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="mod2" type="KeyModifierList" vs:snippet="yes">
+          <xs:annotation>
+            <xs:documentation ><!-- _locID_text="KeyBinding-mod2" _locComment="" -->Key modifier may be a combination of 'Control', 'Alt' and 'Shift' delimeted by space</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="Bitmap">
+    <xs:attribute name="guid" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation ><!-- _locID_text="Bitmap" _locComment="" -->The guid used for a bitmap should be unique, not the package guid, and should be used for the scope of the symbolic names for the ordinal values of its icon slots</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="resID" type="xs:string" vs:snippet="yes">
+      <xs:annotation>
+        <xs:documentation ><!-- _locID_text="Bitmap-resID" _locComment="" -->The resource ID specified here will be used to extract the resource from the package dll that the resluting binary command table is embeded in.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="href" type="xs:string">
+      <xs:annotation>
+        <xs:documentation ><!-- _locID_text="Bitmap-href" _locComment="" -->The relateive file path specified here will be used to extract the resource from a disk bitmap.  It will be imediately imbeded.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="usedList" type="xs:string">
+      <xs:annotation>
+        <xs:documentation ><!-- _locID_text="Bitmap-usedList" _locComment="" -->This list of values represents the ordinal positions of the icons in the srip that will be 'used'.  When compiled, the strip will be compacted to only those icons.  If this attribute is not specified, all images will be considered used.  If the image is retrieved by resID this attribute is requried.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="UsedCommand">
+    <xs:complexContent>
+      <xs:extension base="annotated">
+        <xs:attributeGroup ref="Guid-ID" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!---->
+  <xs:simpleType name="SymbolValue_Extern">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Extern" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="SymbolValue_Hex">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="0[Xx][0-9a-fA-F]*" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Valid Guid forms are as folows.  Any whitespace present will be ignored and is not case sensitive.
+  {6D484634-E53D-4a2c-ADCB-55145C9362C8}
+  { 0x6d484634, 0xe53d, 0x4a2c, { 0xad, 0xcb, 0x55, 0x14, 0x5c, 0x93, 0x62, 0xc8 } };
+  -->
+  <xs:simpleType name="SymbolValue_RegGuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\{[0-9a-fA-F]{8}(\-[0-9a-fA-F]{4}){3}\-[0-9a-fA-F]{12}\}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="SymbolValue_CGuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\{\s*0[xX][0-9a-fA-F]{1,8}\s*,(\s*0[xX][0-9a-fA-F]{1,4}\s*,){2}\s*\{\s*(0[xX][0-9a-fA-F]{1,2}\s*,\s*){7}(0[xX][0-9a-fA-F]{1,2}\s*)\}\s*\}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <xs:simpleType name="SymbolValue">
+    <xs:union memberTypes="xs:integer SymbolValue_Extern SymbolValue_Hex SymbolValue_RegGuid SymbolValue_CGuid   " />
+  </xs:simpleType>
+  <!---->
+  <xs:attributeGroup name="Symbol">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="value" type="SymbolValue" use="required">
+      <xs:annotation>
+        <xs:documentation ><!-- _locID_text="Symbol" _locComment="" -->Symbol values must be specified in decimal, hex, a guid or the value 'Extern'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!---->
+  <xs:complexType name="ButtonList">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="Button" type="Button" />
+        <xs:element maxOccurs="unbounded" name="Buttons" type="ButtonList">
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Condition" />
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="ComboList">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="Combo" type="Combo" />
+        <xs:element maxOccurs="unbounded" name="Buttons" type="ComboList">
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Condition" />
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="MenuList">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="Menu" type="Menu" />
+        <xs:element maxOccurs="unbounded" name="Menus" type="MenuList">
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Condition" />
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="GroupList">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="Group" type="Group" />
+        <xs:element maxOccurs="unbounded" name="Groups" type="GroupList">
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Condition" />
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="BitmapList">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="Bitmap" type="Bitmap" />
+        <xs:element maxOccurs="unbounded" name="Bitmaps" type="BitmapList">
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Condition" />
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="PlacementList">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="CommandPlacement" type="Placement" />
+        <xs:element maxOccurs="unbounded" name="CommandPlacements" type="PlacementList">
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Condition" />
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="VisibilityItemList">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="VisibilityItem" type="Visibility" />
+        <xs:element maxOccurs="unbounded" name="VisibilityConstraints" type="VisibilityItemList">
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Condition" />
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="KeyBindingList">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="KeyBinding" type="KeyBinding" />
+        <xs:element maxOccurs="unbounded" name="KeyBindings" type="KeyBindingList">
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Condition" />
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="UsedCommandList">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="UsedCommand" type="UsedCommand" />
+        <xs:element maxOccurs="unbounded" name="UsedCommands" type="UsedCommandList">
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Condition" />
+  </xs:complexType>
+  <!---->
+  <!---->
+  <xs:element name="CommandTable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Extern" vs:snippet="yes">
+            <xs:annotation>
+              <xs:documentation ><!-- _locID_text="CommandTable-Extern" _locComment="" -->The vsct file or header file specified in the 'href' will be loaded only so that the symbols that it contains may be used.  The actual components of the document, menus, groups etc... will not be included.  If this points to a header file, (*.h) it and its dependancies will be examined for value #define directives that are either a name, number or guid.  If a value is found to have multiple names, only the first name discovered will be rememberd.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:attribute name="Condition" type="xs:string" use="optional"/>
+              <xs:attribute name="href" type="xs:string" use="required"/>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Include">
+            <xs:annotation>
+              <xs:documentation ><!-- _locID_text="CommandTable-Include" _locComment="" -->The vsct file specified in the 'href' will be combined with the current document as if it were a single file.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:attribute name="Condition" type="xs:string" use="optional"/>
+              <xs:attribute name="href" type="xs:string" use="required"/>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Define">
+            <xs:annotation>
+              <xs:documentation ><!-- _locID_text="CommandTable-Define" _locComment="" -->Add a processing conditional value to the current list.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:attribute name="Condition" />
+              <xs:attribute name="name" type="xs:string" use="required"/>
+              <xs:attribute name="value" type="xs:string" use="optional"/>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Commands" vs:snippet="yes">
+          <xs:complexType>
+            <xs:all>
+              <xs:element minOccurs="0" name="SharedButtons" type="ButtonList" />
+              <xs:element minOccurs="0" name="SharedCombos" type="ComboList" />
+              <xs:element minOccurs="0" name="AppIDButtons" type="ButtonList" />
+              <xs:element minOccurs="0" name="AppIDCombos" type="ComboList" />
+              <xs:element minOccurs="0" name="Buttons" type="ButtonList" vs:snippet="yes" />
+              <xs:element minOccurs="0" name="Combos" type="ComboList" vs:snippet="yes" />
+              <xs:element minOccurs="0" name="Menus" type="MenuList" vs:snippet="yes" />
+              <xs:element minOccurs="0" name="Groups" type="GroupList" vs:snippet="yes" />
+              <xs:element minOccurs="0" name="Bitmaps" type="BitmapList" vs:snippet="yes" />
+            </xs:all>
+            <xs:attribute name="package" type="xs:string" use="optional" vs:snippet="yes" />
+          </xs:complexType>
+        </xs:element>
+        <xs:choice minOccurs="0" maxOccurs="unbounded"><!-- This is to support any order vs. actally controlling the number of occurrences -->
+          <xs:element minOccurs="0" name="CommandPlacements" type="PlacementList" vs:snippet="yes" />
+          <xs:element minOccurs="0" name="VisibilityConstraints" type="VisibilityItemList" vs:snippet="yes" />
+          <xs:element minOccurs="0" name="KeyBindings" type="KeyBindingList" vs:snippet="yes" />
+          <xs:element minOccurs="0" name="UsedCommands" type="UsedCommandList" vs:snippet="yes" />
+          <xs:element minOccurs="0" name="Symbols" vs:snippet="yes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="1" maxOccurs="unbounded" name="GuidSymbol" vs:snippet="yes">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element minOccurs="0" maxOccurs="unbounded" name="IDSymbol" vs:snippet="yes">
+                        <xs:complexType>
+                          <xs:attributeGroup ref="Symbol" />
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:attributeGroup ref="Symbol" />
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="language" type="xs:language" use="optional" vs:snippet="yes" default="en-us">
+        <xs:annotation>
+          <xs:documentation ><!-- _locID_text="CommandTable-language" _locComment="" -->Define the language in the command table as the default language for all strings</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

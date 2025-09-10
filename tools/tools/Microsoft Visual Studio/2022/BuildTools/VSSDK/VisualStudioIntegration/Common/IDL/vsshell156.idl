@@ -1,0 +1,464 @@
+/****************************************************************************
+*  The VSSHELL Interfaces
+*  Copyright (c) Microsoft Corporation, All Rights Reserved
+****************************************************************************/
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+import "oaidl.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "vsshell153.idl";
+import "objext.idl";
+import "olecm.idl";
+import "VsPlatformUI.idl";
+
+#endif
+
+/****************************************************************************
+
+***** General notes for updating this file
+
+***** Proxy Stub
+
+If you modify anything in here, you may need to rebuild the proxy-stub,
+msenvXXXp.dll, and update its registration file,
+SetupAuthoring\env\Registry\msenvXXXp.ddr. To do that, once this file has been
+built and published, build from env\msenv\proxies and observe the build output.
+
+If you need to omit something from the proxy/stub file, then put it inside an
+#ifndef PROXYSTUB_BUILD/#endif block
+
+There is no need to define GUIDs in external header files such as
+vsshelluuids.h. Instead, define the GUID directly within the [uuid(...)]
+attribute and use __uuidof in native code.
+
+***** Primary Interop Assemblies
+
+If you modify anything in here, you may need to rebuild the primary interop
+assemblies. To do that, once this file has been built and published, build
+from vscommon\pias using: 'msbuild pias.nativeproj'
+
+***** PreserveSig
+
+Prefer "nopreservesig", which is the default for all new interfaces, because
+it creates cleaner managed code. Managed implementations are free to throw
+exceptions which will automatically be translated to HRESULTs in the CLR's
+COM interop layer. Native implementations will return HRESULTs and they will
+be converted to exceptions for managed callers.
+
+Do not create methods returning S_FALSE. Instead use an additional
+"[out] VARIANT_BOOL*" or "[out,retval] VARIANT_BOOL*" argument.
+
+***** Interface inheritance
+
+You may derive new interfaces from existing ones, but avoid mixing
+"preservesig" (old) with "nopreservesig" (new). Derive from an older interface
+if all of the methods in your interface match the preservesig attributes of the
+older interface.
+
+Remember, when implementing a derived interface in C++, you must implement
+QueryInterface for the base interface(s) too.
+
+***** Enumerators and bitwise flags passed as parameters:
+
+When a parameter must be exactly one of a set of values (a true enumerator),
+the values should be defined and used as follows:
+
+typedef enum __VSSAMPLETYPE
+{
+ST_THISTYPE     = 0,   // first value should be zero or one, except
+ST_THATTYPE     = 1,   // in special cases, and following values
+ST_THEOTHERTYPE = 2,   // should use consecutive numbers
+} VSSAMPLETYPE;
+
+interface IVsSample : IUnknown
+{
+HRESULT SampleMethod([in] VSSAMPLETYPE stType);
+}
+
+When a parameter must be exactly one of a set of values (a true enumerator),
+and is considered a PROPID, the values should be defined and used as follows:
+
+enum __VSSAMPLEPROPID
+{
+VSSAMPPROPID_LAST     = -7000,  // first value should be a unique
+VSSAMPPROPID_This     = -7000,  // number not used by any other
+VSSAMPPROPID_That     = -7001,  // PROPID, and following values
+VSSAMPPROPID_FIRST    = -7001,  // should use consecutive numbers
+};
+typedef LONG VSSAMPLEPROPID;
+
+interface IVsSample : IUnknown
+{
+HRESULT GetProperty([in] VSSAMPLEPROPID propid, [out,retval] VARIANT *pvar);
+HRESULT SetProperty([in] VSSAMPLEPROPID propid, [in] VARIANT var);
+}
+
+When a parameter can be none of or a combination of values (bitwise),
+the values should be defined and used as follows:
+
+enum __VSSAMPLEOPTS
+{
+SO_THISOPTION     = 0x00000001,   // first value should be one,
+SO_THATOPTION     = 0x00000002,   // following values should use
+SO_THEOTHEROPTION = 0x00000004,   // consecutive powers of two
+};
+typedef DWORD VSSAMPLEOPTS;
+
+interface IVsSample : IUnknown
+{
+HRESULT SampleMethod([in] VSSAMPLEOPTS grfOptions);
+}
+
+***** Defining properties
+
+Define properties as follows:
+
+interface IVsSample : IUnknown
+{
+[propget] HRESULT Foo([out, retval] BSTR *pbstrFoo);
+[propput] HRESULT Foo([in] LPCOLESTR strFoo);
+}
+
+Using [propget], [propput] and [out, retval] makes the interface easier
+to implement and consume in managed code.
+
+Note: The example above shows a case where the get/put methods accept slightly different
+argument types (BSTR versus LPCOLESTR). As long as the equivalent interop types are the
+same, this is fine (MarshalAs[..] attributes will be added as necessary). However, this
+is typically seen only for string arguments.
+
+***** Array typed args
+
+Pass array type arguments (both in and out) using [] and size_is when the corresponding
+size argument is present. You must have the array size as an argument for interop to
+work correctly.
+
+interface IVsSample : IUnknown
+{
+HRESULT MethodPassesInArray([in] int cItems, [in, size_is(cItems)] int prgiItems[]);
+}
+
+DO NOT use [in] int piItems[].
+
+For simple element types, consider using SAFEARRAY: e.g. SAFEARRAY(VARIANT_BOOL),
+SAFEARRAY(BSTR), SAFEARRAY(INT), etc. because they interop cleanly to managed code, but
+note that there is additional memory allocation and it may not be appropriate for high-
+performance methods. Also see the following note.
+
+******* SAFEARRAY(IVsFoo*)
+
+SAFEARRAY(IVsFoo*) will cause MIDL warning 2456:
+SAFEARRAY(interface pointer) doesn't work using midl generated proxy
+
+If you know for sure that implementions will never will never need to be called cross
+apartment (cross thread/process), then you can add [local] to the method.
+
+Alternatively, consider creating a custom IEnumXXX interface.
+
+****** Strings
+
+Use "[in] LPCOLESTR" instead of "[in] BSTR"
+
+for faster marshaling and more convenience to native callers.
+(But continue to use "[out] BSTR*" for out args.)
+
+Generally, you don't need to specify [in,string] for NUL-terminated strings
+because most of the "pointer to character" typedefs are already attributed with
+[string]. (e.g. "typedef [string] const OLECHAR *LPCOLESTR")
+
+******* Boolean
+
+Use VARIANT_BOOL instead of BOOL because it interops as System.Boolean instead
+of System.Int
+
+However, exercise caution when assigning or comparing to/from C++ bool in native
+code because VARIANT_BOOL is typedef'd as a short and VARIANT_TRUE is ((short)-1)
+
+******* Optional (may be null) args
+
+Use [in,unique] for optional input arguments which may be NULL.
+Note that pointer_default(unique) does NOT do this automatically.
+
+Do not use [out,unique] because unique cannot be applied to [out]-only top-level
+pointer parameters. However, you can use [in,out,unique].
+
+Do not use [optional]. It only works with VARIANT anyway and it's not
+obvious for managed coders.
+
+******* [out] NonNullableType*
+
+Note that arguments of the type "[out] Foo* pFoo", where Foo is a "non-nullable
+type" such as int, double, VARIANT_BOOL, BSTR, will be converted to
+"out Foo[] pFoo" in managed code. This is a non-standard conversion applied by
+an IL transformation step during the build for the interop assembly.
+
+******* Service GUIDs
+
+Define service GUIDs via an empty interface derived from IUnknown
+and put it inside an #ifndef PROXYSTUB_BUILD/#endif block
+
+******* HWNDs, HANDLE, and other non-marshalable types
+
+Take care if you define an interface with HWND, HGDIOBJ or other Win32
+handle types. These typically need to be marked [local] since they
+cannot cross apartment (specifically, process) boundaries.
+
+****************************************************************************/
+
+// forward declarations
+
+
+enum _VSRDTFLAGS5
+{
+    //  RDT_NoLock                = 0x00000000,    // can be used with FindAndLockDocument(RDT_NoLock,...,&docCookie) to get DocCookie w/o taking a lock
+    //  RDT_ReadLock              = 0x00000001,
+    //  RDT_EditLock              = 0x00000002,
+    //  RDT_RequestUnlock         = 0x00000004,
+    //  RDT_LOCKMASK              = 0x00000007,
+
+    //  RDT_DontSaveAs            = 0x00000008,
+    //  RDT_NonCreatable          = 0x00000010,
+    //  RDT_DontSave              = 0x00000020,
+    //  RDT_DontAutoOpen          = 0x00000040,
+    //  RDT_CaseSensitive         = 0x00000080,
+    //  RDT_CantSave              = RDT_DontSave | RDT_DontSaveAs,
+    //  RDT_VirtualDocument       = 0x00001000,
+    //  RDT_ProjSlnDocument       = 0x00002000,
+    //  RDT_PlaceHolderDoc        = 0x00004000,
+    //  RDT_CanBuildFromMemory    = 0x00008000,
+    //  RDT_DontAddToMRU          = 0x00010000,
+
+    // Don't poll for changes to the document's dirty or readonly state.
+    // The document owner takes responsibility for explicitly updating
+    // the state via IVsRunningDocumentTable3.UpdateDirtyState or
+    // IVsRunningDocumentTable3.UpdateReadOnlyState.
+    //  RDT_DontPollForState      = 0x00020000,
+
+    // The document hasn't yet been initialized; it will be initialized
+    // on demand.  Several things can cause the document to be initialized, including
+    // but not limited to:
+    //
+    //  *   Calling IVsRunningDocumentTable.GetDocumentInfo requesting the docdata.
+    //  *   Requesting various properties from the document's window frame,
+    //      including: 
+    //      -   VSFPROPID_DocView 
+    //      -   VSFPROPID_ViewHelper
+    //      -   VSFPROPID_DocData
+    //      -   VSFPROPID_AltDocData
+    //      -   VSFPROPID_RDTDocData
+    //
+    // Documents that are auto-opened when reloading a solution are created with this
+    // flag.  If the auto-opened document's project has not yet been loaded, it will also
+    // have the RDT_PendingHierarchyInitialization flag.  When the document is fully
+    // initialized, RDT_PendingInitialization will be cleared and OnAfterAttributeChanged(Ex)
+    // will be raised with RDTA_DocumentInitialized.
+    //
+    // This flag is set by the system.  It can not be specified by the caller
+    // when registering the document.
+    // RDT_PendingInitialization = 0x00040000,
+
+    // The document's hierarchy hasn't yet been initialized; it will be initialized
+    // on demand.  Several things can cause the hierarchy to be initialized, including
+    // but not limited to:
+    //
+    //  *   Calling IVsRunningDocumentTable.GetDocumentInfo requesting the
+    //      hierarchy or item id.
+    //  *   Requesting various properties from the document's window frame,
+    //      including: 
+    //      -   VSFPROPID_Hierarchy
+    //      -   VSFPROPID_ItemID
+    //  *   The owning project is loaded.
+    //
+    // Documents that have RDT_PendingInitialization will also have this flag if
+    // the document's project has not yet been loaded when the document is created.
+    // When the document's project is eventually loaded, RDT_PendingHierarchyInitialization 
+    // will be cleared and OnAfterAttributeChanged(Ex) will be raised with RDTA_HierarchyInitialized.
+    // RDTA_HierarchyInitialized *may* be followed very closely by RDTA_DocumentInitialized,
+    // but that isn't guaranteed.
+    //
+    // This flag is set by the system.  It can not be specified by the caller
+    // when registering the document.
+    // RDT_PendingHierarchyInitialization = 0x00080000,
+
+    // This document does not participate in disaster recovery autosaves (similar to files that
+    // can't be saved).
+    RDT_DontAutoSave = 0x00100000
+
+    //  RDT_DOCMASK               = 0xFFFFF0F8,    // allow __VSCREATEDOCWIN flags in doc mask
+
+    //  RDT_Unlock_NoSave         = 0x00000100,
+    //  RDT_Unlock_SaveIfDirty    = 0x00000200,
+    //  RDT_Unlock_PromptSave     = 0x00000400,
+    //  RDT_Lock_WeakEditLock     = 0x00000800,
+    //  RDT_SAVEMASK              = 0x00000F00,
+    //  RDT_LOCKUNLOCKMASK        = 0x00000F00,
+};
+typedef DWORD VSRDTFLAGS5;
+
+[uuid(F902BFA6-B9ED-4D0C-9C8A-FCB1DDD442D2)]
+// The acqusition service for updating VS
+interface IVsSetupCompositionService3 : IUnknown
+{
+    // Update this instance of Visual Studio
+    HRESULT UpdateVisualStudioInstance();
+}
+
+//---------------------------------------------------------------------------
+// IVsAsyncToolWindowFactory
+//---------------------------------------------------------------------------
+[uuid(e6d4cefd-0b9e-4971-bc98-ed9fbc797d94)]
+interface IVsAsyncToolWindowFactory : IUnknown
+{
+    // Performs the initialization work necessary for creating a tool window.
+    // The returned task yields a context object that will be passed to CreateToolWindow.
+    HRESULT InitializeToolWindowAsync(
+        [in] GUID guidPersistenceSlot,      // the tool window class identifier
+        [in] DWORD dwToolWindowId,          // the tool window instance id
+        [out, retval] IVsTask** ppTask);    // the task representing the asynchronous initialization work
+
+    // Creates a tool window whose initialization was performed by InitializeToolWindowAsync.
+    HRESULT CreateToolWindow(
+        [in] GUID guidPersistenceSlot,      // the tool window class identifier
+        [in] DWORD dwToolWindowId,          // the tool window instance id
+        [in] VARIANT context);              // the context object yielded by the task returned by InitializeToolWindowAsync
+
+    // Retrieves the title for the tool window
+    HRESULT GetToolWindowTitle(
+        [in] GUID guidPersistenceSlot,      // the tool window class identifier
+        [in] DWORD dwToolWindowId,          // the tool window instance id
+        [out, retval] BSTR* title);         // The tool window title
+}
+
+//---------------------------------------------------------------------------
+// IVsAsyncToolWindowFactoryProvider
+//---------------------------------------------------------------------------
+[uuid(ba087b5e-4614-4928-bcec-85bf35eb031b)]
+interface IVsAsyncToolWindowFactoryProvider : IUnknown
+{
+    // Returns the IVsAsyncToolWindowFactory that can create a tool window identified by 
+    // rguidPersistenceSlot, or null if async creation of the tool window is not supported.
+    HRESULT GetAsyncToolWindowFactory(
+        [in] GUID guidPersistenceSlot, 
+        [out, retval] IVsAsyncToolWindowFactory** ppFactory);
+}
+
+// Batch project load support
+typedef struct _VsProjectLoadInfo
+{
+    DWORD dwProjectLoadFlags;
+    GUID  guidProjectFactory;
+    GUID  guidProjectId;
+    BSTR  bstrActiveProjectConfiguration;
+    BSTR  bstrProjectFile;
+} VsProjectLoadInfo;
+
+[uuid(2BD6379A-CD38-4FF7-BCC5-C2968B2FE48D)]
+interface IVsPrefetchLoadProgress : IUnknown
+{
+    // Called back by prefetch factory when prefetch process for a particular project is completed
+    HRESULT ProjectPrefetchCompleted([in] REFGUID guidProjectId, [in] VARIANT_BOOL fSuccessful, [in] DWORD dwFlags);
+}
+
+[uuid(C9635D64-F4BA-4162-A9E2-008D5789E61F)]
+interface IVsPrefetchProjectFactory : IUnknown
+{
+    // Called during solution load sequence before beginning any project loads to give a [optional] prefetch factory to do efficient bulk [pre]load of projects it can handle
+    // the normal load will continue as is after that unchanged.
+    HRESULT PrepareProjects([in] LPCOLESTR szActiveSolutionConfiguration, [in] DWORD dwSolutionLoadFlags, [in] int count, [in, size_is(count)] VsProjectLoadInfo rgPprojects[], [in] IVsPrefetchLoadProgress *pProgress);
+
+    // Called when solution is done with loading projects. Here prefetch factory can release any caches associated with prefetch work.
+    HRESULT EndSolutionLoad();
+}
+
+// Registration for project prefetch factory
+// same mechanism as for registration of project types, generators, or selectors
+// Each project factory has associated guid, they are listed under
+// RegRoot\ProjectPrefetch\{guid of prefetch factory}
+//    Package:"{guid of the package to load when prefetch factory to be used}"
+//
+// then a project type can declare it supports prefetch factory by: 
+// RegRoot\Project\{guid project type}
+//    PrefetchFactory:"{guid of prefetch factory}"
+//
+// when solution needs particular project prefetch factory, it will load the package as specified by the registry key above
+// it is expected the package then will use project registration [SID_SVsRegisterProjectTypes]service's IVsRegisterPrefetchProjectFactory to register the
+// factory implementation by calling RegisterPrefetchProjectFactory.
+[uuid(46F1C80F-EA5D-47A0-806F-4C0A916E1396)]
+interface IVsRegisterPrefetchProjectFactory : IUnknown
+{
+    HRESULT RegisterPrefetchProjectFactory([in] REFGUID guidPrefetchFactory, [in] IVsPrefetchProjectFactory *pProjectFactory, [out] VSCOOKIE *pdwCookie);
+    HRESULT UnregisterPrefetchProjectFactory([in] VSCOOKIE dwCookie);
+}
+
+// {164FD4DC-B2A4-448E-BB60-0583CD343D3B}
+// Set when a Solution begins loading and cleared once the loading has completed. Covers background solution loading if any.
+cpp_quote("extern const __declspec(selectany) GUID UICONTEXT_FullSolutionLoading = { 0x164fd4dc, 0xb2a4, 0x448e,{ 0xbb, 0x60, 0x5, 0x83, 0xcd, 0x34, 0x3d, 0x3b } };")
+
+
+// Solution working folders type
+// currently we only defined the model for "local IDE state" artifacts. In the future we 
+// want to have a story for build (bin, obj, etc) probably for deploy (Layout) etc with the goal to keep the
+// source code place "pure".
+enum __WorkingFolderKind
+{
+    WFK_SolutionStatePersistence = 1 // Location intended to write down IDE state files 
+};
+
+typedef [public] DWORD WorkingFolderKind;
+
+//----------------------------------------------------------------------
+// IVsWorkingFoldersEvents
+//----------------------------------------------------------------------
+// Implement on IVsSolutionEvent object and advised to IVsSolution::AdviseSolutionEvents
+[
+    uuid(DBF44E6B-78FF-413D-98B7-5CB601FB672A),
+    version(1.0)
+]
+interface IVsWorkingFoldersEvents : IUnknown
+{
+    // called before the process of relocating one of the working folders for Solution
+    // Every module that does store artifacts in such folder should ensure any lock are released in repsonse to this event
+    // so folder can be removed/renamed/moved. 
+    // pfCanMoveContent, set to true, if the modules artifacts are safe to be moved "as is". If all listeners agree Solution location service will 
+    // attempt to move the content to new location which can be faster. if any listener set this to false, solution will not try to move the content but instead
+    // will remove the folder instead.  It will be up to any artifact producer to store anything they consider important to new location (either on OnAfterLocalChange, or on close solution)
+    HRESULT OnQueryLocationChange([in] WorkingFolderKind location, [out] VARIANT_BOOL *pfCanMoveContent);
+
+    // Called when the process of relocation a working folder is complete
+    HRESULT OnAfterLocationChange([in] WorkingFolderKind location, [in] VARIANT_BOOL contentMoved);
+}
+
+//----------------------------------------------------------------------
+// IVsWorkingFolders
+//----------------------------------------------------------------------
+// Obtained by QI from IVsSolution
+[
+    uuid(B362DB16-833E-4F93-B108-71B2177C3930),
+    version(1.0)
+]
+interface IVsWorkingFolders : IUnknown
+{
+    // Gets the location of specific solution working folder
+    // fVersionSpecific - true = version specific location, false - common (for all VS version /dev14+). 
+    // fEnsureCreated - true, the Solution will ensure the location exist on this, will create the folder if not. 
+    HRESULT GetFolder([in] WorkingFolderKind folderKind, [in] VARIANT_BOOL fVersionSpecific, [in] VARIANT_BOOL fEnsureCreated, [out, retval] BSTR *pszBstrFullPath);
+
+    // Get [existing] older VS folder location. Used by features that support migration of working content (such as SUO settings migration)
+    // pszOldLocation: will contain the [version specific] location for a solution working folder of type "location" if such exists. Can be null in which case caller should assume no previous
+    //                 vs working content exist. If there was an existing current version working folder before solution was opened, GetMigrationFolder will always return null.
+    // pdwOldMajorVersion:  will contain the version of VS that created the old existing settings or 0 if unknow
+    // 
+    // the intended behavior for features that suport migration of content is to call GetFolder first, look for their artifacts, if they cant find any, call GetMigrationFolder and look for older
+    // content there if pszOldLocation != null
+    HRESULT GetMigrationFolder([in] WorkingFolderKind location, [out] DWORD *pdwOldMajorVersion, [out] BSTR *pszOldLocation);
+}

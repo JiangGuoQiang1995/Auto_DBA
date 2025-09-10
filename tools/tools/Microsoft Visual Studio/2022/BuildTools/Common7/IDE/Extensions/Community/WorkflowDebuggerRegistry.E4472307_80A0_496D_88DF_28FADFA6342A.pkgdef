@@ -1,0 +1,15 @@
+[$RootKey$\AD7Metrics\ExpressionEvaluator\{1F1149BB-9732-4eb8-9ED4-FA738768919C}\{994B45C4-E6E9-11D2-903F-00C04FA302A1}]
+"CLSID"="{4EA84A50-5D8B-461F-87DF-2BC197C81926}"
+"HideCallStackBreakpoints"=dword:00000001
+"HideGoToDisassembly"=dword:00000001
+"HideGoToSource"=dword:00000001
+"HideRunToCursor"=dword:00000001
+"Language"="Workflow"
+"Name"="Workflow"
+[$RootKey$\CLSID\{4EA84A50-5D8B-461F-87DF-2BC197C81926}]
+@="$System$\mscoree.dll"
+"Assembly"="Microsoft.VisualStudio.Activities.ExpressionEvaluator,version=17.0.0.0,publicKeyToken=31bf3856ad364e35,culture=neutral"
+"Class"="Microsoft.VisualStudio.Activities.ExpressionEvaluator.ExpressionEvaluator"
+"CodeBase"="$ShellFolder$\Common7\IDE\Microsoft.VisualStudio.Activities.ExpressionEvaluator.dll"
+"RuntimeVersion"="v4.0.30319"
+"ThreadingModel"="Both"

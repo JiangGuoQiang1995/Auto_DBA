@@ -1,0 +1,9 @@
+---
+title: Customize with Copilot instructions and prompt files
+area: GitHub Copilot
+featureId: CustomInstructions
+
+---
+
+Tailor Copilot to your preferences by writing custom instructions in a `copilot-instructions.md` file, and scale your workflow by saving reusable prompts in your `.github/prompts` folder.
+

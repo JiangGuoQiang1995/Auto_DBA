@@ -1,0 +1,486 @@
+/****************************************************************************
+*  The VSSHELL Interfaces
+*  Copyright (c) Microsoft Corporation, All Rights Reserved
+****************************************************************************/
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+import "oaidl.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "objext.idl";
+import "olecm.idl";
+import "VsPlatformUI.idl";
+
+#endif
+
+#include "vscookie.h"
+
+/****************************************************************************
+
+***** General notes for updating this file
+
+***** Proxy Stub
+
+If you modify anything in here, you may need to rebuild the proxy-stub,
+msenvXXXp.dll, and update its registration file,
+SetupAuthoring\env\Registry\msenvXXXp.ddr. To do that, once this file has been
+built and published, build from env\msenv\proxies and observe the build output.
+
+If you need to omit something from the proxy/stub file, then put it inside an
+#ifndef PROXYSTUB_BUILD/#endif block
+
+There is no need to define GUIDs in external header files such as
+vsshelluuids.h. Instead, define the GUID directly within the [uuid(...)]
+attribute and use __uuidof in native code.
+
+***** Primary Interop Assemblies
+
+If you modify anything in here, you may need to rebuild the primary interop
+assemblies. To do that, once this file has been built and published, build
+from vscommon\pias using: 'msbuild pias.nativeproj'
+
+***** PreserveSig
+
+Prefer "nopreservesig", which is the default for all new interfaces, because
+it creates cleaner managed code. Managed implementations are free to throw
+exceptions which will automatically be translated to HRESULTs in the CLR's
+COM interop layer. Native implementations will return HRESULTs and they will
+be converted to exceptions for managed callers.
+
+Do not create methods returning S_FALSE. Instead use an additional
+"[out] VARIANT_BOOL*" or "[out,retval] VARIANT_BOOL*" argument.
+
+***** Interface inheritance
+
+You may derive new interfaces from existing ones, but avoid mixing
+"preservesig" (old) with "nopreservesig" (new). Derive from an older interface
+if all of the methods in your interface match the preservesig attributes of the
+older interface.
+
+Remember, when implementing a derived interface in C++, you must implement
+QueryInterface for the base interface(s) too.
+
+***** Enumerators and bitwise flags passed as parameters:
+
+When a parameter must be exactly one of a set of values (a true enumerator),
+the values should be defined and used as follows:
+
+typedef enum __VSSAMPLETYPE
+{
+ST_THISTYPE     = 0,   // first value should be zero or one, except
+ST_THATTYPE     = 1,   // in special cases, and following values
+ST_THEOTHERTYPE = 2,   // should use consecutive numbers
+} VSSAMPLETYPE;
+
+interface IVsSample : IUnknown
+{
+HRESULT SampleMethod([in] VSSAMPLETYPE stType);
+}
+
+When a parameter must be exactly one of a set of values (a true enumerator),
+and is considered a PROPID, the values should be defined and used as follows:
+
+enum __VSSAMPLEPROPID
+{
+VSSAMPPROPID_LAST     = -7000,  // first value should be a unique
+VSSAMPPROPID_This     = -7000,  // number not used by any other
+VSSAMPPROPID_That     = -7001,  // PROPID, and following values
+VSSAMPPROPID_FIRST    = -7001,  // should use consecutive numbers
+};
+typedef LONG VSSAMPLEPROPID;
+
+interface IVsSample : IUnknown
+{
+HRESULT GetProperty([in] VSSAMPLEPROPID propid, [out,retval] VARIANT *pvar);
+HRESULT SetProperty([in] VSSAMPLEPROPID propid, [in] VARIANT var);
+}
+
+When a parameter can be none of or a combination of values (bitwise),
+the values should be defined and used as follows:
+
+enum __VSSAMPLEOPTS
+{
+SO_THISOPTION     = 0x00000001,   // first value should be one,
+SO_THATOPTION     = 0x00000002,   // following values should use
+SO_THEOTHEROPTION = 0x00000004,   // consecutive powers of two
+};
+typedef DWORD VSSAMPLEOPTS;
+
+interface IVsSample : IUnknown
+{
+HRESULT SampleMethod([in] VSSAMPLEOPTS grfOptions);
+}
+
+***** Defining properties
+
+Define properties as follows:
+
+interface IVsSample : IUnknown
+{
+[propget] HRESULT Foo([out, retval] BSTR *pbstrFoo);
+[propput] HRESULT Foo([in] LPCOLESTR strFoo);
+}
+
+Using [propget], [propput] and [out, retval] makes the interface easier
+to implement and consume in managed code.
+
+Note: The example above shows a case where the get/put methods accept slightly different
+argument types (BSTR versus LPCOLESTR). As long as the equivalent interop types are the
+same, this is fine (MarshalAs[..] attributes will be added as necessary). However, this
+is typically seen only for string arguments.
+
+***** Array typed args
+
+Pass array type arguments (both in and out) using [] and size_is when the corresponding
+size argument is present. You must have the array size as an argument for interop to
+work correctly.
+
+interface IVsSample : IUnknown
+{
+HRESULT MethodPassesInArray([in] int cItems, [in, size_is(cItems)] int prgiItems[]);
+}
+
+DO NOT use [in] int piItems[].
+
+For simple element types, consider using SAFEARRAY: e.g. SAFEARRAY(VARIANT_BOOL),
+SAFEARRAY(BSTR), SAFEARRAY(INT), etc. because they interop cleanly to managed code, but
+note that there is additional memory allocation and it may not be appropriate for high-
+performance methods. Also see the following note.
+
+******* SAFEARRAY(IVsFoo*)
+
+SAFEARRAY(IVsFoo*) will cause MIDL warning 2456:
+SAFEARRAY(interface pointer) doesn't work using midl generated proxy
+
+If you know for sure that implementions will never will never need to be called cross
+apartment (cross thread/process), then you can add [local] to the method.
+
+Alternatively, consider creating a custom IEnumXXX interface.
+
+****** Strings
+
+Use "[in] LPCOLESTR" instead of "[in] BSTR"
+
+for faster marshaling and more convenience to native callers.
+(But continue to use "[out] BSTR*" for out args.)
+
+Generally, you don't need to specify [in,string] for NUL-terminated strings
+because most of the "pointer to character" typedefs are already attributed with
+[string]. (e.g. "typedef [string] const OLECHAR *LPCOLESTR")
+
+******* Boolean
+
+Use VARIANT_BOOL instead of BOOL because it interops as System.Boolean instead
+of System.Int
+
+However, exercise caution when assigning or comparing to/from C++ bool in native
+code because VARIANT_BOOL is typedef'd as a short and VARIANT_TRUE is ((short)-1)
+
+******* Optional (may be null) args
+
+Use [in,unique] for optional input arguments which may be NULL.
+Note that pointer_default(unique) does NOT do this automatically.
+
+Do not use [out,unique] because unique cannot be applied to [out]-only top-level
+pointer parameters. However, you can use [in,out,unique].
+
+Do not use [optional]. It only works with VARIANT anyway and it's not
+obvious for managed coders.
+
+******* [out] NonNullableType*
+
+Note that arguments of the type "[out] Foo* pFoo", where Foo is a "non-nullable
+type" such as int, double, VARIANT_BOOL, BSTR, will be converted to
+"out Foo[] pFoo" in managed code. This is a non-standard conversion applied by
+an IL transformation step during the build for the interop assembly.
+
+******* Service GUIDs
+
+Define service GUIDs via an empty interface derived from IUnknown
+and put it inside an #ifndef PROXYSTUB_BUILD/#endif block
+
+******* HWNDs, HANDLE, and other non-marshalable types
+
+Take care if you define an interface with HWND, HGDIOBJ or other Win32
+handle types. These typically need to be marked [local] since they
+cannot cross apartment (specifically, process) boundaries.
+
+****************************************************************************/
+
+#include "vsshelluuids.h" // for uuid_VsPreserveSigAttribute
+
+// forward declarations
+
+//----------------------------------------------------------------------
+// IVsMenuEvents
+//----------------------------------------------------------------------
+[
+    uuid(BD868C04-7979-4DB0-A2E1-F55490A42640),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsMenuEvents : IUnknown
+{
+    // Fired before a menu item is to be displayed
+    HRESULT OnBeforeMenuDisplayed();
+};
+
+//----------------------------------------------------------------------
+// IVsMenuEventsService Interface
+//----------------------------------------------------------------------
+[
+    uuid(B01B8DEE-677E-4ADC-87C2-3E2517FB6EF7),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsMenuEventsService : IUnknown
+{
+    // IVsMenuEventsService
+    HRESULT AdviseMenuEvents([in] IVsMenuEvents *pEventSink, [in] const GUID* pguidCmdGroup, [in] DWORD dwCmdId, [out, retval] VSCOOKIE *pdwCookie);
+    HRESULT UnadviseMenuEvents([in] VSCOOKIE dwCookie);
+};
+
+//----------------------------------------------------------------------
+// SVsMenuEventsService
+//----------------------------------------------------------------------
+[
+    uuid(0D646997-5C08-4EF2-B709-B5C70F009A70)
+]
+interface SVsMenuEventsService : IUnknown
+{
+};
+cpp_quote("#define SID_SVsMenuEventsService IID_SVsMenuEventsService")
+
+//----------------------------------------------------------------------
+// IVsNavigateToService2
+//----------------------------------------------------------------------
+[
+    uuid(6606A1CA-7810-4BB5-A036-725E90A06931)
+]
+interface IVsNavigateToService2 : IUnknown
+{
+    HRESULT IsResultExpanderVisible(
+        [out, retval] VARIANT_BOOL* pfResult);
+
+    HRESULT ActivateResultExpander();
+};
+
+cpp_quote("#define szWSS_LIVE_SETTING L\"LiveSetting\"") // VSUI_TYPE_DWORD(LiveSetting). The live setting for the search control's live region. Values for this setting come from UIAutomation.h, LiveSetting enum. Default=1.
+
+// {C22BCF10-E1EB-42C6-95A5-E01418C08A29}
+// UIContext indicating Cloud Debugging Mode
+cpp_quote("extern const __declspec(selectany) GUID UICONTEXT_CloudDebugging = { 0xc22bcf10, 0xe1eb, 0x42c6, { 0x95, 0xa5, 0xe0, 0x14, 0x18, 0xc0, 0x8a, 0x29 } };")
+
+[
+    uuid(71AF033C-1C1B-4FD4-87AB-08B441DBCE1D),
+    local
+]
+interface IVsDebugger8 : IUnknown
+{
+    HRESULT JumpToText([in] VsTextPos* text);
+};
+
+// VS-specific HRESULT failure codes - start at 0x8004200A
+//
+
+// Error which can be returned by IVsToolboxItemProvider::GetItemContent 
+// to indicate that IVsToolboxItemProvider2.GetItemContentAsync must be used instead
+cpp_quote("#define VS_E_USE_ASYNC_ALTERNATIVE_INSTEAD MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x200A)")
+
+//----------------------------------------------------------------------
+// IVsToolboxItemProvider2
+//----------------------------------------------------------------------
+// An async alternative to IVsToolboxItemProvider
+//
+// The VsTask returned from this method is owned (and will be freed) by the caller.
+// The result of VsTask is int that actually represetns HGLOBAL, it is owned (and will be freed) by the caller.
+// It can be accessed after the task finishes.
+[
+    uuid(35C56762-5AB2-4C9F-AE5A-BF11E4D8FB88)
+]
+interface IVsToolboxItemProvider2 : IUnknown
+{
+    HRESULT GetItemContentAsync([in] LPCWSTR szItemID, [in] unsigned short format, [out, retval] IVsTask** ppTask);
+};
+
+//----------------------------------------------------------------------
+// IVsToolbox7
+//----------------------------------------------------------------------
+// Async methods on toolbox
+//
+[
+    uuid(58928E40-8514-42EE-8EFA-F5CEEEBBF653),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsToolbox7 : IVsToolbox6
+{
+    HRESULT AddItem2Async([in] IDataObject* pDO, [in] TBXITEMINFO* ptif, [in] LPCOLESTR lpszTab, [in] REFGUID guidPkg, [out, retval] IVsTask** ppTask);
+};
+
+enum __VSPROPID8
+{
+    // See previous version of vsshellXX.idl for previous enumeration values.
+
+    VSPROPID_StartupProjectFiles = -8049, // BSTR or ARRAY of BSTR - full file name(s) of the startup project(s). Available even when no projects are created.
+    VSPROPID_PermanentSolutionGuid = -8050, 
+
+    // !!!! NOTE !!!!   THIS MUST BE THE SAME AS THE LAST PROP DEFINED
+    // when this is extended in the next version idl, uses of it must be changed to the new value
+    VSPROPID_FIRST8 = -8050
+};
+typedef [public] DWORD VSPROPID8;
+
+// this is an extension of VSSPROPID7, see vsshell140.idl, vsshell120.idl, vsshell110.idl, vsshell100.idl, vsshell90.idl, vsshell80.idl, vsshell.idl
+enum __VSSPROPID8
+{
+    VSSPROPID_PromptForFileMove = -9083,                // BOOL, Read/Write. Indicates whether VS prompts when moving files in the Solution Explorer.
+    VSSPROPID_FIRST8 = -9083
+};
+typedef LONG VSSPROPID8;
+
+
+typedef enum __VSSOLNBUILDUPDATEFLAGS3
+{
+    /* From vsshell.idl:
+
+    // The first set is UI supression   flags; if they are set the default answer is automatically chosen.
+    SBF_SUPPRESS_NONE           = 0x00000000,
+    SBF_SUPPRESS_OUTOFDATE_QUERY            = 0x00000001,       // Take default answer for out of date query
+    SBF_SUPPRESS_SAVEBEFOREBUILD_QUERY  = 0x00000002,       // Take default answer for save before build query
+    SBF_SUPPRESS_CONTDEPLOYONERROR_QUERY    = 0x00000004,       // Take default answer for continue deploy query
+    SBF_SUPPRESS_CONTLAUNCHONERROR_QUERY    = 0x00000008,       // Take default answer for continue launch query
+    SBF_SUPPRESS_MASK                       = 0x000000FF,
+    // This set of flags is used to control which   operations the solution update manager will
+    // perform as   part of its operation.
+    SBF_OPERATION_NONE          = 0x00000000,       // No build operations are to be performed
+    SBF_OPERATION_BUILD         = 0x00010000,       // Perform build (may be ORed with other flags)
+    SBF_OPERATION_DEPLOY            = 0x00020000,       // Deploy solution (may be ORed with other flags)
+    SBF_OPERATION_LAUNCH            = 0x00040000,       // Launch the application without the debugger involved
+    SBF_OPERATION_LAUNCHDEBUG       = 0x00080000,       // Launch the application for debugging
+    SBF_OPERATION_CLEAN         = 0x00100000,       // Remove built objects
+    SBF_OPERATION_SELECTION     = 0x00200000,       // Operate on the current shell selection context
+    SBF_OPERATION_FORCE_UPDATE      = 0x00400000,       // Force a rebuild on the project, even if it is not out of
+    // date; for SBF_OPERATION_BUILD, projects will recompile
+    // results even if they are not out of date; for
+    // SBF_OPERATION_DEPLOY, the content will be re-copied to the
+    // deployment target even if it is known not to be out of
+    // date at the target.
+    SBF_OPERATION_MASK                  = 0xFFFF0000,
+    */
+
+    /* from vsshell80.idl
+    SBF_OPERATION_PUBLISHUI = 0x00800000,       // Publish solution (may be ORed with other flags)
+    SBF_OPERATION_PUBLISH = 0x01000000,       // Publish solution (may be ORed with other flags)
+    */
+
+    // general build control flags. (will be ORed with OPERATION actions).
+    SBF_FLAGS_NONE = 0x00000000,
+    SBF_FLAGS_DEFERRED_BUILD = 0x00000100, // this is a deferred build (lightweight solution load)
+    SBF_FLAGS_UPTODATE_CHECK = 0x00000200, // the action is up to date check
+    SBF_FLAGS_MASK = 0x0000FF00
+} VSSOLNBUILDUPDATEFLAGS3;
+
+
+//---------------------------------------------------------------------------
+// IVsSolutionBuildManager6
+//---------------------------------------------------------------------------
+[
+    uuid(61AA4EA9-018F-4394-AD31-1E76D1BF80C8),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsSolutionBuildManager6 : IUnknown
+{
+    // Advise all SBM events on a client object.
+    // Note AdviseUpdateSolutionEventsEx  and UnadviseUpdateSolutionEvents should only be called once per object.  SBM will advise all types of IVsUpdateSolution events the client object supports.
+    // To unadvise, use IVsSolutionBuildManager->UnadviseUpdateSolutionEvents with the cookie
+    //
+    // guidActivityId, is a client specific value (expected to be unique for each subscriber) and is used for tracking and potentially backward compatibility.
+    HRESULT AdviseUpdateSolutionEventsEx([in] REFGUID guidActivityId, [in] IUnknown *pSink, [out] VSCOOKIE *pdwCookie);
+};
+
+
+//---------------------------------------------------------------------------
+// IVsUpdateSolutionEvents5
+//---------------------------------------------------------------------------
+[
+    uuid(95498691-CB06-4BC1-8A83-F84C6D565E21),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsUpdateSolutionEvents5 : IUnknown
+{
+    // Fired before solution executes any project action of dwAction type.
+    // Provides opportunity for IDE component to inject additional work before any project participating in the build handles that build action.
+    //
+    // dwAction indicates the update action that is about to begin (for each project). Values are flags or combinations of flags
+    // from VSSOLNBUILDUPDATEFLAGS enum. Legal values are the following, in the order in which the actions
+    // are executed during the build:
+    //
+    // SBF_OPERATION_CLEAN - clean action
+    // SBF_OPERATION_PUBLISHUI - publish UI action
+    // SBF_OPERATION_BUILD - build action
+    // SBF_OPERATION_BUILD | SBF_OPERATION_FORCE_UPDATE - rebuild action
+    // SBF_OPERATION_DEPLOY - deploy action
+    // SBF_OPERATION_PUBLISH - publish action
+    //
+    // in addition the dwAction will have SBF_FLAGS_DEFERRED_BUILD set if solution is opened in Lightweight solution load mode.
+    //
+    // for action that support up to date check (currently this is only SBF_OPERATION_BUILD action) two events will be fired: 
+    // First with dwaction = "action | SBF_FLAGS_UPTODATE_CHECK", before any project commences  the up to date check, and a second event with 
+    // Second with dwAction = "action", which will be fired just before the first project that reports "not up to date" and would actually starts the build.
+    // this way the listeners have opportunity to run before up to date check (if they expect to influence it), or before real work start (and so prevent unnecessary work in case of no-op build).
+    //
+    // pDelayTask: the async VSTask object that represents the asynchronous workload that should be executed before we continue executing with the project update actions.
+    // SBM will cancel the task (by calling pDelayTask->Cancel() ) if build is being canceled while the task is still running.
+    HRESULT UpdateSolution_QueryDelayBuildAction([in] DWORD dwAction, [out] IVsTask **pDelayTask);
+};
+
+//----------------------------------------------------------------------------
+// Well-known color themes names
+//----------------------------------------------------------------------------
+cpp_quote("extern const __declspec(selectany) GUID GUID_AdditionalContrastColorTheme = { 0xCE94D289, 0x8481, 0x498B, { 0x8C, 0xA9, 0x9B, 0x61, 0x91, 0xA3, 0x15, 0xB9} };") // {CE94D289-8481-498B-8CA9-9B6191A315B9}
+
+enum _VSProjectUnloadStatus3
+{
+    /*  defined in vsshell100.idl
+    UNLOADSTATUS_UnloadedByUser          = 0,  // The user unloaded the project.
+                                               //    The project node caption has the suffix "(unavailable)".
+                                               //    The item node caption is "The project file was unloaded."
+    UNLOADSTATUS_LoadPendingIfNeeded     = 1,  // The Solution Load Manager unloaded the project with PLP_LoadIfNeeded.
+                                               //    The project node caption has the suffix "(pending)".
+                                               //    Item node caption is "The project file will automatically load if needed."
+    UNLOADSTATUS_StorageNotLoadable      = 2,  // The project was unloaded because project storage is not loadable.
+                                               //    The project node caption has the suffix "(unavailable)".
+                                               //    The item node caption is "The project file cannot be loaded."
+    UNLOADSTATUS_StorageNotAvailable     = 3,  // The project was unloaded because project storage is not available.
+                                               //    The project node caption has the suffix "(unavailable)".
+                                               //    The item node caption is "The project file or web cannot be found."
+    UNLOADSTATUS_UpgradeFailed           = 4   // The project was unloaded because project migration/upgrade failed.
+                                               //    The project node caption has the suffix "(unavailable)".
+                                               //    The item node caption is "The project has not been converted."
+    */
+
+    /*  defined in vsshell120.idl
+    UNLOADSTATUS_NeedRetarget            = 5,  // The project was unloaded because project target is not supported by current version of VS [SKU].
+                                               //    In order to be loaded project has to be retarget first.
+
+    UNLOADSTATUS_NeedComponents          = 6,   // The project was unloaded because there are components (VS componnets, SDKs etc) not installed
+                                               // on the system that are essential for the proper operation of this project.
+                                               // In order to be loaded, project has to install the missing components
+    */
+
+    UNLOADSTATUS_ProjectIncompatible     = 7   // The project was unloaded because project is incompatible with current visual studio version.
+                                               // It could be the project factory package was not loaded, or the component is missing.
+                                               // The project node caption has the suffix "(incompatible)".
+};

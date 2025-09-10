@@ -1,0 +1,52 @@
+// msdbg162.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+// Event for when the underlying debug process requests an update to the
+// user interface state while in break mode.
+[
+    uuid(4966EE8B-EF5C-4AA4-B4BA-7217FF345CBE),
+    version(1.0),
+    pointer_default(unique),
+    local
+]
+interface IDebugRefreshBreakStateEvent162 : IUnknown
+{
+    // No implementation.
+};
+
+// Interface which is implemented by SDM pending (IDebugPendingBreakpoint2) and bound breakpoints (IDebugBoundBreakpoint2),
+// and which can optionally be implemented on engine breakpoints.
+// If an engine chooses to implement this on bound breakpoints, the SDM will expect the engine to handle all tracepoint functionality.
+[
+    uuid(4BE935F2-82C9-460C-8221-846E5147685E),
+    pointer_default(unique),
+    object
+]
+interface IDebugTracepoint162 : IUnknown
+{
+    // Indicates that the tracepoint state changed.
+    // bstrTracepoint is the same data returned from BP_REQUEST_INFO2.bstrTracepoint.
+    // fBreakWhenHit is the same as checking that the the BP_FLAG_DONT_STOP flag in BP_REQUEST_INFO2.dwFlags is clear
+    HRESULT SetTracepoint(
+        [in] BSTR bstrTracepoint,
+        [in] BOOL fBreakWhenHit
+    );
+
+    // Indicates that the tracepoint has become a breakpoint
+    HRESULT ClearTracepoint();
+};

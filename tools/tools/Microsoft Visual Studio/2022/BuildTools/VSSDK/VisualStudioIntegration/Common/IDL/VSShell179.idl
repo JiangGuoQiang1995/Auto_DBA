@@ -1,0 +1,78 @@
+//=----------------------------------------------------------------------------
+// Microsoft Visual Studio
+//
+// Microsoft Confidential
+// Copyright (c) Microsoft Corporation.  All Rights Reserved.
+//
+// File:     VSShell179.idl
+// Contents: the shell interfaces for the entire Dev17 cycle.
+//
+//
+// Current Owner:
+//=----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+
+#include "vsshelluuids.h" // for uuid_VsPreserveSigAttribute
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "context.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "vsshell153.idl";
+import "vsshell155.idl";
+import "vsshell156.idl";
+import "vsshell157.idl";
+import "vsshell158.idl";
+import "vsshell160.idl";
+import "vsshell161.idl";
+import "vsshell162.idl";
+import "vsshell169.idl";
+import "vsshell1610.idl";
+import "VsPlatformUI.idl";
+
+import "textfind100.idl";
+
+// Excluding DTE related includes for C builds as they contain C++ only constructs
+// and they produce compile errors while building the proxy DLL (msenvXXXp).
+cpp_quote("#ifdef __cplusplus")
+cpp_quote("#include \"dte.h\"")
+cpp_quote("#include \"textmgr2.h\"")
+cpp_quote("#include \"guiddef.h\"")
+cpp_quote("#endif // __cplusplus")
+
+#endif
+
+[v1_enum] enum __VSFPROPID12
+{
+    VSFPROPID_LoadingTask          = -5054,
+    VSFPROPID_IsDocDataInitialized = -5055,
+    VSFPROPID_IsDocViewInitialized = -5056,
+};
+
+
+//----------------------------------------------------------------------------
+// IVsWindowFrameEvents3
+//----------------------------------------------------------------------------
+[
+    uuid(3b8b9802-c720-4219-8694-e87ee8cb0e6d),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsWindowFrameEvents3 : IUnknown
+{
+    HRESULT OnFrameDocDataInitializedAsync([in] IVsWindowFrame* pFrame, [in] IUnknown* pDocData, [out, retval] IVsTask** ppTask);
+    HRESULT OnFrameDocViewInitialized([in] IVsWindowFrame* pFrame, [in] IUnknown* pDocView);
+}
+

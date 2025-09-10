@@ -1,0 +1,66 @@
+// msdbg168.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+import "msdbg100.idl";
+#endif
+
+
+// Indicates that this object is a scope
+cpp_quote("#define DBG_EXATTRIB_SCOPE  0x0000000000000080")
+
+// Implemented by an engine to handle launching a debuggee in non-debug scenarios (e.g. Ctrl-F5).
+[
+    uuid(BE3E8946-6DD2-47B4-9BF6-7C7B43631201),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IDebugEngineNonDebugLaunch168 : IUnknown
+{
+    // Called by the IDE to let the engine launch a process in a non-debug scenario.  Note that since the process is not
+    //  being debugged, the provided IDebugEventCallback2 will ignore most events.  Supported events include:
+    //    - INonDebugProcessExitedEvent168
+    //    - IDebugOutputStringEvent2
+    //    - IDebugMessageEvent2
+    //    - IDebugErrorEvent2
+    HRESULT LaunchNonDebugProcess(
+        [in, ptr] LPCOLESTR pszExe,
+        [in, ptr] LPCOLESTR pszArgs,
+        [in, ptr] LPCOLESTR pszDir,
+        [in, ptr] BSTR bstrEnv,
+        [in, ptr] LPCOLESTR pszOptions,
+        [in] LAUNCH_FLAGS dwLaunchFlags,
+        [in] PROCESS_STARTUP_INFO* pStartupInfo,
+        [in] IDebugEventCallback2* pCallback
+    );
+
+    // Called by the IDE to terminate a non-debug process launched by the engine.
+    HRESULT TerminateNonDebugProcess();
+}
+
+// Sent by an engine when a process launched in non-debug mode has exited.
+[
+    object,
+    uuid(3D8B328A-25F8-4F41-87C9-8377C38AAD68),
+    pointer_default(unique)
+]
+interface INonDebugProcessExitedEvent168 : IUnknown
+{
+    // Retrieves the implementation of IDebugEngineNonDebugLaunch168 that was used to launch the process.
+    HRESULT GetNonDebugLaunch([out] IDebugEngineNonDebugLaunch168** ppNonDebugLaunch);
+
+    // Retrieves the exit code of the process
+    HRESULT GetExitCode([out] DWORD* pdwExit);
+}

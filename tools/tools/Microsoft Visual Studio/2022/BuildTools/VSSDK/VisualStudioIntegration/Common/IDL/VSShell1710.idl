@@ -1,0 +1,118 @@
+//=----------------------------------------------------------------------------
+// Microsoft Visual Studio
+//
+// Microsoft Confidential
+// Copyright (c) Microsoft Corporation.  All Rights Reserved.
+//
+// File:     VSShell1710.idl
+// Contents: the shell interfaces for the entire Dev17 cycle.
+//
+//
+// Current Owner:
+//=----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+
+#include "vsshelluuids.h" // for uuid_VsPreserveSigAttribute
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "context.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "vsshell153.idl";
+import "vsshell155.idl";
+import "vsshell156.idl";
+import "vsshell157.idl";
+import "vsshell158.idl";
+import "vsshell160.idl";
+import "vsshell161.idl";
+import "vsshell162.idl";
+import "vsshell169.idl";
+import "vsshell1610.idl";
+import "VsPlatformUI.idl";
+
+
+// Excluding DTE related includes for C builds as they contain C++ only constructs
+// and they produce compile errors while building the proxy DLL (msenvXXXp).
+cpp_quote("#ifdef __cplusplus")
+cpp_quote("#include \"dte.h\"")
+cpp_quote("#include \"textmgr2.h\"")
+cpp_quote("#include \"guiddef.h\"")
+cpp_quote("#endif // __cplusplus")
+
+#endif
+
+//----------------------------------------------------------------------------
+// IVsUnifiedSettingsObserverFactory
+//----------------------------------------------------------------------------
+[
+    uuid(b2d10780-c41b-410e-b199-08cd9a4f22a6),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsUnifiedSettingsObserverFactory : IUnknown
+{
+    HRESULT CreateSettingsObserver([in] GUID guid, [out, retval] IUnknown **res);
+}
+
+//----------------------------------------------------------------------------
+// IVsAsyncUnifiedSettingsObserverFactory
+//----------------------------------------------------------------------------
+[
+    uuid(d6225e73-4825-4ac6-99f3-4af29d61305f),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsAsyncUnifiedSettingsObserverFactory : IUnknown
+{
+    HRESULT CreateSettingsObserverAsync([in] GUID guid, [out, retval] IVsTask **res);
+}
+
+[v1_enum] enum _FONTFLAGS2
+{
+    // The original FONTGLAGS enum lives in the text manager idl/pia, but with the current form
+    // of idls and pias, it's simpler to just declare the 2nd iteration of the enum here.
+    // FF_DEFAULT       = 0x0,
+    // FF_BOLD          = 0x1,
+    // FF_STRIKETHROUGH = 0x2,
+    FF_ITALIC    = 0x4,
+    FF_UNDERLINE = 0x8,
+};
+
+typedef DWORD FONTFLAGS2;
+
+[v1_enum] enum __FCITEMFLAGS2
+{
+    // FCIF_ISMARKER          = 0x01,
+    // FCIF_ALLOWFGCHANGE     = 0x02,
+    // FCIF_ALLOWBGCHANGE     = 0x04,
+    // FCIF_ALLOWBOLDCHANGE   = 0x08,
+    // FCIF_ALLOWCUSTOMCOLORS = 0x10,
+    // FCIF_PLAINTEXT         = 0x20,
+    FCIF_ALLOWSTRIKETHROUGHCHANGE = 0x040,
+    FCIF_ALLOWITALICCHANGE        = 0x080,
+    FCIF_ALLOWUNDERLINECHANGE     = 0x100,
+};
+
+typedef DWORD FCITEMFLAGS2;
+
+[v1_enum] enum __FCFONTFLAGS2
+{
+    // FCFF_TRACK_PLAINTEXT_BOLD = 0x80000000,
+    FCFF_TRACK_PLAINTEXT_STRIKETHROUGH = 0x40000000,
+    FCFF_TRACK_PLAINTEXT_ITALIC        = 0x20000000,
+    FCFF_TRACK_PLAINTEXT_UNDERLINE     = 0x10000000,
+};
+
+typedef DWORD FCFONTFLAGS2;

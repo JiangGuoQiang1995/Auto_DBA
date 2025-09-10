@@ -1,0 +1,143 @@
+/****************************************************************************
+*  The TEXTMGR151 Interfaces
+*  Copyright (c) Microsoft Corporation, All Rights Reserved
+****************************************************************************/
+
+#ifndef INTEROPLIB
+
+import "context.idl";
+import "IVsQueryEditQuerySave2.idl";
+import "IVsQueryEditQuerySave80.idl";
+import "msxml.idl";
+import "context.idl";
+import "textmgr.idl";
+import "textmgr2.idl";
+import "textmgr100.idl";
+import "textmgr110.idl";
+import "textmgr120.idl";
+
+#endif
+
+/****************************************************************************
+********    IMPORTANT!!   *********
+
+All guids for interfaces and co-creatable objects in this file should be defined
+in textmgruuids.h
+
+****************************************************************************/
+
+#include "textmgruuids.h"
+#include "vsshelluuids.h"
+
+#ifndef INTEROPLIB
+
+[
+    uuid(uuid_lib_TextManager151),
+    version(1.0)
+]
+library TextMgr151
+{
+
+#endif
+
+    typedef struct _VIEWPREFERENCES5
+    {
+        //---------------------------------------------------------------------------------------------
+        // The following members are copied from the original VIEWPREFERENCES4 struct.  To maintain
+        // compatibility, their size, meaning, and order must not be modified.
+
+        // settings for text views
+        unsigned fVisibleWhitespace;         // show spaces/tabs etc?
+        unsigned fSelectionMargin;           // display selection margin?
+        unsigned fAutoDelimiterHighlight;    // allow automatic delimiter highlighting?
+        unsigned fGoToAnchorAfterEscape;     // go to anchor after escape?
+        unsigned fDragDropEditing;           // drag/drop editing?
+        unsigned fUndoCaretMovements;        // include caret movements and text selections in undo list?
+        unsigned fOvertype;                  // overtype/insert? - NOT persisted
+        unsigned fDragDropMove;              // whether we allow drag/drop moves
+        unsigned fWidgetMargin;              // show widget margin?
+
+        // Setting fUserReadOnly to true overrides setting fDragDropEditing and fDragDropMove to true
+        unsigned fReadOnly;                  // whether read only
+        unsigned fActiveInModalState;        // whether active in a modal state
+
+        unsigned fClientDragDropFeedback;
+        unsigned fTrackChanges;
+        unsigned uCompletorSize;             
+        unsigned fDetectUTF8;
+        long     lEditorEmulation;
+        unsigned fHighlightCurrentLine;      // highlight current line
+
+        unsigned fShowBlockStructure;        // Show block structure
+        unsigned fEnableCodingConventions;   // Enable editor support for coding conventions
+
+        //---------------------------------------------------------------------------------------------
+        // End of copy of original VIEWPREFERENCES4 struct.  New members must be added below this point.
+
+        unsigned fEnableClickGotoDef;       // Enable mouse click for Goto Definition
+        unsigned uModifierKey;              // Modifier key to use in combination with mouse click for Goto Definition
+        unsigned fOpenDefInPeek;            // Open definition in Peek view
+    } VIEWPREFERENCES5;
+
+    ////////////////////////////////////////////////////////////////////////////
+    // IVsTextManager6 interface
+    ////////////////////////////////////////////////////////////////////////////
+    [
+        uuid(uuid_IVsTextManager6),
+        version(1.0)
+    ]
+    // Preserve signature for method 
+    [custom(uuid_VsPreserveSigAttribute, "preservesig")]
+    interface IVsTextManager6 : IUnknown
+    {
+        // For the LANGPREFERENCES member, specify the language in question by setting 
+        // pLangPrefs->guidLang to the language SID.
+        [local] HRESULT GetUserPreferences6(
+            [out]     VIEWPREFERENCES5      * pViewPrefs,  // struct is caller-allocated
+            [in, out] LANGPREFERENCES3      * pLangPrefs,  // struct is caller-allocated
+            [in, out] FONTCOLORPREFERENCES2 * pColorPrefs);// struct is caller-allocated
+
+        [local]  HRESULT SetUserPreferences6(
+            [in] const VIEWPREFERENCES5      * pViewPrefs,
+            [in] const LANGPREFERENCES3      * pLangPrefs,
+            [in] const FONTCOLORPREFERENCES2 * pColorPrefs);
+    };
+
+    ////////////////////////////////////////////////////////////////////////////
+    // IVsTextManagerEvents6 interface
+    ////////////////////////////////////////////////////////////////////////////
+    [
+        uuid(uuid_IVsTextManagerEvents6 ),
+        version(1.0)
+    ]
+    // Preserve signature for method 
+    [custom(uuid_VsPreserveSigAttribute, "preservesig")]
+    interface IVsTextManagerEvents6 : IUnknown
+    {
+        // Fired when the user's global preferences have changed
+        [local]  HRESULT OnUserPreferencesChanged6([in] const VIEWPREFERENCES5  * pViewPrefs,
+            [in] const LANGPREFERENCES3  * pLangPrefs,
+            [in] const FONTCOLORPREFERENCES2 * pColorPrefs);
+    };
+
+    ////////////////////////////////////////////////////////////////////////////
+    // MARKERTYPE enum
+    //
+    // These represent the pre-registered set of markers.
+    //
+    ////////////////////////////////////////////////////////////////////////////
+    typedef enum _markertype3
+    {
+        // This enum continues from MARKERTYPE2. See MARKERTYPE2 for earlier values.
+        MARKER_HINTED_SUGGESTION = 36,    // a tag that provides a subtle hint adornment
+        DEF_MARKER_COUNT_NEW_2            // this should be at the end to define the number of markers
+
+    } MARKERTYPE3;
+
+
+#ifndef INTEROPLIB
+
+};
+
+#endif
+

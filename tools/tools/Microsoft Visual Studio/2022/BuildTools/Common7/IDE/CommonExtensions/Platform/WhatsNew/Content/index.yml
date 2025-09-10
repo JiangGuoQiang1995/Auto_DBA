@@ -1,0 +1,22 @@
+featureIds: 
+- vscontent
+- gpt-5
+- mcp-server-ga
+- bring-your-own-key
+- collapse-nes
+- copilot-signin
+- completions-on-demand
+- contextUpdateAugust
+- gitcontextchat
+- ue-blueprint-debugger
+files:
+- vscontent.md
+- gpt-5.md
+- mcp-ga.md
+- bring-your-own-key.md
+- nes-collapsed.md
+- copilot-google-sign-up.md
+- completions-on-demand.md
+- context-updates.md
+- git-context-chat.md
+- cpp-ue-blueprint-debugger.md

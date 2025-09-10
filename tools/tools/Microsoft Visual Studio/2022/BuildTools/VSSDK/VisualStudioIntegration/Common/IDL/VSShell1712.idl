@@ -1,0 +1,86 @@
+//=----------------------------------------------------------------------------
+// Microsoft Visual Studio
+//
+// Microsoft Confidential
+// Copyright (c) Microsoft Corporation.  All Rights Reserved.
+//
+// File:     VSShell1712.idl
+// Contents: the shell interfaces for the entire Dev17 cycle.
+//
+//
+// Current Owner:
+//=----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+
+#include "vsshelluuids.h" // for uuid_VsPreserveSigAttribute
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "context.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "vsshell153.idl";
+import "vsshell155.idl";
+import "vsshell156.idl";
+import "vsshell157.idl";
+import "vsshell158.idl";
+import "vsshell160.idl";
+import "vsshell161.idl";
+import "vsshell162.idl";
+import "vsshell169.idl";
+import "vsshell1610.idl";
+import "VsPlatformUI.idl";
+import "wtypes.idl";
+
+// Excluding DTE related includes for C builds as they contain C++ only constructs
+// and they produce compile errors while building the proxy DLL (msenvXXXp).
+cpp_quote("#ifdef __cplusplus")
+cpp_quote("#include \"dte.h\"")
+cpp_quote("#include \"textmgr2.h\"")
+cpp_quote("#include \"guiddef.h\"")
+cpp_quote("#endif // __cplusplus")
+
+#endif
+
+#ifndef PROXYSTUB_BUILD
+
+//----------------------------------------------------------------------------
+// IVsFreeThreadedPackageLoadEvents
+//----------------------------------------------------------------------------
+[
+    uuid(202c0d8b-6ef7-4bbd-b696-52f942aace3f),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsFreeThreadedPackageLoadEvents : IUnknown
+{
+    HRESULT OnPackageLoaded(REFGUID refPackageGuid, [in] IVsPackage *pPackage);
+}
+
+//----------------------------------------------------------------------------
+// IVsShell8
+//----------------------------------------------------------------------------
+[
+    uuid(aa956419-6594-4568-a33a-97a7a96d0d65),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsShell8 : IUnknown
+{
+    HRESULT AdviseFreeThreadedPackageLoadEvents([in] IVsFreeThreadedPackageLoadEvents *pEventSink, [out, retval] VSCOOKIE *pCookie);
+
+    HRESULT UnadviseFreeThreadedPackageLoadEvents([in] VSCOOKIE cookie);
+}
+
+#endif // END PROXYSTUB_BUILD

@@ -1,0 +1,194 @@
+// msdbg158.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+// ------------------------------------------------------------------
+// IDebugProcessInfoUpdatedEvent158
+[
+    object,
+    uuid(96C242FC-F584-4C3E-8FED-384D3D13EF36),
+    pointer_default(unique)
+]
+interface IDebugProcessInfoUpdatedEvent158 : IUnknown
+{
+    HRESULT GetUpdatedProcessInfo(
+        [out] BSTR* pbstrName,
+        [out] DWORD *pdwSystemProcessId);
+};
+
+// This enum extends enum_FRAMEINFO_FLAGS.  enum_FRAMEINFO_FLAGS has exhausted all the possible bits of a 32-bit integer,
+// so any new flags must use enum_FRAMEINFO_FLAGS_EXTENDED instead.
+enum FRAMEINFO_FLAGS_EX158
+{
+    /**************************************
+    FIF_EX_INCLUDE_ASYNC_FRAMES = 0x00000001,
+    ***************************************/
+    FIF_EX_SHOW_TASK_IDS        = 0x00000002, // Show the task id annotation as part of the frame format.
+};
+
+// Indicates if address of the property is currently being tracked by a data breakpoint.
+cpp_quote("#define DBG_ATTRIB_HAS_DATA_BREAKPOINT 0x1000000000000000")
+
+cpp_quote("#define DBG_ATTRIB_HAS_EXTENDED_ATTRIBS  0x8000000000000000")
+
+cpp_quote("#define DBG_EXATTRIB_MEM_FUTURE  0x0000000000000001")
+cpp_quote("#define DBG_EXATTRIB_MEM_PAST  0x0000000000000002")
+cpp_quote("#define DBG_EXATTRIB_MEM_GAP  0x0000000000000004")
+
+typedef UINT64 DBG_EXATTRIB_FLAGS;
+
+// ------------------------------------------------------------------
+// IDebugProperty158
+// Provides extended property attributes and data breakpoints
+[
+    object,
+    uuid(E02453B1-F68A-47C1-B243-25760004A4B9),
+    pointer_default(unique)
+]
+interface IDebugProperty158 : IUnknown
+{
+    // Get extend property attributes.
+    // This is needed to allow more than 64 DBG_ATTRIB_FLAGS values
+    HRESULT GetExtendedAttribs([out] DBG_EXATTRIB_FLAGS* pExFlags);
+
+    // Obtains information used to set or remove a data breakpoint on this property. 
+    // This is used, for example, when invoking the 'Break when changed' command on 
+    // a watch window item. To create a breakpoint the address/size is placed in the 
+    // fields of a BP_LOCATION_DATA_STRING structure for a BPLT_DATA_STRING breakpoint.
+    HRESULT GetDataBreakpointInfo(
+        [out] BSTR* pbstrAddress,
+        [out] DWORD* pSize,
+        [out] BSTR* pbstrError);
+};
+
+enum enum_LAUNCH_FLAGS158
+{
+    /**************************************
+    LAUNCH_DEBUG            = 0x0000, // Launch the process for debugging
+    LAUNCH_NODEBUG          = 0x0001, // Launch the process without debugging it
+    LAUNCH_ENABLE_ENC       = 0x0002, // Launch the process with EnC enabled.
+    LAUNCH_MERGE_ENV        = 0x0004, // Launch the process and merge the environment
+    LAUNCH_WAIT_FOR_EVENT   = 0x0008
+    LAUNCH_ALLOW_EVENTS_AFTER_STOPPED = 0x0010, // Allow stopping events in break-mode
+    LAUNCH_FORCE_32BIT_DEBUG = 0x0020, // Force use of the 32-bit debugger
+    LAUNCH_FORCE_64BIT_DEBUG = 0x0040  // Force use of the 64-bit debugger
+    LAUNCH_PROFILING = 0x0080  // Launch the process for profiling 
+    LAUNCH_STDIO_TO_OUTPUT_WINDOW = 0x0100
+    ***************************************/
+    
+    LAUNCH_FORCE_PSEUDO_REMOTE_DEBUG = 0x0200, // Force pseudoremote debugging
+    LAUNCH_INTEGRATED_CONSOLE = 0x400
+};
+typedef DWORD LAUNCH_FLAGS158;
+
+// This enumeration provides priority classes for WorkList processing
+enum enum_EXECUTION_PRIORITY
+{
+    WLP_HIGH_PRIORITY_CLASS           = 0x00000010,
+    WLP_ABOVE_NORMAL_PRIORITY_CLASS   = 0x00000020,
+    WLP_NORMAL_PRIORITY_CLASS         = 0x00000030,
+    WLP_BELOW_NORMAL_PRIORITY_CLASS   = 0x00000040,
+    WLP_IDLE_PRIORITY_CLASS           = 0x00000050
+};
+typedef DWORD EXECUTION_PRIORITY;
+
+// ------------------------------------------------------------------
+// IAsyncDebugEngineOperation158
+// Interface that may be implemented on IAsyncDebugEngineOperation objects to provide a priority hint when executing.
+// SDM async operations(the async operations that UI components talk to) will always implement this
+// interface. Engine async operations can optionally implement this interface.
+[
+    object,
+    uuid(0FDDD94E-01DA-4409-844C-36C63AAD3FC9),
+    pointer_default(unique)
+]
+interface IAsyncDebugEngineOperation158 : IUnknown
+{
+    // Start execution of the operation in the debug engine with the specified priority.
+    // This will fail with E_ASYNC_OPERATION_RUNNING if the operation has already started.
+    HRESULT BeginExecute([in] EXECUTION_PRIORITY priority);
+};
+
+// ------------------------------------------------------------------
+// IAsyncDebugEngineOperationWorkList158
+// Interface that may be implemented on objects that implement IAsyncDebugEngineOperationWorkList to provide a priority hint when executing.
+// SDM work lists (the work list that UI components talk to) will always implement this interface.
+// Engine work lists can optionally implement this interface.
+[
+    object,
+    uuid(44DFF079-4364-4D72-9997-CD3FE128CE39),
+    pointer_default(unique)
+]
+interface IAsyncDebugEngineOperationWorkList158 : IUnknown
+{
+    // Begin executing operations in the worklist with the specified priority.
+    // This will fail with E_ASYNC_OPERATION_RUNNING if the worklist has already
+    // been started.
+    HRESULT BeginExecute([in] EXECUTION_PRIORITY priority);
+};
+
+// ------------------------------------------------------------------
+// IVsDebuggerDelayedEnterBreakSink
+// Interface that should be implemented by the subscribers of IVsDebuggerDelayedEnterBreak to receive events.
+[
+    object,
+    uuid(B00E6E5A-7A25-454D-858A-396F7D24E17F),
+    pointer_default(unique)
+]
+interface IVsDebuggerDelayedEnterBreakSink : IUnknown
+{
+    // Gets called by the debugger package, once the debugger enters the breakmode and after the fast stepping timeout. 
+    HRESULT OnDelayedEnterBreak([in] IDebugThread2* pThread);
+};
+
+// ------------------------------------------------------------------
+// IVsDebuggerDelayedEnterBreak
+// Interface that is implemented in vsdebug package. Provides subscription to DelayedEnterBreak event.
+[
+    object,
+    uuid(A01C5DF6-ED76-4BCE-B38D-50563C2E59F0),
+    pointer_default(unique)
+]
+interface IVsDebuggerDelayedEnterBreak : IUnknown
+{
+    // Subscribe to DelayedEnterBreak events with a certain priority
+    HRESULT Subscribe([in] EXECUTION_PRIORITY priority, [in] IVsDebuggerDelayedEnterBreakSink* pEventsSink);
+
+    // Unsubscribe from DelayedEnterBreak events with a certain priority
+    HRESULT Unsubscribe([in] IVsDebuggerDelayedEnterBreakSink* pEventsSink);
+};
+
+// Extended bit field to support more annotated frame types.
+enum enum_FRAMEINFO_FLAGS_VALUES158
+{
+    // Existing flags:
+    // FIFV_ANNOTATEDFRAME                      = 0x00000001,
+    // FIFV_NON_USER_CODE                       = 0x00000002,
+    // FIFV_CANINTERCEPT_EXCEPTION              = 0x00000004,
+    // FIFV_FUNCEVALFRAME                       = 0x00000008,
+    // FIFV_MAXFRAMES_EXCEEDED                  = 0x00000010,
+    // FIFV_ASYNC_FRAME                         = 0x00000020,
+    // FIFV_RETURN_STACK_FRAME                  = 0x00000040,
+    // FIFV_TASK_CREATION_STACK_FRAME           = 0x00000080,
+    // FIFV_ASYNC_CALL_ANNOTATED_FRAME          = 0x00000100,
+    // FIFV_ASYNC_CONTINUATION_ANNOTATED_FRAME  = 0x00000200
+
+    // Indicates that the frame is an inline optimized code frame. Currently only set for native frames.
+    // If this is set and the stopping event is a step complete, the debugger UI will attempt to
+    // select the parent (non-inline) frame to be the current frame.
+    FIFV_INLINE_FRAME                           = 0x00000400
+};

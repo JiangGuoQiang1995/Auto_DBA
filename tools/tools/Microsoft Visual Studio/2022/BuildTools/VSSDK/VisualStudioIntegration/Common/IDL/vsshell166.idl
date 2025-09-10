@@ -1,0 +1,340 @@
+/****************************************************************************
+*  The VSSHELL Interfaces
+*  Copyright (c) Microsoft Corporation, All Rights Reserved
+****************************************************************************/
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+
+import "oaidl.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "objext.idl";
+import "olecm.idl";
+import "VsPlatformUI.idl";
+import "basetsd.h";
+import "oleidl.idl";
+import "servprov.idl";
+import "docobj.idl";
+import "designer.idl";
+import "textmgr.idl";
+import "oleipc.idl";
+
+#endif
+
+#include "vscookie.h"
+
+/****************************************************************************
+
+***** General notes for updating this file
+
+***** Proxy Stub
+
+If you modify anything in here, you may need to rebuild the proxy-stub,
+msenvXXXp.dll, and update its registration file,
+SetupAuthoring\env\Registry\msenvXXXp.ddr. To do that, once this file has been
+built and published, build from env\msenv\proxies and observe the build output.
+
+If you need to omit something from the proxy/stub file, then put it inside an
+#ifndef PROXYSTUB_BUILD/#endif block
+
+There is no need to define GUIDs in external header files such as
+vsshelluuids.h. Instead, define the GUID directly within the [uuid(...)]
+attribute and use __uuidof in native code.
+
+***** Primary Interop Assemblies
+
+If you modify anything in here, you may need to rebuild the primary interop
+assemblies. To do that, once this file has been built and published, build
+from vscommon\pias using: 'msbuild pias.nativeproj'
+
+***** PreserveSig
+
+Prefer "nopreservesig", which is the default for all new interfaces, because
+it creates cleaner managed code. Managed implementations are free to throw
+exceptions which will automatically be translated to HRESULTs in the CLR's
+COM interop layer. Native implementations will return HRESULTs and they will
+be converted to exceptions for managed callers.
+
+Do not create methods returning S_FALSE. Instead use an additional
+"[out] VARIANT_BOOL*" or "[out,retval] VARIANT_BOOL*" argument.
+
+***** Interface inheritance
+
+You may derive new interfaces from existing ones, but avoid mixing
+"preservesig" (old) with "nopreservesig" (new). Derive from an older interface
+if all of the methods in your interface match the preservesig attributes of the
+older interface.
+
+Remember, when implementing a derived interface in C++, you must implement
+QueryInterface for the base interface(s) too.
+
+***** Enumerators and bitwise flags passed as parameters:
+
+When a parameter must be exactly one of a set of values (a true enumerator),
+the values should be defined and used as follows:
+
+typedef enum __VSSAMPLETYPE
+{
+ST_THISTYPE     = 0,   // first value should be zero or one, except
+ST_THATTYPE     = 1,   // in special cases, and following values
+ST_THEOTHERTYPE = 2,   // should use consecutive numbers
+} VSSAMPLETYPE;
+
+interface IVsSample : IUnknown
+{
+HRESULT SampleMethod([in] VSSAMPLETYPE stType);
+}
+
+When a parameter must be exactly one of a set of values (a true enumerator),
+and is considered a PROPID, the values should be defined and used as follows:
+
+enum __VSSAMPLEPROPID
+{
+VSSAMPPROPID_LAST     = -7000,  // first value should be a unique
+VSSAMPPROPID_This     = -7000,  // number not used by any other
+VSSAMPPROPID_That     = -7001,  // PROPID, and following values
+VSSAMPPROPID_FIRST    = -7001,  // should use consecutive numbers
+};
+typedef LONG VSSAMPLEPROPID;
+
+interface IVsSample : IUnknown
+{
+HRESULT GetProperty([in] VSSAMPLEPROPID propid, [out,retval] VARIANT *pvar);
+HRESULT SetProperty([in] VSSAMPLEPROPID propid, [in] VARIANT var);
+}
+
+When a parameter can be none of or a combination of values (bitwise),
+the values should be defined and used as follows:
+
+enum __VSSAMPLEOPTS
+{
+SO_THISOPTION     = 0x00000001,   // first value should be one,
+SO_THATOPTION     = 0x00000002,   // following values should use
+SO_THEOTHEROPTION = 0x00000004,   // consecutive powers of two
+};
+typedef DWORD VSSAMPLEOPTS;
+
+interface IVsSample : IUnknown
+{
+HRESULT SampleMethod([in] VSSAMPLEOPTS grfOptions);
+}
+
+***** Defining properties
+
+Define properties as follows:
+
+interface IVsSample : IUnknown
+{
+[propget] HRESULT Foo([out, retval] BSTR *pbstrFoo);
+[propput] HRESULT Foo([in] LPCOLESTR strFoo);
+}
+
+Using [propget], [propput] and [out, retval] makes the interface easier
+to implement and consume in managed code.
+
+Note: The example above shows a case where the get/put methods accept slightly different
+argument types (BSTR versus LPCOLESTR). As long as the equivalent interop types are the
+same, this is fine (MarshalAs[..] attributes will be added as necessary). However, this
+is typically seen only for string arguments.
+
+***** Array typed args
+
+Pass array type arguments (both in and out) using [] and size_is when the corresponding
+size argument is present. You must have the array size as an argument for interop to
+work correctly.
+
+interface IVsSample : IUnknown
+{
+HRESULT MethodPassesInArray([in] int cItems, [in, size_is(cItems)] int prgiItems[]);
+}
+
+DO NOT use [in] int piItems[].
+
+For simple element types, consider using SAFEARRAY: e.g. SAFEARRAY(VARIANT_BOOL),
+SAFEARRAY(BSTR), SAFEARRAY(INT), etc. because they interop cleanly to managed code, but
+note that there is additional memory allocation and it may not be appropriate for high-
+performance methods. Also see the following note.
+
+******* SAFEARRAY(IVsFoo*)
+
+SAFEARRAY(IVsFoo*) will cause MIDL warning 2456:
+SAFEARRAY(interface pointer) doesn't work using midl generated proxy
+
+If you know for sure that implementions will never will never need to be called cross
+apartment (cross thread/process), then you can add [local] to the method.
+
+Alternatively, consider creating a custom IEnumXXX interface.
+
+****** Strings
+
+Use "[in] LPCOLESTR" instead of "[in] BSTR"
+
+for faster marshaling and more convenience to native callers.
+(But continue to use "[out] BSTR*" for out args.)
+
+Generally, you don't need to specify [in,string] for NUL-terminated strings
+because most of the "pointer to character" typedefs are already attributed with
+[string]. (e.g. "typedef [string] const OLECHAR *LPCOLESTR")
+
+******* Boolean
+
+Use VARIANT_BOOL instead of BOOL because it interops as System.Boolean instead
+of System.Int
+
+However, exercise caution when assigning or comparing to/from C++ bool in native
+code because VARIANT_BOOL is typedef'd as a short and VARIANT_TRUE is ((short)-1)
+
+******* Optional (may be null) args
+
+Use [in,unique] for optional input arguments which may be NULL.
+Note that pointer_default(unique) does NOT do this automatically.
+
+Do not use [out,unique] because unique cannot be applied to [out]-only top-level
+pointer parameters. However, you can use [in,out,unique].
+
+Do not use [optional]. It only works with VARIANT anyway and it's not
+obvious for managed coders.
+
+******* [out] NonNullableType*
+
+Note that arguments of the type "[out] Foo* pFoo", where Foo is a "non-nullable
+type" such as int, double, VARIANT_BOOL, BSTR, will be converted to
+"out Foo[] pFoo" in managed code. This is a non-standard conversion applied by
+an IL transformation step during the build for the interop assembly.
+
+******* Service GUIDs
+
+Define service GUIDs via an empty interface derived from IUnknown
+and put it inside an #ifndef PROXYSTUB_BUILD/#endif block
+
+******* HWNDs, HANDLE, and other non-marshalable types
+
+Take care if you define an interface with HWND, HGDIOBJ or other Win32
+handle types. These typically need to be marked [local] since they
+cannot cross apartment (specifically, process) boundaries.
+
+******* WPARAM, LPARAM, LRESULT, *_PTR types
+
+Currently any of the types listed above is translated incorreclty in to PIA. As all of them
+are pointer types, we want them to be IntPtr type but PIA generation uses int32 or int64 based on
+build architecture so it is suggested to use "HANDLE" type when INTEROPLIB is defined.
+
+TODO: Figure out how to properly build these types in both header, typelib and interop.
+
+****************************************************************************/
+
+#include "vsshelluuids.h" // for uuid_VsPreserveSigAttribute
+
+enum __VSFPROPID10
+{
+    // See previous version of vsshellXX.idl for previous enumeration values.
+    VSFPROPID_OverriddenGroupName = -5051,  // VT_BSTR.  The group name to use for this frame, when tabs are grouped
+};
+
+//----------------------------------------------------------------------------
+// IVsDebuggerLaunchAsync
+//----------------------------------------------------------------------------
+
+// Callback that can optionally be implemented by callers of IVsDebuggerLaunchAsync.LaunchDebugTargetsAsync
+[
+    uuid(5FD08946-C8AE-444C-9DB1-2807629AD9F5),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsDebuggerLaunchCompletionCallback : IUnknown
+{
+    // Provides the result of the debugger launch
+    HRESULT OnComplete(
+        [in] HRESULT hr,
+        [in] ULONG debugTargetCount,
+        [in, size_is(debugTargetCount)] VsDebugTargetProcessInfo* processInfoArray);
+}
+
+// Implemented by the Debugger, obtained via the SID_SVsDebuggerLaunchAsync service.
+[
+    uuid(62166866-2F12-4324-A9A6-48B2081053D1),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsDebuggerLaunchAsync : IUnknown
+{
+    // Kicks off the launch of the provided debug targets. If the launch is successfully kicked off (success return value)
+    // then the debugger will always call the provided completion callback when the launch finishes. If the launch fails
+    // to kick off, then the completion routine will not be called. The completion callback may be called before 
+    // LaunchDebugTargetsAsync returns successfully.
+    //
+    // The completion call back is optional. If not specified, the debugger will put up an error if the launch fails after kick off.
+    HRESULT LaunchDebugTargetsAsync(
+        [in] ULONG debugTargetCount,
+        [in, size_is(debugTargetCount)] VsDebugTargetInfo4* debugTargetArray,
+        [in, unique] IVsDebuggerLaunchCompletionCallback* completionCallback);
+}
+
+cpp_quote("#define SID_SVsDebuggerLaunchAsync __uuidof(IVsDebuggerLaunchAsync)")
+
+// Use this instead of IVsAddProjectItemDlg[2] / IVsAddNewWebProjectItemDlg to invoke the "add item" dialog in a way that's
+// compatible with Visual Studio Online.  In C/C++, obtain this via service SID_SVsAddProjectItemDlg.  In managed code, use
+// typeof(IVsAddProjectItemDlg) as the service ID.
+[
+    uuid(525ff8a4-fb75-4924-a0fa-f50c44087857),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsAddProjectItemDlg3 : IUnknown
+{
+    HRESULT AddProjectItemDlgRemotable(
+        [in] VSITEMID itemidLoc,          // item to add into
+        [in] REFGUID rguidProjectId,      // project ID (*not* project *type* like the rguidProject parameter to IVsAddProjectItemDlg2.AddProjectItemDlgTitledEx)
+        [in] VSADDITEMFLAGS grfAddFlags,  // flags
+        [in] LPCOLESTR lpszDlgTitle,      // dialog caption ("Add New Item - <project name>" if null)
+        [in] LPCOLESTR lpszTreeViewTitle, // treeview caption ("Categories" if null)
+        [in] LPCOLESTR lpszHelpTopic,     // name of help topic ("vs.add[new|existing]item" if null)
+        [in] LPCOLESTR lpszExpand,        // directory to select/expand by default
+        [in] LPCOLESTR lpszSelect,        // item to select
+        [in, out] BSTR* pbstrLocation,    // location field (initial/final value); valid if ShowLocationField set
+        [in, out] BSTR* pbstrFilter,      // filter string (initial/final value); valid if AllowStickyFilter set
+        [out] BOOL* pfDontShowAgain);     // checkbox to suppress dialog
+
+    HRESULT AddNewWebProjectItemDlgRemotable(
+        [in] VSITEMID itemidLoc,          // item to add into
+        [in] REFGUID rguidProjectId,      // project ID (*not* project *type* like the rguidProject parameter to IVsAddNewWebProjectItemDlg.AddNewWebProjectItemDlg)
+        [in] LPCOLESTR pszDlgTitle,       // Dialog caption (can be null)
+        [in] LPCOLESTR lpszHelpTopic,     // name of help topic (NULL == "vs.add[new|existing]item")
+        [in] LPCOLESTR lpszLanguage,      // directory (language) to select by default
+        [in] LPCOLESTR lpszSelect,        // item to select
+        [in] VSADDNEWWEBITEMOPTIONS options); // options to set on the dialog
+}
+
+//---------------------------------------------------------------------------
+// IVsBuildItemStorage
+//---------------------------------------------------------------------------
+// Used to access items from the project's MSBuild file
+
+[
+    uuid(3be310dd-16da-461d-986c-bd0f84150e47),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsBuildItemStorageCallback : IUnknown
+{
+    HRESULT ItemFound([in] BSTR itemSpec, [in] SAFEARRAY(BSTR) metadata);
+};
+
+[
+    uuid(a11def4b-ab42-407b-985f-c44a77d43387),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsBuildItemStorage : IUnknown
+{
+    HRESULT FindItems([in] LPCOLESTR itemType, [in] int metadataNameCount, [in, size_is(metadataNameCount)] const LPCOLESTR metadataNames[], [in] IVsBuildItemStorageCallback* storageCallback);
+};

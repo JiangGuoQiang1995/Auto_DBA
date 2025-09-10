@@ -1,0 +1,79 @@
+// msdbg1712.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+import "msdbg100.idl";
+import "msdbg174.idl";
+#endif
+
+#ifdef DEBUGGER_PIA_BUILD
+#define XINT32 int
+#else
+#define XINT32 ULONG32
+#endif
+
+interface IDebugErrorBreakpointResolution174;
+interface IDebugDumpModule100;
+
+enum ModuleSymbolLoadFlags1712
+{
+	//*** 17.4 flags
+    
+	SymbolLoadFlags1712_None = 0x00000000,
+    
+    // Indicates that only local symbol sources should be considered.
+    SymbolLoadFlags1712_LocalSourcesOnly = 0x00000001,
+    
+    // Indicates that the user should not be prompted to locate symbols if they cannot be found automatically.
+    SymbolLoadFlags1712_NoPrompt = 0x00000002,
+	
+	//** end 17.4 flags
+
+	// Indicates that the symbol search should not consider the location stored in the process, dump, or binary
+	// header metadata while searching for symbols.
+	SymbolLoadFlags1712_SkipOriginalLocation = 0x00000004
+
+};
+cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(ModuleSymbolLoadFlags1712)")
+
+// ------------------------------------------------------------------
+// IDebugBoundBreakpointErrorEvent
+
+[
+	object,
+	uuid(10EB6E39-2941-4B10-BCD4-849E46BAC8B3),
+	pointer_default(unique)
+]
+interface IDebugBoundBreakpointErrorEvent: IUnknown
+{
+	HRESULT GetErrorInformation(
+                [out] IDebugBoundBreakpoint2** ppBp,
+                [out] IDebugErrorBreakpointResolution174** ppBoundBreakpoint);
+};
+
+// ------------------------------------------------------------------
+// IDebugDumpModule1712 - implemented by engines that support debugging dump files. 
+// Called by the debugger ui to support finding modules in dumps.
+[
+    object,
+    uuid(7a0f7ad1-20a4-4f4d-8828-908b7bf2d3b7),
+    pointer_default(unique)
+]
+interface IDebugDumpModule1712: IUnknown
+{
+    HRESULT LoadBinary(
+		[in] enum ModuleSymbolLoadFlags flags,
+		[out] IDebugDumpModule100** ppModule);
+};

@@ -1,0 +1,977 @@
+[$RootKey$\CLSID\{41F94B58-7625-4376-8722-698033655F1D}]
+@="Microsoft.VisualStudio.Activities.Asr.XamlActivityGenerator"
+"Assembly"="Microsoft.VisualStudio.Activities,version=17.0.0.0,publicKeyToken=31bf3856ad364e35,culture=neutral"
+"Class"="Microsoft.VisualStudio.Activities.Asr.XamlActivityGenerator"
+"CodeBase"="$ShellFolder$\Common7\IDE\Microsoft.VisualStudio.Activities.dll"
+"InprocServer32"="$System$\mscoree.dll"
+"ThreadingModel"="Both"
+[$RootKey$\Editors\{32CC8DFA-2D70-49b2-94CD-22D57349B778}\Extensions]
+"xamlx"=dword:00000064
+[$RootKey$\Editors\{d4d9fcbc-b26a-4c41-ab9f-11fd2466829a}]
+@="Workflow Designer Package"
+"CommonPhysicalViewAttributes"=dword:00000000
+"DisplayName"="#105"
+"DeferUntilIntellisenseIsReady"=dword:00000000
+"Package"="{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}"
+[$RootKey$\Editors\{d4d9fcbc-b26a-4c41-ab9f-11fd2466829a}\Extensions]
+"xaml"=dword:0000005A
+"xamlx"=dword:0000005A
+[$RootKey$\Editors\{d4d9fcbc-b26a-4c41-ab9f-11fd2466829a}\LogicalViews]
+"{7651a700-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a701-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a702-06e5-11d1-8ebd-00a0c90f26ea}"=""
+"{7651a703-06e5-11d1-8ebd-00a0c90f26ea}"=""
+[$RootKey$\Editors\{FA3CD31E-987B-443A-9B81-186104E8DAC1}\Extensions]
+"xamlx"=dword:00000020
+[$RootKey$\Generators\{164B10B9-B200-11D0-8C61-00A0C91E29D5}\Xaml Activity Generator]
+@="VB XamlActivityGenerator"
+"CLSID"="{41F94B58-7625-4376-8722-698033655F1D}"
+"GeneratesDesignTimeSource"=dword:00000001
+[$RootKey$\Generators\{FAE04EC1-301F-11D3-BF4B-00C04F79EFBC}\Xaml Activity Generator]
+@="C# XamlActivityGenerator"
+"CLSID"="{41F94B58-7625-4376-8722-698033655F1D}"
+"GeneratesDesignTimeSource"=dword:00000001
+[$RootKey$\Languages\File Extensions\.xamlx]
+@="{c9164055-039b-4669-832d-f257bd5554d4}"
+[$RootKey$\Menus]
+"{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}"=", ActivitiesMenus.ctmenu, 1"
+[$RootKey$\MSBuild\SafeImports]
+"GenerateExpressionReferenceAssemblyDeclaration.targets"="$WINDIR$\microsoft.net\framework\v4.0.30319\GenerateExpressionReferenceAssemblyDeclaration.targets"
+"Microsoft.Xaml.Targets"="$WINDIR$\microsoft.net\framework\v4.0.30319\Microsoft.Xaml.Targets"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}]
+@="Microsoft.VisualStudio.Activities.ActivitiesPackage"
+"Assembly"="Microsoft.VisualStudio.Activities,version=17.0.0.0,publicKeyToken=31bf3856ad364e35,culture=neutral"
+"Class"="Microsoft.VisualStudio.Activities.ActivitiesPackage"
+"CompanyName"="Microsoft PLK"
+"ID"=dword:00000001
+"InprocServer32"="$System$\mscoree.dll"
+"MinEdition"="Standard"
+"ProductName"="Microsoft Windows Workflow Designer"
+"ProductVersion"="1.0"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox]
+"Default Items"=dword:00000001
+"Formats"="CF_XMLCODE"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\19F59B74448F6A27519DB281A44E4B12]
+@="#509"
+"Index"=dword:00001F40
+"UniqueID"="Migration"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\19F59B74448F6A27519DB281A44E4B12\70E7A058EA8CF778B26BE7CE4AF06A61]
+@="Interop"
+"AssemblyName"=" System.Workflow.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Interop"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Interop.UI"
+"Index"=dword:00009470
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#639"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Interop"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Interop"
+"UniqueID"="Interop"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\19F59B74448F6A27519DB281A44E4B12\70E7A058EA8CF778B26BE7CE4AF06A61\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,07,49,6e,74,65,72,6f,70,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,80,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,49,6e,74,65,72,6f,70,2c,20,53,79,73,74,65,6d,2e,57,6f,72,6b,66,6c,6f,77,2e,52,75,6e,74,69,6d,65,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E]
+@="#506"
+"Index"=dword:00001388
+"UniqueID"="Transaction"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\1FFE943AA63644DE3B21EC426C40E61F]
+@="Compensate"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#CompensableActivity"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Compensate.UI"
+"Index"=dword:00006D60
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#629"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Compensate"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Compensate"
+"UniqueID"="Compensate"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\1FFE943AA63644DE3B21EC426C40E61F\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,0a,43,6f,6d,70,65,6e,73,61,74,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7d,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,43,6f,6d,70,65,6e,73,61,74,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\541F889398B25A13EE45DDEF1799E]
+@="CompensableActivity"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#CompensableActivity"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.CompensableActivity.UI"
+"Index"=dword:00006978
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#628"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="CompensableActivity"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.CompensableActivity"
+"UniqueID"="CompensableActivity"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\541F889398B25A13EE45DDEF1799E\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,13,43,6f,6d,70,65,6e,73,61,62,6c,65,41,63,74,69,76,69,74,79,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,86,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,43,6f,6d,70,65,6e,73,61,62,6c,65,41,63,74,69,76,69,74,79,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\70D9BE9B139893AA6C69B5E77E614311]
+@="Confirm"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Confirm"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Confirm.UI"
+"Index"=dword:00007148
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#630"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Confirm"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Confirm"
+"UniqueID"="Confirm"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\70D9BE9B139893AA6C69B5E77E614311\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,07,43,6f,6e,66,69,72,6d,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7a,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,43,6f,6e,66,69,72,6d,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\A37BFEFE3292863C4C9412DEF040557A]
+@="TransactionScope"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#TransactionScope"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.TransactionScope.UI"
+"Index"=dword:00007530
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#631"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="TransactionScope"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.TransactionScope"
+"UniqueID"="TransactionScope"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\A37BFEFE3292863C4C9412DEF040557A\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,10,54,72,61,6e,73,61,63,74,69,6f,6e,53,63,6f,70,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,83,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,54,72,61,6e,73,61,63,74,69,6f,6e,53,63,6f,70,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\F3A6C5EBFF5F206B761BBB50167FB14]
+@="CancellationScope"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#CancellationScope"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.CancellationScope.UI"
+"Index"=dword:00006590
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#627"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="CancellationScope"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.CancellationScope"
+"UniqueID"="CancellationScope"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\1BFFAAE3973401F71CD0AB9F7856E\F3A6C5EBFF5F206B761BBB50167FB14\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,11,43,61,6e,63,65,6c,6c,61,74,69,6f,6e,53,63,6f,70,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,84,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,43,61,6e,63,65,6c,6c,61,74,69,6f,6e,53,63,6f,70,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\26933FD131947AEEC2DE5ACAA979A77]
+@="#502"
+"Index"=dword:000003E8
+"UniqueID"="Flowchart"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\26933FD131947AEEC2DE5ACAA979A77\26933FD131947AEEC2DE5ACAA979A77]
+@="Flowchart"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Flowchart"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Flowchart.UI"
+"Index"=dword:00002710
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#611"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Flowchart"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Flowchart"
+"UniqueID"="Flowchart"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\26933FD131947AEEC2DE5ACAA979A77\26933FD131947AEEC2DE5ACAA979A77\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,09,46,6c,6f,77,63,68,61,72,74,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7c,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,46,6c,6f,77,63,68,61,72,74,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\26933FD131947AEEC2DE5ACAA979A77\43C0B5789E7F23E958B1655D9D6E7B4]
+@="FlowDecision"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#FlowDecision"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.FlowDecision.UI"
+"Index"=dword:00002AF8
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#612"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="FlowDecision"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.FlowDecision"
+"UniqueID"="FlowDecision"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\26933FD131947AEEC2DE5ACAA979A77\43C0B5789E7F23E958B1655D9D6E7B4\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,0c,46,6c,6f,77,44,65,63,69,73,69,6f,6e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7f,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,46,6c,6f,77,44,65,63,69,73,69,6f,6e,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\26933FD131947AEEC2DE5ACAA979A77\7634B66A7f15479DBD05645DE46429B7]
+@="FlowSwitch<T>"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#FlowSwitch"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.FlowSwitch`1.UI"
+"Index"=dword:00009C40
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#613"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="FlowSwitch<T>"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.FlowSwitch`1"
+"UniqueID"="FlowSwitch<T>"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\26933FD131947AEEC2DE5ACAA979A77\7634B66A7f15479DBD05645DE46429B7\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,0d,46,6c,6f,77,53,77,69,74,63,68,3c,54,3e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7f,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,46,6c,6f,77,53,77,69,74,63,68,60,31,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\3C37ECB57287453E8C5C17FD47B31C4E]
+@="#511"
+"Index"=dword:00002328
+"UniqueID"="Data  "
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\555874C6FF034E599A30AD4A16C71B83]
+@="#510"
+"Index"=dword:000005DC
+"UniqueID"="State Machine"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\555874C6FF034E599A30AD4A16C71B83\6716954EAAD649ECB61E2543A9337712]
+@="State"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#State"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.State.UI"
+"Index"=dword:0000A410
+"TFMs"=".NETFramework,Version=v4.0.1"
+"TipDescription"="#641"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="State"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.State"
+"UniqueID"="State"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\555874C6FF034E599A30AD4A16C71B83\6716954EAAD649ECB61E2543A9337712\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,05,53,74,61,74,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,78,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,53,74,61,74,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\555874C6FF034E599A30AD4A16C71B83\80147353F3DB47769B3E8DFCE182F900]
+@="FinalState"
+"AssemblyName"="System.Activities.Core.Presentation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#FinalState"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.FinalState.UI"
+"Index"=dword:0000A7F8
+"TFMs"=".NETFramework,Version=v4.0.1"
+"TipDescription"="#642"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="FinalState"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Core.Presentation.FinalState"
+"UniqueID"="FinalState"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\555874C6FF034E599A30AD4A16C71B83\80147353F3DB47769B3E8DFCE182F900\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,0a,46,69,6e,61,6c,53,74,61,74,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,96,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2e,46,69,6e,61,6c,53,74,61,74,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\555874C6FF034E599A30AD4A16C71B83\8E304C025AA64830881A2566F1A22165]
+@="StateMachine"
+"AssemblyName"="System.Activities.Core.Presentation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#StateMachine"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.StateMachine.UI"
+"Index"=dword:0000A028
+"TFMs"=".NETFramework,Version=v4.0.1"
+"TipDescription"="#640"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="StateMachine"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Core.Presentation.Factories.StateMachineWithInitialStateFactory"
+"UniqueID"="StateMachine"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\555874C6FF034E599A30AD4A16C71B83\8E304C025AA64830881A2566F1A22165\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,23,53,74,61,74,65,4d,61,63,68,69,6e,65,57,69,74,68,49,6e,69,74,69,61,6c,53,74,61,74,65,46,61,63,74,6f,72,79,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,b9,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2e,46,61,63,74,6f,72,69,65,73,2e,53,74,61,74,65,4d,61,63,68,69,6e,65,57,69,74,68,49,6e,69,74,69,61,6c,53,74,61,74,65,46,61,63,74,6f,72,79,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3]
+@="#501"
+"Index"=dword:00000000
+"UniqueID"="Control Flow"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\3CDDBB8F43A4E074E2C2CE3E8622F43E]
+@="While"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#While"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.While.UI"
+"Index"=dword:00002328
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#610"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="While"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.While"
+"UniqueID"="While"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\3CDDBB8F43A4E074E2C2CE3E8622F43E\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,05,57,68,69,6c,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,78,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,57,68,69,6c,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\3FF39D3ACB3275537A64EFCB321D5]
+@="Sequence"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Sequence"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Sequence.UI"
+"Index"=dword:00001B58
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#608"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Sequence"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Sequence"
+"UniqueID"="Sequence"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\3FF39D3ACB3275537A64EFCB321D5\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,08,53,65,71,75,65,6e,63,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7b,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,53,65,71,75,65,6e,63,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\4F505EA5D1AC8191649C2D42E1DB1C]
+@="ParallelForEach<T>"
+"AssemblyName"=" System.Activities.Core.Presentation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#ParallelForEach"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.ParallelForEach`1.UI"
+"Index"=dword:00000FA0
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#605"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="ParallelForEach<T>"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Core.Presentation.Factories.ParallelForEachWithBodyFactory`1"
+"UniqueID"="ParallelForEach<T>"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\4F505EA5D1AC8191649C2D42E1DB1C\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,12,50,61,72,61,6c,6c,65,6c,46,6f,72,45,61,63,68,3c,54,3e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,b6,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2e,46,61,63,74,6f,72,69,65,73,2e,50,61,72,61,6c,6c,65,6c,46,6f,72,45,61,63,68,57,69,74,68,42,6f,64,79,46,61,63,74,6f,72,79,60,31,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\5710716372F788CCDE74EEDC55BBD]
+@="Pick"
+"AssemblyName"=" System.Activities.Core.Presentation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Pick"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Pick.UI"
+"Index"=dword:00001388
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#606"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Pick"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Core.Presentation.Factories.PickWithTwoBranchesFactory"
+"UniqueID"="Pick"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\5710716372F788CCDE74EEDC55BBD\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,04,50,69,63,6b,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,b0,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2e,46,61,63,74,6f,72,69,65,73,2e,50,69,63,6b,57,69,74,68,54,77,6f,42,72,61,6e,63,68,65,73,46,61,63,74,6f,72,79,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\701F4C1EB1C113BC9BA69CA1A4C9B1]
+@="ForEach<T>"
+"AssemblyName"=" System.Activities.Core.Presentation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#ForEach"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.ForEach`1.UI"
+"Index"=dword:000003E8
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#602"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="ForEach<T>"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Core.Presentation.Factories.ForEachWithBodyFactory`1"
+"UniqueID"="ForEach<T>"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\701F4C1EB1C113BC9BA69CA1A4C9B1\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,0a,46,6f,72,45,61,63,68,3c,54,3e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,ae,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2e,46,61,63,74,6f,72,69,65,73,2e,46,6f,72,45,61,63,68,57,69,74,68,42,6f,64,79,46,61,63,74,6f,72,79,60,31,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\786887572F6EF1C2F2D8177CB2F1639]
+@="If"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#If"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.If.UI"
+"Index"=dword:000007D0
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#603"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="If"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.If"
+"UniqueID"="If"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\786887572F6EF1C2F2D8177CB2F1639\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,02,49,66,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,75,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,49,66,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\8856746DDCCC594484656B61F53578]
+@="DoWhile"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#DoWhile"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.DoWhile.UI"
+"Index"=dword:00000000
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#601"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="DoWhile"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.DoWhile"
+"UniqueID"="DoWhile"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\8856746DDCCC594484656B61F53578\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,07,44,6f,57,68,69,6c,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7a,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,44,6f,57,68,69,6c,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\98402EECFBCEFC336954458A1752131]
+@="Parallel"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Parallel"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Parallel.UI"
+"Index"=dword:00000BB8
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#604"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Parallel"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Parallel"
+"UniqueID"="Parallel"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\98402EECFBCEFC336954458A1752131\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,08,50,61,72,61,6c,6c,65,6c,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7b,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,50,61,72,61,6c,6c,65,6c,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\A44B51EA8C5E05678C33BC275C459]
+@="Switch<T>"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Switch"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Switch`1.UI"
+"Index"=dword:00001F40
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#609"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Switch<T>"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Switch`1"
+"UniqueID"="Switch<T>"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\A44B51EA8C5E05678C33BC275C459\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,09,53,77,69,74,63,68,3c,54,3e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7b,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,53,77,69,74,63,68,60,31,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\A6B39ADB149076CA2B22CFC5935D56F]
+@="PickBranch"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#PickBranch"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.PickBranch.UI"
+"Index"=dword:00001770
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#607"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="PickBranch"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.PickBranch"
+"UniqueID"="PickBranch"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6A5EF0F472B554214A936C224815BB3\A6B39ADB149076CA2B22CFC5935D56F\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,0a,50,69,63,6b,42,72,61,6e,63,68,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7d,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,50,69,63,6b,42,72,61,6e,63,68,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337]
+@="#505"
+"Index"=dword:00000FA0
+"UniqueID"="Primitives"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\185B7133DB222371A857C05936CC2]
+@="Assign"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Assign"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Assign.UI"
+"Index"=dword:000055F0
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#623"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Assign"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Assign"
+"UniqueID"="Assign"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\185B7133DB222371A857C05936CC2\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,06,41,73,73,69,67,6e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,79,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,41,73,73,69,67,6e,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\5179C7FEE3A2EECFFEB94BE068551]
+@="WriteLine"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#WriteLine"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.WriteLine.UI"
+"Index"=dword:000061A8
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#626"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="WriteLine"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.WriteLine"
+"UniqueID"="WriteLine"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\5179C7FEE3A2EECFFEB94BE068551\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,09,57,72,69,74,65,4c,69,6e,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7c,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,57,72,69,74,65,4c,69,6e,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\8397F042D1538F0979B970AAF8F2BA]
+@="InvokeMethod"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#InvokeMethod"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.InvokeMethod.UI"
+"Index"=dword:00005DC0
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#625"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="InvokeMethod"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.InvokeMethod"
+"UniqueID"="InvokeMethod"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\8397F042D1538F0979B970AAF8F2BA\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,0c,49,6e,76,6f,6b,65,4d,65,74,68,6f,64,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7f,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,49,6e,76,6f,6b,65,4d,65,74,68,6f,64,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\8F497C1A3D15AF9EC215019F26B887D]
+@="Delay"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Delay"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Delay.UI"
+"Index"=dword:000059D8
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#624"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Delay"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Delay"
+"UniqueID"="Delay"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\8F497C1A3D15AF9EC215019F26B887D\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,05,44,65,6c,61,79,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,78,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,44,65,6c,61,79,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\D61A69DAA08BB7B3126667A65C19F520]
+@="InvokeDelegate"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#InvokeDelegate"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.InvokeDelegate.UI"
+"Index"=dword:00005BCC
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#649"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="InvokeDelegate"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.InvokeDelegate"
+"UniqueID"="InvokeDelegate"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\6F1B10C83F41962B7BC970AA1514F337\D61A69DAA08BB7B3126667A65C19F520\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,0e,49,6e,76,6f,6b,65,44,65,6c,65,67,61,74,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,81,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,49,6e,76,6f,6b,65,44,65,6c,65,67,61,74,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199]
+@="#503"
+"Index"=dword:000007D0
+"UniqueID"="Messaging"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\34B7D4D2EA18FFAFC47391D142183]
+@="InitializeCorrelation"
+"AssemblyName"=" System.ServiceModel.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#InitializeCorrelation"
+"Formats"=""
+"HelpKeyword"="System.ServiceModel.Activities.InitializeCorrelation.UI"
+"Index"=dword:000036B0
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#615"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="InitializeCorrelation"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.ServiceModel.Activities.InitializeCorrelation"
+"UniqueID"="InitializeCorrelation"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\34B7D4D2EA18FFAFC47391D142183\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,15,49,6e,69,74,69,61,6c,69,7a,65,43,6f,72,72,65,6c,61,74,69,6f,6e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,97,01,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2e,49,6e,69,74,69,61,6c,69,7a,65,43,6f,72,72,65,6c,61,74,69,6f,6e,2c,20,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\3D7F6184A766B4DAC713C421F2D8E33D]
+@="CorrelationScope"
+"AssemblyName"=" System.ServiceModel.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#CorrelationScope"
+"Formats"=""
+"HelpKeyword"="System.ServiceModel.Activities.CorrelationScope.UI"
+"Index"=dword:000032C8
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#614"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="CorrelationScope"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.ServiceModel.Activities.CorrelationScope"
+"UniqueID"="CorrelationScope"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\3D7F6184A766B4DAC713C421F2D8E33D\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,10,43,6f,72,72,65,6c,61,74,69,6f,6e,53,63,6f,70,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,92,01,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,72,65,6c,61,74,69,6f,6e,53,63,6f,70,65,2c,20,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\45B16C40C4E3DC16A897F4449D3DF76]
+@="ReceiveAndSendReply"
+"AssemblyName"=" System.Activities.Core.Presentation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#ReceiveAndSendReply"
+"Formats"=""
+"HelpKeyword"="System.ServiceModel.Activities.ReceiveAndSendReply.UI"
+"Index"=dword:00003E80
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#617"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="ReceiveAndSendReply"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.ServiceModel.Activities.Presentation.Factories.ReceiveAndSendReplyFactory"
+"UniqueID"="ReceiveAndSendReply"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\45B16C40C4E3DC16A897F4449D3DF76\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,13,52,65,63,65,69,76,65,41,6e,64,53,65,6e,64,52,65,70,6c,79,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,b8,01,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2e,46,61,63,74,6f,72,69,65,73,2e,52,65,63,65,69,76,65,41,6e,64,53,65,6e,64,52,65,70,6c,79,46,61,63,74,6f,72,79,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\4857AAE61A4144336B2E9C8F658F5D6]
+@="SendAndReceiveReply"
+"AssemblyName"=" System.Activities.Core.Presentation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#SendAndReceiveReply"
+"Formats"=""
+"HelpKeyword"="System.ServiceModel.Activities.SendAndReceiveReply.UI"
+"Index"=dword:00004650
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#619"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="SendAndReceiveReply"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.ServiceModel.Activities.Presentation.Factories.SendAndReceiveReplyFactory"
+"UniqueID"="SendAndReceiveReply"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\4857AAE61A4144336B2E9C8F658F5D6\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,13,53,65,6e,64,41,6e,64,52,65,63,65,69,76,65,52,65,70,6c,79,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,b8,01,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2e,46,61,63,74,6f,72,69,65,73,2e,53,65,6e,64,41,6e,64,52,65,63,65,69,76,65,52,65,70,6c,79,46,61,63,74,6f,72,79,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,43,6f,72,65,2e,50,72,65,73,65,6e,74,61,74,69,6f,6e,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\5639D3DF5AEA3D9E7827B843EE3CBB2]
+@="Receive"
+"AssemblyName"=" System.ServiceModel.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Receive"
+"Formats"=""
+"HelpKeyword"="System.ServiceModel.Activities.Receive.UI"
+"Index"=dword:00003A98
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#616"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Receive"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.ServiceModel.Activities.Receive"
+"UniqueID"="Receive"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\5639D3DF5AEA3D9E7827B843EE3CBB2\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,07,52,65,63,65,69,76,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,89,01,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2e,52,65,63,65,69,76,65,2c,20,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\94966D90747B97D1F0F26C98A8B1AC3]
+@="Send"
+"AssemblyName"=" System.ServiceModel.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Send"
+"Formats"=""
+"HelpKeyword"="System.ServiceModel.Activities.Send.UI"
+"Index"=dword:00004268
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#618"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Send"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.ServiceModel.Activities.Send"
+"UniqueID"="Send"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\94966D90747B97D1F0F26C98A8B1AC3\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,04,53,65,6e,64,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,86,01,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2e,53,65,6e,64,2c,20,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\EEBC897E4A8C4432A53874F8F44B9E]
+@="TransactedReceiveScope"
+"AssemblyName"=" System.ServiceModel.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#TransactedReceiveScope"
+"Formats"=""
+"HelpKeyword"="System.ServiceModel.Activities.TransactedReceiveScope.UI"
+"Index"=dword:00004A38
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#620"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="TransactedReceiveScope"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.ServiceModel.Activities.TransactedReceiveScope"
+"UniqueID"="TransactedReceiveScope"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\B54FA74B22DA5A748EAE3D55AD264199\EEBC897E4A8C4432A53874F8F44B9E\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,16,54,72,61,6e,73,61,63,74,65,64,52,65,63,65,69,76,65,53,63,6f,70,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,98,01,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2e,54,72,61,6e,73,61,63,74,65,64,52,65,63,65,69,76,65,53,63,6f,70,65,2c,20,53,79,73,74,65,6d,2e,53,65,72,76,69,63,65,4d,6f,64,65,6c,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\BC366F2DBA3D681E7A3899917C5D3DE]
+@="#504"
+"Index"=dword:00000BB8
+"UniqueID"="Runtime"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\BC366F2DBA3D681E7A3899917C5D3DE\3f9ba21991834ae7a6524f0c2a175d2e]
+@="NoPersistScope"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#NoPersistScope"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.NoPersistScope.UI"
+"Index"=dword:0000ABE0
+"TFMs"=".NETFramework,Version=v4.5"
+"TipDescription"="#644"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="NoPersistScope"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.NoPersistScope"
+"UniqueID"="NoPersistScope"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\BC366F2DBA3D681E7A3899917C5D3DE\3f9ba21991834ae7a6524f0c2a175d2e\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,0e,4e,6f,50,65,72,73,69,73,74,53,63,6f,70,65,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,81,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,4e,6f,50,65,72,73,69,73,74,53,63,6f,70,65,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\BC366F2DBA3D681E7A3899917C5D3DE\522691E35860B55A403B64B796F704E]
+@="TerminateWorkflow"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#TerminateWorkflow"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.TerminateWorkflow.UI"
+"Index"=dword:00005208
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#622"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="TerminateWorkflow"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.TerminateWorkflow"
+"UniqueID"="TerminateWorkflow"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\BC366F2DBA3D681E7A3899917C5D3DE\522691E35860B55A403B64B796F704E\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,11,54,65,72,6d,69,6e,61,74,65,57,6f,72,6b,66,6c,6f,77,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,84,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,54,65,72,6d,69,6e,61,74,65,57,6f,72,6b,66,6c,6f,77,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\BC366F2DBA3D681E7A3899917C5D3DE\5A7DACB6E9B5BA37E22F825429355174]
+@="Persist"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Persist"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Persist.UI"
+"Index"=dword:00004E20
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#621"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Persist"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Persist"
+"UniqueID"="Persist"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\BC366F2DBA3D681E7A3899917C5D3DE\5A7DACB6E9B5BA37E22F825429355174\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,07,50,65,72,73,69,73,74,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7a,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,50,65,72,73,69,73,74,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\D15B505CCE9406DE9F918CB1F8C641C]
+@="#507"
+"Index"=dword:00001770
+"UniqueID"="Collection"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\D15B505CCE9406DE9F918CB1F8C641C\4455EED5BE2C17AFC35549D9D99E4C31]
+@="AddToCollection<T>"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#AddToCollection"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.AddToCollection`1.UI"
+"Index"=dword:00007918
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#632"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="AddToCollection<T>"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.AddToCollection`1"
+"UniqueID"="AddToCollection<T>"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\D15B505CCE9406DE9F918CB1F8C641C\4455EED5BE2C17AFC35549D9D99E4C31\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,12,41,64,64,54,6f,43,6f,6c,6c,65,63,74,69,6f,6e,3c,54,3e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,84,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,41,64,64,54,6f,43,6f,6c,6c,65,63,74,69,6f,6e,60,31,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\D15B505CCE9406DE9F918CB1F8C641C\4D69F65D59ADF1C057E54F6B52B53550]
+@="ClearCollection<T>"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#ClearCollection"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.ClearCollection`1.UI"
+"Index"=dword:00007D00
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#633"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="ClearCollection<T>"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.ClearCollection`1"
+"UniqueID"="ClearCollection<T>"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\D15B505CCE9406DE9F918CB1F8C641C\4D69F65D59ADF1C057E54F6B52B53550\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,12,43,6c,65,61,72,43,6f,6c,6c,65,63,74,69,6f,6e,3c,54,3e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,84,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,43,6c,65,61,72,43,6f,6c,6c,65,63,74,69,6f,6e,60,31,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\D15B505CCE9406DE9F918CB1F8C641C\612CFF39F1AD9F85D643E1CAEF9F574]
+@="ExistsInCollection<T>"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#ExistsInCollection"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.ExistsInCollection`1.UI"
+"Index"=dword:000080E8
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#634"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="ExistsInCollection<T>"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.ExistsInCollection`1"
+"UniqueID"="ExistsInCollection<T>"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\D15B505CCE9406DE9F918CB1F8C641C\612CFF39F1AD9F85D643E1CAEF9F574\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,15,45,78,69,73,74,73,49,6e,43,6f,6c,6c,65,63,74,69,6f,6e,3c,54,3e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,87,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,45,78,69,73,74,73,49,6e,43,6f,6c,6c,65,63,74,69,6f,6e,60,31,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\D15B505CCE9406DE9F918CB1F8C641C\C3E86847E88D2C4BAD1C7BDDEC9E]
+@="RemoveFromCollection<T>"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#RemoveFromCollection"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.RemoveFromCollection`1.UI"
+"Index"=dword:000084D0
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#635"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="RemoveFromCollection<T>"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.RemoveFromCollection`1"
+"UniqueID"="RemoveFromCollection<T>"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\D15B505CCE9406DE9F918CB1F8C641C\C3E86847E88D2C4BAD1C7BDDEC9E\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,17,52,65,6d,6f,76,65,46,72,6f,6d,43,6f,6c,6c,65,63,74,69,6f,6e,3c,54,3e,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,89,01,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,52,65,6d,6f,76,65,46,72,6f,6d,43,6f,6c,6c,65,63,74,69,6f,6e,60,31,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\EF43236673CABB66B1409161AC271]
+@="#508"
+"Index"=dword:00001B58
+"UniqueID"="Error Handling"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\EF43236673CABB66B1409161AC271\624F5B3E6FAA60138294C1ACB6EDB8A]
+@="Rethrow"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Rethrow"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Rethrow.UI"
+"Index"=dword:000088B8
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#638"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Rethrow"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Rethrow"
+"UniqueID"="Rethrow"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\EF43236673CABB66B1409161AC271\624F5B3E6FAA60138294C1ACB6EDB8A\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,07,52,65,74,68,72,6f,77,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7a,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,52,65,74,68,72,6f,77,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\EF43236673CABB66B1409161AC271\8CE61DD2505EFFD96F937FA743B6491F]
+@="Throw"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#Throw"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.Throw.UI"
+"Index"=dword:00008CA0
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#636"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="Throw"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.Throw"
+"UniqueID"="Throw"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\EF43236673CABB66B1409161AC271\8CE61DD2505EFFD96F937FA743B6491F\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,05,54,68,72,6f,77,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,78,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,54,68,72,6f,77,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\EF43236673CABB66B1409161AC271\DA91A17374ABD20B6C15678EB4AAE1]
+@="TryCatch"
+"AssemblyName"=" System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+"BitmapResourceID"="#TryCatch"
+"Formats"=""
+"HelpKeyword"="System.Activities.Statements.TryCatch.UI"
+"Index"=dword:00009088
+"TFMs"=".NETFramework,Version=v4.0"
+"TipDescription"="#637"
+"TipPublisher"="Microsoft Corporation"
+"TipTitle"="TryCatch"
+"TipType"="Managed .NET Component"
+"TipVersion"="4.0.0.0"
+"TransparentColor"=dword:00FF00FF
+"TypeName"="System.Activities.Statements.TryCatch"
+"UniqueID"="TryCatch"
+[$RootKey$\Packages\{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}\Toolbox\DefaultContent\EF43236673CABB66B1409161AC271\DA91A17374ABD20B6C15678EB4AAE1\ItemContent]
+"CF_WORKFLOW_4"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,08,54,72,79,43,61,74,63,68,0b
+"WorkflowItemTypeNameFormat"=hex:96,a7,9e,fd,13,3b,70,43,a6,79,56,10,6b,b2,88,fb,00,01,00,00,00,ff,ff,ff,ff,01,00,00,00,00,00,00,00,06,01,00,00,00,7b,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2e,53,74,61,74,65,6d,65,6e,74,73,2e,54,72,79,43,61,74,63,68,2c,20,53,79,73,74,65,6d,2e,41,63,74,69,76,69,74,69,65,73,2c,20,56,65,72,73,69,6f,6e,3d,34,2e,30,2e,30,2e,30,2c,20,43,75,6c,74,75,72,65,3d,6e,65,75,74,72,61,6c,2c,20,50,75,62,6c,69,63,4b,65,79,54,6f,6b,65,6e,3d,33,31,62,66,33,38,35,36,61,64,33,36,34,65,33,35,0b
+[$RootKey$\Projects\{32F31D43-81CC-4C15-9DE6-3fC5453562B6}]
+@="WorkflowProjectFactory"
+"DisplayName"="Workflow Project"
+"Package"="{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}"
+[$RootKey$\Projects\{F184B08F-C81C-45f6-A57F-5ABD9991F28F}\FileExtensions\.xamlx\RefactorNotify\{C9164055-039B-4669-832D-F257BD5554D4}]
+"NotificationType"=dword:00000000
+[$RootKey$\Projects\{FAE04EC0-301F-11d3-BF4B-00C04F79EFBC}\FileExtensions\.xamlx\RefactorNotify\{C9164055-039B-4669-832D-F257BD5554D4}]
+"NotificationType"=dword:00000000
+[$RootKey$\ShellFileAssociations\.xamlx]
+"DefaultIconMoniker"="KnownMonikers.WFService"
+[$RootKey$\ToolboxPages\System.Activities Components]
+@="#110"
+"DefaultTbx"=dword:0000001F
+"HelpKeyword"="System.Activities Components"
+"Package"="{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}"
+"Page"="{4D0038A7-0676-44B4-822F-EC45D8E1CAA2}"
+[$RootKey$\ToolWindows\{19b8364c-88ac-40b4-b9db-72c141e60d5b}]
+@="{AAFFDC1E-A1C7-47BC-B3DC-9E685DF3959B}"
+"Name"="Microsoft.VisualStudio.Activities.WorkfowToolWindow"
+[$RootKey$\XmlChooserFactory\WorkflowService]
+"{7651A700-06E5-11D1-8EBD-00A0C90F26EA}"="{D4D9FCBC-B26A-4C41-AB9F-11FD2466829A}"
+"{7651A701-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+"{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"="{D4D9FCBC-B26A-4C41-AB9F-11FD2466829A}"
+"{7651A703-06E5-11D1-8EBD-00A0C90F26EA}"="{D4D9FCBC-B26A-4C41-AB9F-11FD2466829A}"
+"DefaultLogicalView"="{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"
+"Extension"="xamlx"
+[$RootKey$\XmlChooserFactory\XAML\Workflow]
+"{7651A700-06E5-11D1-8EBD-00A0C90F26EA}"="{D4D9FCBC-B26A-4C41-AB9F-11FD2466829A}"
+"{7651A701-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+"{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"="{D4D9FCBC-B26A-4C41-AB9F-11FD2466829A}"
+"{7651A703-06E5-11D1-8EBD-00A0C90F26EA}"="{D4D9FCBC-B26A-4C41-AB9F-11FD2466829A}"
+"DefaultLogicalView"="{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"
+"Extension"="xaml"
+"Match"="both"
+"Namespace"="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+[$RootKey$\XmlChooserFactory\XAML\WorkflowTemplate]
+"{7651A700-06E5-11D1-8EBD-00A0C90F26EA}"="{D4D9FCBC-B26A-4C41-AB9F-11FD2466829A}"
+"{7651A701-06E5-11D1-8EBD-00A0C90F26EA}"="{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+"{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"="{D4D9FCBC-B26A-4C41-AB9F-11FD2466829A}"
+"{7651A703-06E5-11D1-8EBD-00A0C90F26EA}"="{D4D9FCBC-B26A-4C41-AB9F-11FD2466829A}"
+"DefaultLogicalView"="{7651A702-06E5-11D1-8EBD-00A0C90F26EA}"
+"Extension"="xaml"
+"Match"="both"
+"Namespace"="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation/toolbox"

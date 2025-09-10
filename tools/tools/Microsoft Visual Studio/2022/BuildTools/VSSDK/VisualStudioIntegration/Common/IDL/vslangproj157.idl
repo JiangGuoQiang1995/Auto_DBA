@@ -1,0 +1,82 @@
+/****************************************************************************
+*  The vslangproj Interfaces
+*  Copyright (c) Microsoft Corporation, All Rights Reserved
+****************************************************************************/
+
+/****************************************************************************
+* vslangproj157.idl
+*
+* Sources the typelib that needs to be exposed to clients.
+* Exposes the CATID's of the extensibility Project & ProjectItem object.
+* Exposes the diff CATID's for the diff packages for the browse objects.
+* Exposes the browse object interfaces
+* Exposes the interfaces of the package specific extensibility project object.
+*****************************************************************************/
+#ifndef INTEROPLIB
+import "oaidl.idl";
+
+// done because the .idl file does not understand namespaces but these interfaces are in a namespace in the header file.
+cpp_quote("#include \"dte.h\"")
+cpp_quote("#ifdef FORCE_EXPLICIT_DTE_NAMESPACE")
+cpp_quote("#define DTE VxDTE::DTE")
+cpp_quote("#define Project VxDTE::Project")
+cpp_quote("#define ProjectItem VxDTE::ProjectItem")
+cpp_quote("#endif")
+
+// Interface definitions
+cpp_quote("#define VSLANGPROJ157_VER_MAJ   15")
+cpp_quote("#define VSLANGPROJ157_VER_MIN    7")
+
+#define VSLANGPROJ_VER        15.7
+
+[
+    uuid(A8EE31BA-E32B-404A-AE7C-F28B1546990A),
+    helpstring("Microsoft Visual Studio Project Model (15.7)"),
+    version(VSLANGPROJ_VER)
+]
+library VSLangProj157
+{
+#endif // INTEROPLIB
+
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+    importlib("dte.tlb");
+    importlib("vslangproj.tlb");
+    importlib("vslangproj2.tlb");
+    importlib("vslangproj80.tlb");
+    importlib("vslangproj90.tlb");
+    importlib("vslangproj100.tlb");
+    importlib("vslangproj110.tlb");
+    importlib("vslangproj140.tlb");
+    #include "vsshelluuids.h"
+
+    enum VsProjReferencesPropId157
+    {
+        DISPID_References_AddFiles = 10,
+    };
+
+    //
+    // References3
+    //
+    [
+        dual,
+        oleautomation,
+        object,
+        uuid(0B2B0873-6DE1-4045-88DD-B2CBD94E3547)
+    ]
+    interface References3 : References2
+    {
+        [id(DISPID_References_AddFiles), helpstring("AddFiles")]
+        HRESULT AddFiles([in] SAFEARRAY(BSTR) parrbstrPaths, [out] SAFEARRAY(Reference*) *pparrReferences);
+    }
+
+
+#ifndef INTEROPLIB
+}
+#endif
+
+cpp_quote("#ifdef FORCE_EXPLICIT_DTE_NAMESPACE")
+cpp_quote("#undef DTE")
+cpp_quote("#undef Project")
+cpp_quote("#undef ProjectItem")
+cpp_quote("#endif")

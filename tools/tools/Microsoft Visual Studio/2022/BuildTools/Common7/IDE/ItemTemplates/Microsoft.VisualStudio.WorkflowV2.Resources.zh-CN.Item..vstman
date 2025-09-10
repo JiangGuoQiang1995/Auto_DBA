@@ -1,0 +1,134 @@
+﻿<VSTemplateManifest Version="1.0" xmlns="http://schemas.microsoft.com/developer/vstemplatemanifest/2015">
+  <VSTemplateContainer TemplateType="Item" Locale="2052">
+    <RelativePathOnDisk>CSharp\Workflow\2052\Activity</RelativePathOnDisk>
+    <TemplateFileName>Activity.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <DefaultName>Activity.xaml</DefaultName>
+        <Name Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="208" />
+        <Description Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="209" />
+        <TemplateID>Microsoft.CSharp.Activity</TemplateID>
+        <ProjectType>CSharp</ProjectType>
+        <Icon>__TemplateIcon.ico</Icon>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <SortOrder>110</SortOrder>
+        <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Item" Locale="2052">
+    <RelativePathOnDisk>CSharp\Workflow\2052\ActivityDesigner</RelativePathOnDisk>
+    <TemplateFileName>ActivityDesigner.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <DefaultName>ActivityDesigner.xaml</DefaultName>
+        <Name Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="210" />
+        <Description Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="211" />
+        <TemplateID>Microsoft.CSharp.ActivityDesigner</TemplateID>
+        <ProjectType>CSharp</ProjectType>
+        <Icon Package="{b3bae735-386c-4030-8329-ef48eeda4036}" ID="4594" />
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <SortOrder>120</SortOrder>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Item" Locale="2052">
+    <RelativePathOnDisk>CSharp\Workflow\2052\CodeActivity</RelativePathOnDisk>
+    <TemplateFileName>CodeActivity.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <DefaultName>CodeActivity.cs</DefaultName>
+        <Name Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="212" />
+        <Description Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="213" />
+        <TemplateID>Microsoft.CSharp.CodeActivity</TemplateID>
+        <ProjectType>CSharp</ProjectType>
+        <Icon>__TemplateIcon.ico</Icon>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <SortOrder>130</SortOrder>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Item" Locale="2052">
+    <RelativePathOnDisk>CSharp\Workflow\2052\WCFWorkflowService</RelativePathOnDisk>
+    <TemplateFileName>WCFWorkflowService.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <DefaultName>Service.xamlx</DefaultName>
+        <Name Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="214" />
+        <Description Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="215" />
+        <TemplateID>Microsoft.CSharp.WorkflowService</TemplateID>
+        <ProjectType>CSharp</ProjectType>
+        <Icon>__TemplateIcon.ico</Icon>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <SortOrder>140</SortOrder>
+        <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Item" Locale="2052">
+    <RelativePathOnDisk>VisualBasic\Workflow\2052\Activity</RelativePathOnDisk>
+    <TemplateFileName>Activity.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <DefaultName>Activity.xaml</DefaultName>
+        <Name Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="208" />
+        <Description Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="209" />
+        <TemplateID>Microsoft.VisualBasic.Activity</TemplateID>
+        <ProjectType>VisualBasic</ProjectType>
+        <Icon>__TemplateIcon.ico</Icon>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <SortOrder>110</SortOrder>
+        <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Item" Locale="2052">
+    <RelativePathOnDisk>VisualBasic\Workflow\2052\ActivityDesigner</RelativePathOnDisk>
+    <TemplateFileName>ActivityDesigner.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <DefaultName>ActivityDesigner.xaml</DefaultName>
+        <Name Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="210" />
+        <Description Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="211" />
+        <TemplateID>Microsoft.VisualBasic.ActivityDesigner</TemplateID>
+        <ProjectType>VisualBasic</ProjectType>
+        <Icon Package="{b3bae735-386c-4030-8329-ef48eeda4036}" ID="4591" />
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <SortOrder>120</SortOrder>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Item" Locale="2052">
+    <RelativePathOnDisk>VisualBasic\Workflow\2052\CodeActivity</RelativePathOnDisk>
+    <TemplateFileName>CodeActivity.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <DefaultName>CodeActivity.vb</DefaultName>
+        <Name Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="212" />
+        <Description Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="213" />
+        <TemplateID>Microsoft.VisualBasic.CodeActivity</TemplateID>
+        <ProjectType>VisualBasic</ProjectType>
+        <Icon>__TemplateIcon.ico</Icon>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <SortOrder>130</SortOrder>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Item" Locale="2052">
+    <RelativePathOnDisk>VisualBasic\Workflow\2052\VBWCFWorkflowService</RelativePathOnDisk>
+    <TemplateFileName>WCFWorkflowService.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <DefaultName>Service.xamlx</DefaultName>
+        <Name Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="214" />
+        <Description Package="{AAFFDC1E-A1C7-47bc-B3DC-9E685DF3959B}" ID="215" />
+        <TemplateID>Microsoft.VisualBasic.WorkflowService</TemplateID>
+        <ProjectType>VisualBasic</ProjectType>
+        <Icon>__TemplateIcon.ico</Icon>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <SortOrder>140</SortOrder>
+        <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+</VSTemplateManifest>

@@ -1,0 +1,762 @@
+/****************************************************************************
+*  The VSSHELL Interfaces
+*  Copyright (c) Microsoft Corporation, All Rights Reserved
+****************************************************************************/
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+import "oaidl.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "objext.idl";
+import "olecm.idl";
+import "VsPlatformUI.idl";
+
+#endif
+
+#include "vscookie.h"
+
+/****************************************************************************
+
+***** General notes for updating this file
+
+***** Proxy Stub
+
+If you modify anything in here, you may need to rebuild the proxy-stub,
+msenvXXXp.dll, and update its registration file,
+SetupAuthoring\env\Registry\msenvXXXp.ddr. To do that, once this file has been
+built and published, build from env\msenv\proxies and observe the build output.
+
+If you need to omit something from the proxy/stub file, then put it inside an
+#ifndef PROXYSTUB_BUILD/#endif block
+
+There is no need to define GUIDs in external header files such as
+vsshelluuids.h. Instead, define the GUID directly within the [uuid(...)]
+attribute and use __uuidof in native code.
+
+***** Primary Interop Assemblies
+
+If you modify anything in here, you may need to rebuild the primary interop
+assemblies. To do that, once this file has been built and published, build
+from vscommon\pias using: 'msbuild pias.nativeproj'
+
+***** PreserveSig
+
+Prefer "nopreservesig", which is the default for all new interfaces, because
+it creates cleaner managed code. Managed implementations are free to throw
+exceptions which will automatically be translated to HRESULTs in the CLR's
+COM interop layer. Native implementations will return HRESULTs and they will
+be converted to exceptions for managed callers.
+
+Do not create methods returning S_FALSE. Instead use an additional
+"[out] VARIANT_BOOL*" or "[out,retval] VARIANT_BOOL*" argument.
+
+***** Interface inheritance
+
+You may derive new interfaces from existing ones, but avoid mixing
+"preservesig" (old) with "nopreservesig" (new). Derive from an older interface
+if all of the methods in your interface match the preservesig attributes of the
+older interface.
+
+Remember, when implementing a derived interface in C++, you must implement
+QueryInterface for the base interface(s) too.
+
+***** Enumerators and bitwise flags passed as parameters:
+
+When a parameter must be exactly one of a set of values (a true enumerator),
+the values should be defined and used as follows:
+
+typedef enum __VSSAMPLETYPE
+{
+ST_THISTYPE     = 0,   // first value should be zero or one, except
+ST_THATTYPE     = 1,   // in special cases, and following values
+ST_THEOTHERTYPE = 2,   // should use consecutive numbers
+} VSSAMPLETYPE;
+
+interface IVsSample : IUnknown
+{
+HRESULT SampleMethod([in] VSSAMPLETYPE stType);
+}
+
+When a parameter must be exactly one of a set of values (a true enumerator),
+and is considered a PROPID, the values should be defined and used as follows:
+
+enum __VSSAMPLEPROPID
+{
+VSSAMPPROPID_LAST     = -7000,  // first value should be a unique
+VSSAMPPROPID_This     = -7000,  // number not used by any other
+VSSAMPPROPID_That     = -7001,  // PROPID, and following values
+VSSAMPPROPID_FIRST    = -7001,  // should use consecutive numbers
+};
+typedef LONG VSSAMPLEPROPID;
+
+interface IVsSample : IUnknown
+{
+HRESULT GetProperty([in] VSSAMPLEPROPID propid, [out,retval] VARIANT *pvar);
+HRESULT SetProperty([in] VSSAMPLEPROPID propid, [in] VARIANT var);
+}
+
+When a parameter can be none of or a combination of values (bitwise),
+the values should be defined and used as follows:
+
+enum __VSSAMPLEOPTS
+{
+SO_THISOPTION     = 0x00000001,   // first value should be one,
+SO_THATOPTION     = 0x00000002,   // following values should use
+SO_THEOTHEROPTION = 0x00000004,   // consecutive powers of two
+};
+typedef DWORD VSSAMPLEOPTS;
+
+interface IVsSample : IUnknown
+{
+HRESULT SampleMethod([in] VSSAMPLEOPTS grfOptions);
+}
+
+***** Defining properties
+
+Define properties as follows:
+
+interface IVsSample : IUnknown
+{
+[propget] HRESULT Foo([out, retval] BSTR *pbstrFoo);
+[propput] HRESULT Foo([in] LPCOLESTR strFoo);
+}
+
+Using [propget], [propput] and [out, retval] makes the interface easier
+to implement and consume in managed code.
+
+Note: The example above shows a case where the get/put methods accept slightly different
+argument types (BSTR versus LPCOLESTR). As long as the equivalent interop types are the
+same, this is fine (MarshalAs[..] attributes will be added as necessary). However, this
+is typically seen only for string arguments.
+
+***** Array typed args
+
+Pass array type arguments (both in and out) using [] and size_is when the corresponding
+size argument is present. You must have the array size as an argument for interop to
+work correctly.
+
+interface IVsSample : IUnknown
+{
+HRESULT MethodPassesInArray([in] int cItems, [in, size_is(cItems)] int prgiItems[]);
+}
+
+DO NOT use [in] int piItems[].
+
+For simple element types, consider using SAFEARRAY: e.g. SAFEARRAY(VARIANT_BOOL),
+SAFEARRAY(BSTR), SAFEARRAY(INT), etc. because they interop cleanly to managed code, but
+note that there is additional memory allocation and it may not be appropriate for high-
+performance methods. Also see the following note.
+
+******* SAFEARRAY(IVsFoo*)
+
+SAFEARRAY(IVsFoo*) will cause MIDL warning 2456:
+SAFEARRAY(interface pointer) doesn't work using midl generated proxy
+
+If you know for sure that implementions will never will never need to be called cross
+apartment (cross thread/process), then you can add [local] to the method.
+
+Alternatively, consider creating a custom IEnumXXX interface.
+
+****** Strings
+
+Use "[in] LPCOLESTR" instead of "[in] BSTR"
+
+for faster marshaling and more convenience to native callers.
+(But continue to use "[out] BSTR*" for out args.)
+
+Generally, you don't need to specify [in,string] for NUL-terminated strings
+because most of the "pointer to character" typedefs are already attributed with
+[string]. (e.g. "typedef [string] const OLECHAR *LPCOLESTR")
+
+******* Boolean
+
+Use VARIANT_BOOL instead of BOOL because it interops as System.Boolean instead
+of System.Int
+
+However, exercise caution when assigning or comparing to/from C++ bool in native
+code because VARIANT_BOOL is typedef'd as a short and VARIANT_TRUE is ((short)-1)
+
+******* Optional (may be null) args
+
+Use [in,unique] for optional input arguments which may be NULL.
+Note that pointer_default(unique) does NOT do this automatically.
+
+Do not use [out,unique] because unique cannot be applied to [out]-only top-level
+pointer parameters. However, you can use [in,out,unique].
+
+Do not use [optional]. It only works with VARIANT anyway and it's not
+obvious for managed coders.
+
+******* [out] NonNullableType*
+
+Note that arguments of the type "[out] Foo* pFoo", where Foo is a "non-nullable
+type" such as int, double, VARIANT_BOOL, BSTR, will be converted to
+"out Foo[] pFoo" in managed code. This is a non-standard conversion applied by
+an IL transformation step during the build for the interop assembly.
+
+******* Service GUIDs
+
+Define service GUIDs via an empty interface derived from IUnknown
+and put it inside an #ifndef PROXYSTUB_BUILD/#endif block
+
+******* HWNDs, HANDLE, and other non-marshalable types
+
+Take care if you define an interface with HWND, HGDIOBJ or other Win32
+handle types. These typically need to be marked [local] since they
+cannot cross apartment (specifically, process) boundaries.
+
+****************************************************************************/
+
+#include "vsshelluuids.h" // for uuid_VsPreserveSigAttribute
+
+// forward declarations
+
+
+//----------------------------------------------------------------------------
+// FRAMESHOW4
+//----------------------------------------------------------------------------
+enum __FRAMESHOW4
+{
+	/*************************** Defined in vsshell.idl.
+	FRAMESHOW_Hidden             = 0,    // obsolete, use WinHidden
+	FRAMESHOW_WinHidden          = 0,    // window (tabbed or otherwise) is hidden
+	FRAMESHOW_WinShown           = 1,    // a non-tabbed window is made visible
+	FRAMESHOW_TabActivated       = 2,    // a tabbed window is activated (made visible)
+	FRAMESHOW_TabDeactivated     = 3,    // a tabbed window is deactivated
+	FRAMESHOW_WinRestored        = 4,    // window is restored to normal state
+	FRAMESHOW_WinMinimized       = 5,    // window is minimized
+	FRAMESHOW_WinMaximized       = 6,    // window is maximized
+	FRAMESHOW_WinClosed          = 7,    // window is closed and persisted
+	FRAMESHOW_DestroyMultInst    = 8,    // multi instance toolwindow destroyed
+	FRAMESHOW_AutoHideSlideBegin = 9,    // autohidden window is about to slide into view
+	/*************************** Defined in vsshell80.idl.
+	FRAMESHOW_BeforeWinHidden    = 10,   // Before the Hide of single instance toolwindows
+	FRAMESHOW_AutoHideSlideEnd   = 11    // autohidden window is finished its slide into view
+	**************************** Defined in vsshell90.idl.
+	FRAMESHOW_WinActivated       = 12,   // Notify when window is activated. This notification is sent only if VSFPROPID_NotifyOnActivate is set.
+	**********************************************/
+
+	FRAMESHOW_WinContentGotFocus  = 13,  // the window's inner content received keyboard focus
+	FRAMESHOW_WinContentLostFocus = 14,  // the window's inner content lost keyboard focus
+};
+typedef BOOL FRAMESHOW4;
+
+//----------------------------------------------------------------------------
+// IVsRunningDocumentTable5
+//----------------------------------------------------------------------------
+[uuid(dd4e3397-637c-4597-b337-045bb3ff24b5)]
+interface IVsRunningDocumentTable5 : IUnknown
+{
+	// This method is typically called prior to an operation that will change
+	// the document on disk.  When the operation is complete, HandsOnDocument
+	// should be called.
+	//
+	// It performs the following actions:
+	//
+	//  - IVsFileChangeEx.IgnoreFile(true)
+	//  - IVsTrackProjectDocuments3.HandsOffFiles
+	//
+	//  - If the document's docdata supports it:
+	//      - IVsPersistDocData3.HandsOffDocDataStorage
+	//      - IVsDocDataFileChangeControl.IgnoreFileChanges
+	//
+	//  - If the document's hierarchy supports it:
+	//      - IVsPersistHierarchyItem2.IgnoreItemFileChanges
+	HRESULT HandsOffDocument(
+		[in] VSCOOKIE cookie,       // (optional) the cookie for the document (if VSCOOKIE_NIL is used, the moniker parameter identifies the document)
+		[in] LPCOLESTR moniker);    // (optional) the moniker for the document (only used if cookie == VSCOOKIE_NIL)
+
+									// Undoes the actions performed by HandsOffDocument
+	HRESULT HandsOnDocument(
+		[in] VSCOOKIE cookie,       // (optional) the cookie for the document (if VSCOOKIE_NIL is used, the moniker parameter identifies the document)
+		[in] LPCOLESTR moniker);    // (optional) the moniker for the document (only used if cookie == VSCOOKIE_NIL)
+};
+
+//----------------------------------------------------------------------------
+// IVsFileChangeEx2
+//----------------------------------------------------------------------------
+[uuid(00d5f3b7-eae1-4902-93bb-37a111eb8e7f)]
+interface IVsFileChangeEx2 : IUnknown
+{
+	// Ignores or un-ignores change in a directory and its subdirectories
+	HRESULT IgnoreDir (
+		[in] LPCOLESTR directory,   // the directory to ignore
+		[in] VARIANT_BOOL ignore);  // if true, the directory is ignored; if false, the directory is unignored
+};
+
+//----------------------------------------------------------------------------
+// IVsFreeThreadedFileChangeEvents
+//
+// If you implement this interface on your event sink, you are declaring 
+// that your sink is free-threaded.  IVsFileChangeEvents.FilesChanged will be 
+// called on a background thread, not on the main thread.  Likewise, 
+// IVsFreeThreadedFileChangeEvents.DirectoryChangedEx will be called on a
+// background thread, not on the main thread.  IVsFileChangeEvents.DirectoryChanged
+// will not be called on your sink.
+//----------------------------------------------------------------------------
+[
+	uuid(a869b861-3f5c-4bd5-a7a2-b1975af11c53),
+
+	// base interface is preservesig, so this one must be as well
+	custom(uuid_VsPreserveSigAttribute, "preservesig")
+]
+interface IVsFreeThreadedFileChangeEvents : IVsFileChangeEvents
+{
+	HRESULT DirectoryChangedEx(
+		[in] LPCOLESTR pszDirectory,    // the directory that changed
+		[in] LPCOLESTR pszFile);        // the file that changed, if known; NULL if unknown
+};
+
+//----------------------------------------------------------------------
+// IVsProjectSelector
+//----------------------------------------------------------------------
+// Allows scenarios to dynamically take ownership between more than one project system. 
+// Solution loader will first try to match the project type to the registered ProjectSelectors and if there is one, will call GetProjectFactoryGuid 
+// which inturn looks into the pszFilename and look for condition to redirect the project load using either Legacy Project System or New Project System.
+
+// To create the list of selectors, solution will read this registry data: 
+// <VSROOTKEY>\ProjectSelectors
+//      {<selector id>}     // the selector key name is based on selectors's unique ID (a GUID). 
+//      Package REGSZ      // the guid of the Package that host the IVsProjectSelector instance
+// returns : S_OK if selection is successful.
+//----------------------------------------------------------------------
+[uuid(DFAD4C39-FCB2-4BDF-A389-2EA6DB28F062)]
+interface IVsProjectSelector : IUnknown
+{
+	HRESULT GetProjectFactoryGuid(
+		[in] GUID guidProjectType,
+		[in] LPCOLESTR pszFilename,
+		[out] GUID *guidProjectFactory);
+};
+
+//----------------------------------------------------------------------------
+// IVsRegisterProjectSelector
+//----------------------------------------------------------------------------
+// Implemented by the Environment. To obtain this interface one can QI on IVsProjectSelector or directly by 
+// QueryService(IID_IVsProjectSelector). Used by packages that implement a project selectors. 
+// RegisterProjectSelector is usually called in IVsPackage::SetSite; UnregisterProjectGenerator is called in IVsPackage::Close.
+// Note: For the registered selectors (under <VSKEYROOT>\ProjectSelectors, the solution loaded will ensure that
+// selector package is loaded in time when it is needed, so it is not required to preload the packages. 
+
+[uuid(B042860A-5A69-4259-BC88-F1C79AE16C50)]
+interface IVsRegisterProjectSelector : IUnknown
+{
+	HRESULT RegisterProjectSelector([in] REFGUID rguidProjType,
+		[in]  IVsProjectSelector *pProjectSelector,
+		[out] VSCOOKIE* pdwCookie);
+
+	HRESULT UnregisterProjectSelector([in] VSCOOKIE dwCookie);
+}
+
+//-----------------------------------------------------------------------------
+// SVsNavigateToService
+// The service type implementing the NavigateTo service
+//-----------------------------------------------------------------------------
+[uuid(65c44ef9-16f8-4f36-bd73-f10335ec452e)]
+interface SVsNavigateToService : IUnknown
+{
+}
+cpp_quote("#define SID_SVsNavigateToService IID_SVsNavigateToService")
+
+//----------------------------------------------------------------------------
+// IVsNavigateToService
+//----------------------------------------------------------------------------
+[
+	uuid(6ab63b41-fa6d-4fdd-9636-4e2e408ebd49),
+	version(1.0),
+	pointer_default(unique)
+]
+interface IVsNavigateToService : IUnknown
+{
+	HRESULT IsShortcutInstalled(
+		[in] LPCWSTR wszShortcutName,
+		[out, retval] VARIANT_BOOL* pfResult);
+
+	HRESULT IsWindowVisible([out, retval] VARIANT_BOOL* pfResult);
+
+	HRESULT HideWindow();
+
+	HRESULT ShowWindowWithShortcut([in] LPCWSTR wszShortcutName);
+
+	HRESULT IsShortcutActive(
+		[in] LPCWSTR wszShortcutName,
+		[out, retval] VARIANT_BOOL* pfResult);
+
+	HRESULT ActivateShortcut(
+		[in] LPCWSTR wszShortcutName,
+		[in] VARIANT_BOOL fActivate,
+		[in] VARIANT_BOOL fClearSearchValue);
+
+	HRESULT OnFilterChanged();
+}
+
+//-----------------------------------------------------------------------------
+// Guid for the Project MRU List {A9C4A31F-F9CB-47A9-ABC0-49CE82D0B3AC}. Used for 
+// accessing the project MRU list with the IVsMRUItemsStore.
+//-----------------------------------------------------------------------------
+//TODO: Uncomment these guids when bug 170002 is fixed.
+//cpp_quote("extern const __declspec(selectany) GUID MruList_Projects = { 0xa9c4a31f, 0xf9cb, 0x47A9, { 0xab, 0xc0, 0x49, 0xce, 0x82, 0xd0, 0xb3, 0xac } };")
+
+//-----------------------------------------------------------------------------
+// Guid for the File MRU List {01235AAD-8F1B-429F-9D02-61A0101EA275}. Used for 
+// accessing the file MRU list with the IVsMRUItemsStore.
+//-----------------------------------------------------------------------------
+//cpp_quote("extern const __declspec(selectany) GUID MruList_Files = { 0x01235aad, 0x8f1b, 0x429f, { 0x9d, 0x02, 0x61, 0xa0, 0x10, 0x1e, 0xa2, 0x75 } };") 
+
+[uuid(EF0E965C-D5AB-4BE5-819B-9CA1AD0C4DE1)]
+interface IVsDebugger6 : IUnknown
+{
+	// When the debugger allows the debuggee to resume running the currently focused window is
+	// recorded. If the window is registered as focus preserving it will receive focus when
+	// break state is next entered. Otherwise the text editor receives focus.
+	HRESULT RegisterFocusPreservingWindow([in] GUID id);
+	HRESULT UnregisterFocusPreservingWindow([in] GUID id);
+	HRESULT IsWindowRegisteredAsFocusPreserving([in] GUID id, [out] VARIANT_BOOL* registered);
+	HRESULT RunToText([in] VsTextPos* pTextPos);
+};
+
+[uuid(394ab223-9fc6-4893-8943-9f6c70d51891)]
+interface IFreeThreadedComWrapper : IUnknown
+{
+}
+
+#ifndef PROXYSTUB_BUILD
+// Factory class for creating COM wrappers around managed objects.
+[uuid(cb4bb619-abd5-459c-ac9f-88844c610bc9)]
+interface IComWrapperFactory2 : IUnknown
+{
+	HRESULT CreateFreeThreadedAggregatedObject([in] IUnknown* managedObject, [out, retval] IUnknown** comWrapper);
+}
+#endif
+
+//---------------------------------------------------------------------------
+// IVsSolution7
+//---------------------------------------------------------------------------
+// Implemented by the Visual Studio Environment.
+//
+// Available via QueryService(SVsSolution)
+[
+	uuid(D32B0C42-8AEE-4772-B5C3-04565CDA5A47),
+	version(1.0),
+	pointer_default(unique)
+]
+interface IVsSolution7 : IUnknown
+{
+	// Opens a folder pointed to by the path.
+	HRESULT OpenFolder(
+		[in] LPCOLESTR  folderPath); // Full path to the folder.
+
+									 // Closes a currently open folder pointed to by the path.
+	HRESULT CloseFolder(
+		[in] LPCOLESTR  folderPath); // Full path to the folder.
+
+									 // Checks if the solution is in deferred load mode.
+	HRESULT IsSolutionLoadDeferred(
+		[out, retval] VARIANT_BOOL* deferred); // 'true' if the solution is loaded in deferred mode, 'false' otherwise.
+
+    // Checks if the project allows deferred load
+    HRESULT IsDeferredProjectLoadAllowed(
+        [in] LPCOLESTR  projectFullPath,
+        [out, retval] VARIANT_BOOL* deferredLoadAllowed); // 'true' if the project is allwed deferred load, 'false' otherwise.
+}
+
+//---------------------------------------------------------------------------
+// IVsSolutionEvents7
+//---------------------------------------------------------------------------
+[
+	uuid(A459C228-5617-4136-BCBE-C282DF6D9A62),
+	version(1.0),
+	pointer_default(unique)
+]
+interface IVsSolutionEvents7 : IUnknown
+{
+	// Notifies listening clients that the folder has been opened.
+	HRESULT OnAfterOpenFolder(
+		[in] LPCOLESTR folderPath); // Full path to the folder opened.
+
+									// Notifies listening clients that the folder is being closed.
+	HRESULT OnBeforeCloseFolder(
+		[in] LPCOLESTR folderPath); // Full path to the folder that will be closed.
+
+									// Queries listening clients as to whether the folder can be closed.
+	HRESULT OnQueryCloseFolder(
+		[in] LPCOLESTR folderPath, // Full path to the folder to be closed.
+		[in, out] BOOL *pfCancel); // true if the client vetoed the closing of the folder. false if the client approved the closing of the folder.
+
+								   // Notifies listening clients that the folder has been closed.
+	HRESULT OnAfterCloseFolder(
+		[in] LPCOLESTR folderPath); // Full path to the folder closed.
+
+									// Notifies listening clients that all projects in deferred mode have been loaded.
+	HRESULT OnAfterLoadAllDeferredProjects();
+};
+
+//---------------------------------------------------------------------------
+// IVsEditorFactory3
+//---------------------------------------------------------------------------
+[
+	uuid(c2274805-a963-49e1-bd01-97ddee5ae744),
+	version(1.0),
+	pointer_default(unique)
+]
+interface IVsEditorFactory3 : IUnknown
+{
+	// Called before creating an instance of the editor factory.
+	// Informs caller if the editor factory requires that the document's project be loaded.
+	HRESULT IsProjectLoadRequired(
+		[out, retval] VARIANT_BOOL *projectLoadRequired);
+}
+
+enum __VSPROPID7
+{
+	// See previous version of vsshellXX.idl for previous enumeration values.
+
+	VSPROPID_IsInOpenFolderMode = -8044, // VARIANT_TRUE when solution is in open folder mode (as opposed to open solution/project file mode).
+
+	VSPROPID_DeferredProjectCount = -8045, // Count of projects currently in deferred mode.
+
+	VSPROPID_DeferredLoadOption = -8046, // Deferred load option for the solution.
+
+	VSPROPID_DeferOptOutProjectCount = -8047, // Count of projects that have opted out of DPL
+
+											  // !!!! NOTE !!!!   THIS MUST BE THE SAME AS THE LAST PROP DEFINED
+											  // when this is extended in the next version idl, uses of it must be changed to the new value
+											  VSPROPID_FIRST7 = -8047
+};
+typedef [public] DWORD VSPROPID7;
+
+enum __VSHPROPID9
+{
+	// See previous version of vsshellXX.idl for previous enumeration values.
+
+	VSHPROPID_IsDeferred = -2175, // VARIANT_BOOL [optional] Gets whether or not the hierarchy is in deferred load mode.
+
+	VSHPROPID_HasRunningOperation = -2176, // VARIANT_BOOL [optional] Gets whether or not the item has running operations requested by the user. Used to provide the user with a UI hint of ongoing work for the associated item.
+
+										   // !!!! NOTE !!!!   THIS MUST BE THE SAME AS THE LAST PROP DEFINED
+										   // when this is extended in the next version idl, uses of it must be changed to the new value
+										   VSHPROPID_FIRST9 = -2176
+};
+typedef[public] DWORD VSHPROPID9;
+
+//-----------------------------------------------------------------------------
+// Extended flags for IVsSolution::GetProjectEnum
+//-----------------------------------------------------------------------------
+enum __VSENUMPROJFLAGS3
+{
+	EPF_DEFERRED = 0x00000200,    // Enumerate only deferred projects.
+
+	EPF_NOTDEFERRED = 0x00000400, // Enumerate only the not deferred projects.
+};
+
+// This is deprecated with the Dev16 deprecation of Lightweight Solution Load.
+enum __VSSOLUTIONDEFERREDLOADOPTION
+{
+	DLO_NONE = 0,        // Deferred load mode is not set for the solution
+	DLO_DEFERRED = 1,    // Solution is set to load in deferred mode
+	DLO_NOTDEFERRED = 2, // Solution is set to not load in deferred mode
+};
+typedef __declspec(deprecated(\"VSSOLUTIONDEFERREDLOADOPTION is deprecated\")) DWORD VSSOLUTIONDEFERREDLOADOPTION;
+
+//-----------------------------------------------------------------------------
+// Extended flags for IVsSolution::GetProjectFilesInSolution
+//-----------------------------------------------------------------------------
+enum __VSGETPROJFILESFLAGS2
+{
+    GPFF_LOADORDER   = 0x00000002, // set of projects in hierarchical order (matches load order)
+};
+
+//----------------------------------------------------------------------------
+// IVsSetupCompositionService
+// Provides a way to get composition information about packages in VS.
+// Implementation must be free-threaded.
+//----------------------------------------------------------------------------
+enum __VsSetupPackageState
+{
+	INSTALL_PACKAGE_UNKNOWN = 0,        // The package has no install state
+	INSTALL_PACKAGE_NOT_INSTALLED = 1,  // The package is or should be absent (not installed).
+	INSTALL_PACKAGE_SUPERSEDED = 2,     // The package is present but a newer package is available.
+	INSTALL_PACKAGE_PRESENT = 3,        // The package is or should be present (installed).
+};
+typedef DWORD VsSetupPackageState;
+
+[uuid(C806DA70-8757-46E1-B46F-3E668D9E1463)]
+interface IVsSetupPackageInfo : IUnknown
+{
+	[propget] HRESULT PackageId ([out, retval] BSTR * bstrId);
+	[propget] HRESULT Description ([out, retval] BSTR * bstrDescription);
+	[propget] HRESULT Type ([out, retval] BSTR * bstrType);
+	[propget] HRESULT Title ([out, retval] BSTR * bstrTitle);
+
+	//return the list of subcategories for the tasks you provide. The task
+	//itself will return an index into this list when asked for a subcategory
+	//If cbstr is passed in as zero and rgbstr as NULL, then the provider
+	//should set *pcActual to the actual number of BSTRs that need to be returned.
+	HRESULT GetKeywords ([in] ULONG cbstr, [out, size_is(cbstr)] BSTR bstrKeyword[], [out] ULONG *pcActual);
+
+	[propget] HRESULT CurrentState ([out, retval] VsSetupPackageState *pState);
+	[propget] HRESULT Version([out, retval] BSTR * bstrVersion);
+	[propget] HRESULT IsUIGroup([out, retval] VARIANT_BOOL* pfIsUiGroup);
+}
+
+[uuid(E7494EBB-5BE2-4A5F-B063-8E0853BE6D1E)]
+interface IVsMatcherDataInfo : IUnknown
+{
+	[propget] HRESULT Type([out, retval] BSTR * pbstrType);
+	[propget] HRESULT CapabilityType([out, retval] BSTR * pbstrCapabilityType);
+	[propget] HRESULT ProjectPropertyId([out, retval] BSTR * pbstrProjectPropertyId);
+	[propget] HRESULT RegExMatchSource([out, retval] BSTR * pbstrRegExMatchSource);
+}
+
+[uuid(9C268EBF-A8A0-4226-B1E2-B8B8BADB0544)]
+interface IVsPackageSelectedInfo : IUnknown
+{
+	[propget] HRESULT Id([out, retval] BSTR * pbstrId);
+}
+
+[uuid(C28FFCEA-421B-46EA-BAC8-D8DC225DDACA)]
+interface IVsProjectClassifierInfo : IUnknown
+{
+	[propget] HRESULT Id([out, retval] BSTR * pbstrId);
+	[propget] HRESULT PackageId([out, retval] BSTR * pbstrId);
+	[propget] HRESULT Extension([out, retval] BSTR * pbstrExtension);
+	[propget] HRESULT FactoryGuid([out, retval] BSTR * pbstrFactoryGuid);
+
+	//return the list of subcategories for the tasks you provide. The task
+	//itself will return an index into this list when asked for a subcategory
+	//If cbstr is passed in as zero and rgbstr as NULL, then the provider
+	//should set *pcActual to the actual number of BSTRs that need to be returned.
+	HRESULT GetMatcherData([in] ULONG cbstr, [out, size_is(cbstr)] IVsMatcherDataInfo* bstrMatcherData[], [out] ULONG *pcActual);
+
+	[propget] HRESULT MatcherId([out, retval] BSTR * pbstrMatcherId);
+	[propget] HRESULT AppliesTo([out, retval] BSTR * pbstrAppliesTo);
+	[propget] HRESULT Priority([out, retval] int* pPriority);
+
+	//return the list of subcategories for the tasks you provide. The task
+	//itself will return an index into this list when asked for a subcategory
+	//If cbstr is passed in as zero and rgbstr as NULL, then the provider
+	//should set *pcActual to the actual number of BSTRs that need to be returned.
+	HRESULT GetPackagesSelectedData([in] ULONG cbstr, [out, size_is(cbstr)] IVsPackageSelectedInfo* bstrPackageSelectedData[], [out] ULONG *pcActual);
+}
+
+[uuid(99D395AF-E402-40B4-86D1-43EDD260ABF4)]
+interface IVsTemplateInfo : IUnknown
+{
+	[propget] HRESULT TemplateId([out, retval] BSTR * pbstrTemplateId);
+	[propget] HRESULT PackageId([out, retval] BSTR * pbstrPackageIdId);
+	[propget] HRESULT ProjectSubTypeSortOrder([out, retval] BSTR * pbstrSortOrder);
+	[propget] HRESULT ProjectSortOrder([out, retval] int * pSortOrder);
+	[propget] HRESULT AppIdFilter([out, retval] BSTR * pbstrAppIdFilter);
+	[propget] HRESULT Title([out, retval] BSTR * pbstrTitle);
+	[propget] HRESULT Description([out, retval] BSTR * pbstrDescription);
+	[propget] HRESULT ProjectType([out, retval] BSTR * pbstrProjectType);
+	[propget] HRESULT ProjectTypeDisplayName([out, retval] BSTR * pbstrProjectTypeDisplayName);
+	[propget] HRESULT ProjectSubType([out, retval] BSTR * pbstrProjectSubType);
+	[propget] HRESULT ProjectSubTypeDisplayName([out, retval] BSTR * pbstrProjectSubTypeDisplayName);
+
+	//return the list of subcategories for the tasks you provide. The task
+	//itself will return an index into this list when asked for a subcategory
+	//If cbstr is passed in as zero and rgbstr as NULL, then the provider
+	//should set *pcActual to the actual number of BSTRs that need to be returned.
+	HRESULT GetPackagesSelectedData([in] ULONG cbstr, [out, size_is(cbstr)] IVsPackageSelectedInfo* bstrPackageSelectedData[], [out] ULONG *pcActual);
+}
+
+[uuid(842F4C6D-85FB-4580-B811-CFEDC7DAF1B1)]
+interface IVsSetupManifestEvents : IUnknown
+{
+	HRESULT OnManifestChanged();
+}
+
+[uuid(ECAB2B82-92FE-4671-A822-908A389541F6)]
+// The acqusition service for determining
+// a. package state
+// b. project classifier
+// c. breadcrumb template
+interface IVsSetupCompositionService : IUnknown
+{
+	// Get devenv installation path
+	[propget] HRESULT InstallationPath([out, retval] BSTR * bstrInstallationPath);
+
+	// Determine if the manifest has been refresh and an update is available
+	[propget] HRESULT IsManifestRefreshedAndUpdateAvailable([out, retval] VARIANT_BOOL* pfResult);
+
+	// Get the version of the installed product
+	[propget] HRESULT ProductVersion([out, retval] BSTR * bstrVersion);
+
+	HRESULT GetSetupPackagesInfo([in] ULONG cPackages, [out, size_is(cPackages)] IVsSetupPackageInfo* ppPackageInfo[], [out] ULONG *pcActual);
+	HRESULT GetProjectClassifierInfo([in] ULONG cProjectGuids, [out, size_is(cProjectGuids)] IVsProjectClassifierInfo* ppProjectGuidInfo[], [out] ULONG *pcActual);
+	HRESULT GetTemplateInfo([in] ULONG cTemplates, [out, size_is(cTemplates)] IVsTemplateInfo* ppTemplateInfo[], [out] ULONG *pcActual);
+	HRESULT GetSetupPackageInfo([in] LPCOLESTR packageName, [out, retval] IVsSetupPackageInfo **ppPackageInfo);
+
+	// in session mechanism to notify the interested components that we are switching to a new feed file.
+	HRESULT RefreshManifest([out, retval] VARIANT_BOOL* pfResult);
+	HRESULT NotifyManifestChanged();
+	HRESULT Advise([in]IVsSetupManifestEvents* pSync, [out, retval] UINT* cookie);
+	HRESULT Unadvise([in] UINT cookie);
+
+	// Get the willow installation path
+	[propget] HRESULT InstallerPath([out, retval] BSTR * bstrInstallerPath);
+
+	// Determine if the package is currently install.
+	// Return false if the package is not defined or not installed.
+	HRESULT IsPackageInstalled([in] LPCOLESTR packageName, [out, retval] VARIANT_BOOL* pfStatus);
+
+	// Get the Product version from the channel manifest
+	[propget] HRESULT ChannelProductVersion([out, retval] BSTR * bstrVersion);
+
+	// Get the release note url information from the channel manifest
+	[propget] HRESULT ChannelReleaseNoteUrl([out, retval] BSTR * bstrChannelReleaseNoteUrl);
+}
+
+//-----------------------------------------------------------------------------
+// SVsSetupCompositionService
+// The service for the IVsSetupCompositionQueryService service
+//-----------------------------------------------------------------------------
+[uuid(B03F88B8-F356-422B-997C-F55BD0668BDC)]
+interface SVsSetupCompositionService : IUnknown
+{
+}
+cpp_quote("#define SID_SVsSetupCompositionService IID_SVsSetupCompositionService")
+
+// {03BDEAC4-7186-458B-A2B0-941605D9917F}
+// Obsolete. The UIContext will never be activated
+cpp_quote("extern const __declspec(selectany) GUID UICONTEXT_ProjectCreating = { 0x03BDEAC4, 0x7186, 0x458B, { 0xA2, 0xB0, 0x94, 0x16, 0x05, 0xD9, 0x91, 0x7F } };")
+
+//---------------------------------------------------------------------------
+// IVsXMLMemberData6
+//---------------------------------------------------------------------------
+// Extracts information out of xml documentation
+[
+	uuid(73F13643-A469-444D-8FFF-55D69229F5AA),
+	version(1.0),
+	pointer_default(unique)
+]
+// Methods inherited from the base interface should be PreserveSig
+[custom(uuid_VsPreserveSigAttribute, "preservesig")]
+interface IVsXMLMemberData6 : IVsXMLMemberData5
+{
+	// Get the experimental tag from the xml documentation (<experimental> tag).
+	// If the tag doesn't exist, returns S_FALSE. If the tag does exist, but has
+	// no content (<experimental/>) pbstrDescription = "".
+	HRESULT GetExperimental([out] BSTR* pbstrDescription);
+};
+
+//---------------------------------------------------------------------------
+// IVsDebugger7
+//---------------------------------------------------------------------------
+// Returns information about debugger options
+
+[uuid(FDDC501D-D9F5-46AA-99F3-07173CE7E004)]
+interface IVsDebugger7 : IUnknown
+{
+	HRESULT IsENCEnabled([out] VARIANT_BOOL* pOptionSet);
+	HRESULT IsJavaScriptDebuggingOnLaunchEnabled([out] VARIANT_BOOL* pOptionSet);
+};

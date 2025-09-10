@@ -1,0 +1,215 @@
+// msdbg174.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+#ifdef DEBUGGER_PIA_BUILD
+#define XINT32 int
+#else
+#define XINT32 ULONG32
+#endif
+
+enum ModuleSymbolLoadFlags
+{
+    SymbolLoadFlags_None = 0x00000000,
+    
+    // Indicates that only local symbol sources should be considered.
+    SymbolLoadFlags_LocalSourcesOnly = 0x00000001,
+    
+    // Indicates that the user should not be prompted to locate symbols if they cannot be found automatically.
+    SymbolLoadFlags_NoPrompt = 0x00000002
+};
+cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(ModuleSymbolLoadFlags)")
+
+//----------------------------------------------------------------------------
+// IDebugModule174
+// Optional interface that can be implemented by objects that also implement
+//  IDebugModule2 in order to allow the IDE to provide additional options when
+//  loading symbols.
+//----------------------------------------------------------------------------
+[
+    local,
+    object,
+    uuid(D74EB328-F42B-4F4C-A87B-AF66247B2FCE),
+    pointer_default(unique)
+]
+interface IDebugModule174 : IUnknown
+{
+    // Loads symbols for the current module with flags to control the load behavior.
+    HRESULT LoadSymbols(
+        [in] enum ModuleSymbolLoadFlags flags
+    );
+};
+
+typedef enum _BreakpointSuggestedFix
+{
+    // Indicates that no suggested fix is available or necessary.
+    BPSF_None = 0,
+
+    // Indicates that this breakpoint might bind successfully if Just My Code is disabled.
+    BPSF_DisableJMC = 1,
+
+    // Indicates that this breakpoint might bind successfully if optimizations applied to managed code are disabled.
+    BPSF_DisableManagedOptimizations = 2
+} BreakpointSuggestedFix;
+
+enum _BPERESI_FIELDS174
+{
+    // VS 8.0 values
+    BPERESI174_BPRESLOCATION = 0x0001,
+    BPERESI174_PROGRAM = 0x0002,
+    BPERESI174_THREAD = 0x0004,
+    BPERESI174_MESSAGE = 0x0008,
+    BPERESI174_TYPE = 0x0010,
+    BPERESI174_ALLFIELDS = 0xffffffff,
+
+    // Values added in VS 17.4
+    BPERESI174_SUGGESTEDFIX = 0x0020
+};
+
+cpp_quote("#if 0")
+// We need this typedef in the IDL so MIDL will generate managed interop using the actual enum type, but
+//  we want to treat it as a DWORD in native to simplify conversion from the old interface.
+typedef enum _BPERESI_FIELDS174 BPERESI_FIELDS174;
+cpp_quote("#endif")
+cpp_quote("typedef DWORD BPERESI_FIELDS174;")
+
+typedef struct _BP_ERROR_RESOLUTION_INFO174
+{
+    // VS 8.0 fields
+    BPERESI_FIELDS174 dwFields;
+    BP_RESOLUTION_LOCATION bpResLocation;
+    IDebugProgram2* pProgram;
+    IDebugThread2* pThread;
+    BSTR bstrMessage;
+    BP_ERROR_TYPE dwType;
+
+    // Fields added in VS 17.4
+    BreakpointSuggestedFix suggestedFix;
+} BP_ERROR_RESOLUTION_INFO174;
+
+//----------------------------------------------------------------------------
+// IDebugErrorBreakpointResolution174
+// Optional interface that can be implemented by objects that also implement
+//  IDebugErrorBreakpoint2 in order to provide hints to the IDE regarding potential
+//  fixes for breakpoints that fail to bind.
+//----------------------------------------------------------------------------
+[
+    local,
+    object,
+    uuid(2A318B44-3878-4015-ACCF-E8323F5B4A73),
+    pointer_default(unique)
+]
+interface IDebugErrorBreakpointResolution174 : IUnknown
+{
+    HRESULT GetResolutionInfo174(
+        [in] BPERESI_FIELDS174 dwFields,
+        [out] BP_ERROR_RESOLUTION_INFO174* pErrorResolutionInfo
+    );
+};
+
+//----------------------------------------------------------------------------
+// IDebugPendingBreakpoint174
+// Optional interface that can be implemented by objects that also implement
+//  IDebugPendingBreakpoint2 in order to provide additional information to the
+//  IDE when breakpoints fail to bind, including suggested fixes.
+//----------------------------------------------------------------------------
+[
+    local,
+    object,
+    uuid(78DD0597-1BE1-4EA7-96AE-5FA787E929D4),
+    pointer_default(unique)
+]
+interface IDebugPendingBreakpoint174 : IUnknown
+{
+    HRESULT GetErrorResolutionInfo174(
+        [in] BPERESI_FIELDS174 dwFields,
+        [out] BP_ERROR_RESOLUTION_INFO174* pErrorResolutionInfo);
+};
+
+/// <summary>
+/// Provides information about the source non-debugged process for a debug event.
+/// </summary>
+[
+    object,
+    uuid(17e698af-e905-4e9f-b8a6-80da45382ee1),
+    pointer_default(unique)
+]
+interface IDebugNonDebugProcessInfo174 : IUnknown
+{
+    /// <summary>
+    /// Gets the name of the process from the 'bstrExe' argument of the VsDebugTargetInfo4, or
+    /// from a IDebugProcessInfoUpdatedEvent158 event.
+    /// </summary>
+    /// <param name="name">The name of the process</param>
+    /// <returns>S_OK on success</returns>
+    HRESULT GetName([out] BSTR* name);
+
+    /// <summary>
+    /// Gets the process id of the non-debug process, if it is available.
+    /// </summary>
+    /// <param name="processId">The process id, or zero if it isn't available yet.</param>
+    /// <returns>S_OK if the system process id is available, or E_PENDING if a IDebugProcessInfoUpdatedEvent158 has not been sent yet.</returns>
+    HRESULT GetSystemProcessId([out] DWORD* processId);
+
+    /// <summary>
+    /// Gets the IVsHierachy of the launching project, if available
+    /// </summary>
+    /// <param name="project"></param>
+    /// <returns>S_OK if the project was returned, otherwise a failure code.</returns>
+    HRESULT GetLaunchProject([out] IUnknown** project);
+};
+
+/// <summary>
+/// Interface that can optionally be implemented on debug events sent for scenarios where
+/// a debug engine is launching a process without debugging. This is implemented for
+/// IDebugOutputStringEvent2 events starting in VS 17.4, and for INonDebugProcessExitedEvent168
+/// events starting in VS 17.7.
+/// </summary>
+[
+    object,
+    uuid(5ab6da30-aaa2-4227-b509-cf9e801c4f29),
+    pointer_default(unique)
+]
+interface IDebugNonDebugEvent174 : IUnknown
+{
+    /// <summary>
+    /// Provides access to the non-debug process info object.
+    /// </summary>
+    /// <param name="process">Returned process info object</param>
+    HRESULT GetNonDebugProcess([out] IDebugNonDebugProcessInfo174** process);
+};
+
+enum enum_LAUNCH_FLAGS174
+{
+    /**************************************
+    LAUNCH_DEBUG            = 0x0000, // Launch the process for debugging
+    LAUNCH_NODEBUG          = 0x0001, // Launch the process without debugging it
+    LAUNCH_ENABLE_ENC       = 0x0002, // Launch the process with EnC enabled.
+    LAUNCH_MERGE_ENV        = 0x0004, // Launch the process and merge the environment
+    LAUNCH_WAIT_FOR_EVENT   = 0x0008
+    LAUNCH_ALLOW_EVENTS_AFTER_STOPPED = 0x0010, // Allow stopping events in break-mode
+    LAUNCH_FORCE_32BIT_DEBUG = 0x0020, // Force use of the 32-bit debugger
+    LAUNCH_FORCE_64BIT_DEBUG = 0x0040  // Force use of the 64-bit debugger
+    LAUNCH_PROFILING = 0x0080  // Launch the process for profiling
+    LAUNCH_STDIO_TO_OUTPUT_WINDOW = 0x0100
+    LAUNCH_FORCE_PSEUDO_REMOTE_DEBUG = 0x0200, // Force pseudoremote debugging
+    LAUNCH_INTEGRATED_CONSOLE = 0x400
+    LAUNCH_SINGLE_USE_INTEGRATED_CONSOLE = 0x800
+    ***************************************/
+    LAUNCH_INTEGRATED_CONSOLE_SERVICE = 0x1000
+};
+typedef DWORD LAUNCH_FLAGS174;

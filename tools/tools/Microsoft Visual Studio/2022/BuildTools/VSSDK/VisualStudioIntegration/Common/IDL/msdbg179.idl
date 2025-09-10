@@ -1,0 +1,98 @@
+// msdbg179.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+#ifdef DEBUGGER_PIA_BUILD
+#define XINT32 int
+#else
+#define XINT32 ULONG32
+#endif
+
+enum enum_EVALFLAGS179
+{
+    /***********************************************************************
+    // ---------------------------------------------------------------------
+    // VS 8.0 values
+
+    // the return value is interesting
+    EVAL179_RETURNVALUE = 0x0002, // Same as EVAL_RETURNVALUE
+    // don't allow side effects
+    EVAL179_NOSIDEEFFECTS = 0x0004, // Same as EVAL_NOSIDEEFFECTS
+    // stop on breakpoints
+    EVAL179_ALLOWBPS = 0x0008, // Same as EVAL_ALLOWBPS
+    // allow error reporting to the host
+    EVAL179_ALLOWERRORREPORT = 0x0010, // Same as EVAL_ALLOWERRORREPORT
+    // evaluate any functions as address (instead of invoking the function)
+    EVAL179_FUNCTION_AS_ADDRESS = 0x0040, // Same as EVAL_FUNCTION_AS_ADDRESS
+    // don't allow function/property evaluation
+    EVAL179_NOFUNCEVAL = 0x0080, // Same as EVAL_NOFUNCEVAL
+    // don't allow events
+    EVAL179_NOEVENTS = 0x1000, // Same as EVAL_NOEVENTS
+    // design-time expression evaluation
+    EVAL179_DESIGN_TIME_EXPR_EVAL = 0x2000, // Same as EVAL_DESIGN_TIME_EXPR_EVAL
+    // Allow implicit variable creation
+    EVAL179_ALLOW_IMPLICIT_VARS = 0x4000, // Same as EVAL_ALLOW_IMPLICIT_VARS
+
+    // ---------------------------------------------------------------------
+    // Values added in VS 9.0
+
+    // Force eval to occur now. Somebody is requesting it (like the user)
+    EVAL179_FORCE_EVALUATION_NOW = 0x8000,
+
+    // ---------------------------------------------------------------------
+    // Values added in VS 10.0
+
+    //Disable use of the IL interpreter.  DO NOT USE THIS FLAG.  USE EVAL179_ENABLE_ILINTERPRETER instead.
+    EVAL179_NO_IL_INTERPRETER_DEPRECATED = 0x10000,
+
+    // Force the EE to allow func-evals (not just ToString() or property getters) even if EVAL100_NOSIDEEFFECTS is present.
+    EVAL179_ALLOW_FUNC_EVALS_EVEN_IF_NO_SIDE_EFFECTS = 0x20000,
+
+    // Allow threads to slip during funceval.
+    EVAL179_ALLOW_THREADSLIPPING = 0x40000,
+
+    // ---------------------------------------------------------------------
+    // Values added in VS 11.0
+
+    EVAL179_SHOW_VALUERAW = 0x80000,
+
+    // All function evaluations should actually execute inside the debuggee, as opposed    
+    // to being interpreted through the IL interpreter.
+    EVAL179_FORCE_REAL_FUNCEVAL = 0x100000,
+
+    //Indicates that the IL interpreter is being used for the evaluation.  This includes real-func eval
+    //cases where the EE is talking to vil.  The only time this is cleared is when the interpreter is completely
+    //disabled (as in the C# EE talks directly to vil).  This flag is cleared in all non-Concord scenarios.
+    EVAL179_ILINTERPRETER_BEING_USED = 0x200000,
+
+
+    // ---------------------------------------------------------------------
+    // Values added in VS 15.0
+
+    // Eval flag to permit less-obvious side effects, such as func-evals from natvis expressions.
+    // Currently, this flag is respected only by the native C++ EE in Concord.
+    EVAL179_ALLOW_EXTENDED_SIDE_EFFECTS = 0x400000,
+
+    // ---------------------------------------------------------------------
+    // Values added in VS 16
+    // EVAL179_FILTER_TO_FAVORITES = 0x10000000, // When an item has favorites, only return the favorite children in the expansion
+    // EVAL179_USE_SHORT_DISPLAY_NAME = 0x20000000, // When an item's display string is computed from its favorites, do not include field names in the value
+    ***********************************************************************/
+
+    EVAL179_INCREASE_MAX_STRING_SIZE = 0x40000000, // A hint to expression evaluators that they should increase the maximum length of a string before truncating.
+};
+typedef DWORD EVALFLAGS179;

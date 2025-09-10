@@ -1,0 +1,108 @@
+//=----------------------------------------------------------------------------
+// Microsoft Visual Studio
+//
+// Microsoft Confidential
+// Copyright (c) Microsoft Corporation.  All Rights Reserved.
+//
+// File:     VSShell176.idl
+// Contents: the shell interfaces for the entire Dev17 cycle.
+//
+//
+// Current Owner:
+//=----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+
+#include "vsshelluuids.h" // for uuid_VsPreserveSigAttribute
+
+#ifndef INTEROPLIB
+
+// Imports - all imports should go here (inside the ifndef)
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "context.idl";
+import "vsshell.idl";
+import "vsshell2.idl";
+import "vsshell80.idl";
+import "vsshell90.idl";
+import "vsshell100.idl";
+import "vsshell110.idl";
+import "vsshell120.idl";
+import "vsshell140.idl";
+import "vsshell150.idl";
+import "vsshell153.idl";
+import "vsshell155.idl";
+import "vsshell156.idl";
+import "vsshell157.idl";
+import "vsshell158.idl";
+import "vsshell160.idl";
+import "vsshell161.idl";
+import "vsshell162.idl";
+import "vsshell169.idl";
+import "vsshell1610.idl";
+import "vsshell172.idl";
+import "VsPlatformUI.idl";
+
+
+// Excluding DTE related includes for C builds as they contain C++ only constructs
+// and they produce compile errors while building the proxy DLL (msenvXXXp).
+cpp_quote("#ifdef __cplusplus")
+cpp_quote("#include \"dte.h\"")
+cpp_quote("#include \"textmgr2.h\"")
+cpp_quote("#include \"guiddef.h\"")
+cpp_quote("#endif // __cplusplus")
+
+#endif
+
+[v1_enum] enum __MARKERTYPE4
+{
+    MARKERTYPE4_MARKER_INFORMATION     = 0x25,
+    MARKERTYPE4_DEF_MARKER_COUNT_NEW_3 = 0x26
+};
+
+typedef DWORD MARKERTYPE4;
+
+//----------------------------------------------------------------------------
+// IVsAsyncRunningDocumentTable3
+//----------------------------------------------------------------------------
+[
+    uuid(fb318d71-ecfc-4352-b19d-2c77acb77d76),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsAsyncRunningDocumentTable3 : IVsAsyncRunningDocumentTable2
+{
+    [propget] HRESULT IsAsyncSaveEnabled([out, retval] VARIANT_BOOL* res);
+};
+
+//---------------------------------------------------------------------------
+// IVsAddProjectItemDlg[2]
+//---------------------------------------------------------------------------
+// Implemented by the Environment.
+// Used by project implementations to display the AddItem dialog.
+[v1_enum] enum __VSADDITEMFLAGS4
+{
+    /********************************************** defined in vsshell.idl, vsshell80.idl, and vsshell100.idl
+    VSADDITEM_AllowMultiSelect       = 0x00000001,  // multi-select
+    VSADDITEM_HideNameField          = 0x00000002,  // disable the item name field
+    VSADDITEM_SuggestTemplateName    = 0x00000008,  // suggest template name for item
+    VSADDITEM_ShowLocationField      = 0x00000010,  // show the location field
+    VSADDITEM_ShowDontShowAgain      = 0x00000040,  // show the "Don't show again" checkbox
+    VSADDITEM_AllowStickyFilter      = 0x00000080,  // allow pbstrFilter[out] parameter to be returned
+    VSADDITEM_AddNewItems            = 0x00000100,  // use the Add New Item dialog (mutually exclusive with VSADDITEM_AddExistingItems)
+    VSADDITEM_AddExistingItems       = 0x00000200,  // use the Add Existing Item dialog (mutually exclusive with VSADDITEM_AddNewItems)
+    VSADDITEM_NoUserTemplateFeatures = 0x00001000,  // dialog does not have 'Standard Templates/User-defined Templates' tabs or 'Online Templates' button
+    VSADDITEM_ProjectHandlesLinks    = 0x00008000,  // project adds items as links--enables "Link" menu item
+    VSADDITEM_NewDirectoryForItem    = 0x00010000,  // item is placed in new directory (location field tracks name field)
+    VSADDITEM_AllowHiddenTreeView    = 0x00020000,  // allow tree view to be hidden if only one template node present
+    VSADDITEM_ShowOpenButtonDropDown = 0x00040000,  // show drop-down menu under Open button on dialog (default is to not dropdown, see comment for VSADDITEM_NoOpenButtonDropDown)
+    VSADDITEM_NoOpenButtonDropDown   = 0x00080000,  // don't show drop-down menu under Open button on dialog (OBSOLETE/default, use VSADDITEM_ShowOpenButtonDropDown to show dropdown)
+    VSADDITEM_AllowSingleTreeRoot    = 0x00100000,  // allow the tree view to have only one root node (default is to use sub-nodes)
+    VSADDITEM_ExpandSingleTreeRoot   = 0x00200000,  // ask the tree view to expand a single root node (default is to not expand it)
+    VSADDITEM_ShowProjectTypesOnly   = 0x00400000,  // show only project types in the dialog (not items associated with projects)
+    VSADDITEM_AllowOnlyFileSysLocs   = 0x00800000,  // allow only local file system locations in the Add Existing Item dialog (no http://)
+    VSADDITEM_NoOnlineTemplates      = 0x01000000,  // don't show online templates provider in the Add New Item dialog. No effect on Add Existing Item dialog.
+    **********************************************/
+    VSADDITEM_DisallowCompactView    = 0x02000000    // don't show compact New Item Dialog
+};
+

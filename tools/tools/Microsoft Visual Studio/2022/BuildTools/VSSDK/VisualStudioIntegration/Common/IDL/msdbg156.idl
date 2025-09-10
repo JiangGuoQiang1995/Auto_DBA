@@ -1,0 +1,144 @@
+// msdbg156.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+import "msdbg100.idl";
+import "msdbg120.idl";
+#endif
+
+#ifdef DEBUGGER_PIA_BUILD
+#define XINT32 int
+#else
+#define XINT32 ULONG32
+#endif
+
+// ------------------------------------------------------------------
+// IAsyncDebugEngineOperation
+// Represents an operation performed by a debugging component (in other words NOT something in
+// the target process) that happens asynchronously. Example: asynchronous request to fetch stack frames.
+[
+    object,
+    uuid(08C85523-1F56-4CCD-8315-DF2C657A245F),
+    pointer_default(unique)
+]
+interface IAsyncDebugEngineOperation : IUnknown
+{
+    // Start execution of the operation in the debug engine.
+    // This will fail with E_ASYNC_OPERATION_RUNNING if the operation has already started.
+    HRESULT BeginExecute();
+
+    // Cancel an in progress operation in the debug engine.
+    // If this operation can actually be cancelled before completion
+    // the completion handler should be called with COR_E_OPERATIONCANCELLED (0x8013153b).
+    // Note that COR_E_OPERATIONCANCELLED is defined in CorError.h from the Windows SDK, and
+    // is the same as HResult property from an OperationCanceledException in .NET.
+    // This will fail with E_ASYNC_OPERATION_NOT_RUNNING if the operation hasn't been started yet.
+    // This does NOT need to block until the operation is done.
+    // This will be invoked automatically for any non-completed operations when Step, Continue,
+    // or Stop Debugging is invoked, but the Step/Continue/Stop will not be sent to the debug
+    // engine until all completions are received. This means that the completion routine should
+    // only be invoked when Cancel is called if it would be safe for the engine to receive a
+    // Start/Continue/Stop while the operation is still in progress. Otherwise the completion
+    // routine should be invoked when the operation actually completes.
+    HRESULT Cancel();
+};
+
+// ------------------------------------------------------------------
+// IAsyncDebugEngineOperationWorkList
+// Represents a set of IAsyncDebugEngineOperations that can be batched together. For example, in the
+// parallel stacks window this can be used to batch together the various stack walk requests. 
+// This can optionally be implemented by engines if they would like to control this batching.
+[
+    object,
+    uuid(4401B380-016E-4B61-8532-B3B0F41A3B47),
+    pointer_default(unique)
+]
+interface IAsyncDebugEngineOperationWorkList : IUnknown
+{
+    // Add an operation to the worklist to be executed later.
+    // This will fail with E_ASYNC_OPERATION_RUNNING if the worklist has already
+    // been started.
+    HRESULT AddOperation([in] IAsyncDebugEngineOperation* pDebugOperation);
+    // Begin executing operations in the worklist.
+    // This will fail with E_ASYNC_OPERATION_RUNNING if the worklist has already
+    // been started.
+    HRESULT BeginExecute();
+    // Cancel any in-progress or not yet started operations.
+    // This will fail with E_ASYNC_OPERATION_NOT_RUNNING if the worklist hasn't started
+    // yet.
+    HRESULT Cancel();
+};
+
+// ------------------------------------------------------------------
+// IAsyncDebugWorkListFactory
+// Interface implemented by the SDM (QIable from the session object) and optionally by debug
+// engines (QIable from the engine object) to allow the caller to construct work list objects.
+[
+    object,
+    uuid(119CD2BC-74EC-4510-A0CD-6276A8A87737),
+    pointer_default(unique)
+]
+interface IAsyncDebugWorkListFactory : IUnknown
+{
+    HRESULT CreateDebugOperationWorkList(
+        [out] IAsyncDebugEngineOperationWorkList** ppWorkList
+    );
+};
+
+// IDebugThreadProperties
+// Object wrapper around a thread properties structure
+//
+// NOTE: the implementation of this interface _MUST_ be thread agile. This is the 
+// default if implementing the interface in managed code. If implementing in native code, 
+// implementations should aggregate the free threaded marshaler.
+[
+    object,
+    local,
+    uuid(30FFAEC1-C24C-440A-A9C5-1CC1CFD99DC8),
+    pointer_default(unique)
+]
+interface IDebugThreadProperties : IUnknown
+{
+    HRESULT GetProperties([out] THREADPROPERTIES100* pProperties);
+}
+
+// ------------------------------------------------------------------
+// IAsyncDebugGetThreadPropertiesCompletionHandler
+[
+    object,
+    uuid(00EB372D-8DC7-404A-AF65-17262FD3B330),
+    pointer_default(unique)
+]
+interface IAsyncDebugGetThreadPropertiesCompletionHandler : IUnknown
+{
+    HRESULT OnComplete(
+        [in] HRESULT hr,
+        [in] IDebugThreadProperties* pStackFrames);
+};
+
+// ------------------------------------------------------------------
+// IDebugThread156
+[
+    object,
+    uuid(F6CD61C6-B706-488A-96C0-1FC3F10AE514),
+    pointer_default(unique)
+]
+interface IDebugThread156 : IUnknown
+{
+    HRESULT GetThreadPropertiesAsync(
+        [in] THREADPROPERTY_FIELDS100 dwFields,
+        [in] IAsyncDebugGetThreadPropertiesCompletionHandler* pCompletionHandler,
+        [out] IAsyncDebugEngineOperation** ppDebugOperation);
+};

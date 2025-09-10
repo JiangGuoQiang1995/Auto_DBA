@@ -1,0 +1,31 @@
+// msdbg161.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+// Interface which can be QI'ed from the implementation of IVsDebuggerSymbolSettings120A to set/get the nuget symbol server setting
+[
+    uuid(20BC5BAB-4E63-49E4-A7E4-611E705E0A05),
+    version(1.0),
+    pointer_default(unique),
+    local
+]
+interface IVsDebuggerSymbolSettings161 : IUnknown
+{
+    // Controls whether Nuget symbol servers are enabled for symbol search.
+    [propput] HRESULT UseNugetSymbolServers([in] VARIANT_BOOL flag);
+    [propget] HRESULT UseNugetSymbolServers([out, retval] VARIANT_BOOL* flag);
+};

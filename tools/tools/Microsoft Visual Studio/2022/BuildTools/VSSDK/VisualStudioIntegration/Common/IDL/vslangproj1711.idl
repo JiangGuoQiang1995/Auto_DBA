@@ -1,0 +1,64 @@
+// Copyright (c) Microsoft Corporation, All Rights Reserved.
+
+#ifndef INTEROPLIB
+import "oaidl.idl";
+
+// Interface definitions
+cpp_quote("#define VSLANGPROJ1711_VER_MAJ   17")
+cpp_quote("#define VSLANGPROJ1711_VER_MIN    11")
+
+#define VSLANGPROJ_VER        17.11
+
+[
+    uuid(d0d25e8f-0f21-4b92-bf22-14ad23e2d572),
+    helpstring("Microsoft Visual Studio Project Model (17.11)"),
+    version(VSLANGPROJ_VER)
+]
+library VSLangProj1711
+{
+#endif // INTEROPLIB
+
+    importlib("vslangproj165.tlb");
+
+    enum VsProjPropId1711
+    {
+        VBPROJPROPID_PreferNativeArm64 = 17311,
+    };
+
+    [
+        uuid(877DEED7-A481-40CC-AE38-78F0F8128B2A),
+        helpstring("VB Project configuration properties 8"),
+        pointer_default(unique),
+        dual
+    ]
+    interface VBProjectConfigurationProperties8 : VBProjectConfigurationProperties7
+    {
+        [propget, id(VBPROJPROPID_PreferNativeArm64), helpstring("native arm64 preferred")]
+        HRESULT PreferNativeArm64([out, retval] VARIANT_BOOL *pValue);
+        [propput, id(VBPROJPROPID_PreferNativeArm64), helpstring("native arm64 preferred")]
+        HRESULT PreferNativeArm64([in] VARIANT_BOOL value);
+    }
+
+    [
+        uuid(91cb30a2-7ffd-468e-8270-a99c20a4fe42),
+        helpstring("C# project configuration properties 8"),
+        pointer_default(unique),
+        dual
+    ]
+    interface CSharpProjectConfigurationProperties8 : CSharpProjectConfigurationProperties7
+    {
+        [propget, id(VBPROJPROPID_PreferNativeArm64), helpstring("native arm64 preferred")]
+        HRESULT PreferNativeArm64([out, retval] VARIANT_BOOL *pValue);
+        [propput, id(VBPROJPROPID_PreferNativeArm64), helpstring("native arm64 preferred")]
+        HRESULT PreferNativeArm64([in] VARIANT_BOOL value);
+    }
+
+#ifndef INTEROPLIB
+}
+#endif
+
+cpp_quote("#ifdef FORCE_EXPLICIT_DTE_NAMESPACE")
+cpp_quote("#undef DTE")
+cpp_quote("#undef Project")
+cpp_quote("#undef ProjectItem")
+cpp_quote("#endif")

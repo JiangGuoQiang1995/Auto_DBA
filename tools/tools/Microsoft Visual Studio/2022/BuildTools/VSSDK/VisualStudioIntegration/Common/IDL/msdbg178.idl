@@ -1,0 +1,152 @@
+// msdbg178.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+#ifdef DEBUGGER_PIA_BUILD
+#define XINT32 int
+#else
+#define XINT32 ULONG32
+#endif
+
+// Indicates that the property result is a truncated string, and the value returned via 
+// GetPropertyInfo in the bstrValue field does not represent the full string in the 
+// target. IDebugProperty::GetStringCharLength and GetStringChars can be used to obtain
+// the full string for string visualizers. Note that engines should generally impose a
+// maximum length of even the "full" string, so for very large strings, the result from
+// GetStringCharLength + GetStringChars may still be truncated.
+// NOTE: DBG_EXATTRIB_TRUNCATED_STRING is defined as the same value as DBG_EXATTRIB_CAN_EVALUATE_WITHOUT_OPTIMIZATION.
+// To differentiate them, DBG_EXATTRIB_TRUNCATED_STRING should never be used with DBG_ATTRIB_VALUE_ERROR.
+cpp_quote("#define DBG_EXATTRIB_TRUNCATED_STRING 0x0000000000000100")
+
+enum _DotnetVisualizerStyle
+{
+    ModalDialog = 0x0000,
+    ToolWindow  = 0x0001
+};
+
+typedef DWORD DotnetVisualizerStyle;
+
+[
+    local,
+    object,
+    uuid(6184BE5C-3CB1-4B98-A610-4F61764483F1),
+    pointer_default(unique)
+]
+interface IDebugVisualizerExtensionListItem : IUnknown
+{
+    HRESULT GetInfo(
+        [out, annotation("_Out_")] GUID* pId,
+        [out, annotation("_Out_")] BSTR* pDisplayName,
+        [out, annotation("_Out_")] BSTR* pTargetTypeFullName,
+        [out, annotation("_Out_")] BSTR* pTargetTypeAssemblyFullName,
+        [out, annotation("_Out_")] BSTR* pDebuggeeSideVisualizerTypeFullName,
+        [out, annotation("_Out_")] BSTR* pDebuggeeSideVisualizerTypeAssemblyFullName,
+        [out, annotation("_Out_")] BSTR* pInstallDirectory,
+        [out, annotation("_Out_")] DotnetVisualizerStyle* pStyle);
+};
+
+// ------------------------------------------------------------------
+// Represents a list of VS 17.8 IDebugVisualizerExtensionListItems that can be indexed like an array.
+//
+// NOTE: the implementation of this interface _MUST_ be thread agile. This is the 
+// default if implementing the interface in managed code. If implementing in native code, 
+// implementations should aggregate the free threaded marshaler.
+[
+    local,
+    object,
+    uuid(FFA6CA0A-9CDE-4F48-BFD3-3E02FE316D1D),
+    pointer_default(unique)
+]
+interface IDebugVisualizerExtensionList178 : IUnknown
+{
+    [propget]
+        HRESULT Count([out, retval, annotation("_Out_")] XINT32* pCount);
+
+    [propget, id(DISPID_VALUE), helpstring("Item")]
+        HRESULT Item([in] XINT32 index, [out, retval, annotation("_Outptr_")] IDebugVisualizerExtensionListItem** ppItem);
+
+    HRESULT GetItems(
+        [in] XINT32 index,
+        [in] XINT32 count,
+        [out, size_is(count), length_is(*pCountReturned), annotation("_Out_writes_to_(count, *pCountReturned)")] IDebugVisualizerExtensionListItem** ppItemsArray,
+        [in, out, annotation("_Out_")] XINT32* pCountReturned);
+};
+
+// Optional interface implemented by debug engines and the SDM
+[
+    local,
+    object,
+    uuid(36CD3D35-790A-45FC-8B4B-62D056C838A9),
+    pointer_default(unique)
+]
+interface IDebugVisualizerExtensionReceiver178 : IUnknown
+{
+    // Called on startup and also when the visualizer collection changes.
+    HRESULT SetVisualizerExtensions([in] IDebugVisualizerExtensionList178* collection);
+};
+
+[
+    local,
+    object,
+    uuid(f48e9dae-f61d-4fa6-9396-eee7b269bbbf),
+    pointer_default(unique)
+]
+interface IDebugDefaultPort178 : IUnknown
+{
+    /// <summary>
+    /// Default transport supports different underlying channels, and each channel has a different port supplier id,
+    /// this method returns this value.
+    /// </summary>
+    /// <param name="pId">guidLocalPortSupplier for local debugging or remote with Windows authentication,
+    /// guidNativePortSupplier for no-authentication or any other value for a custom channel</param>
+    /// <returns>S_OK on success</returns>
+    HRESULT GetChannelPortSupplierId([out, retval, annotation("_Out_")] GUID* pId);
+};
+
+/// <summary>
+/// Optional interface that a debug engine can implement on their IDebugExceptionEvent2 implementations
+/// to provide additional properties to the UI.
+/// </summary>
+[
+    local,
+    object,
+    uuid(2bf9dac6-eb17-42d9-90eb-4e23e3dbd997),
+    pointer_default(unique)
+]
+interface IDebugExceptionEvent178 : IUnknown
+{
+    /// <summary>
+    /// If the exception is being raised by an API in the target engine's base framework
+    /// (example: the .NET Runtime/Base Class Library when debugging .NET), this method
+    /// returns the name of the API being called.
+    /// </summary>
+    /// <param name="methodName">qualified method name (ex: System.String.Format) for the API
+    /// being called or nullptr if this exception is not being throw by an API.</param>
+    /// <returns>S_OK if a method was returned, otherwise S_FALSE or a failure code</returns>
+    HRESULT GetFrameworkAPIMethodName([out, annotation("_Deref_out_opt_")] BSTR* methodName);
+
+    /// <summary>
+    /// If the exception is being raised by an API in the target engine's base framework
+    /// (example: the .NET Runtime/Base Class Library when debugging .NET), this method
+    /// returns the framework portion of the call stack. In other words, the top frames
+    /// of the call stack that are not part of the user's code.
+    /// </summary>
+    /// <param name="callStack">Newline-delimited framework call stack, or nullptr
+    /// if this exception is not being throw by an API.</param>
+    /// <returns>S_OK if a method was returned, otherwise S_FALSE or a failure code</returns>
+    HRESULT GetFrameworkAPIStack([out, annotation("_Deref_out_opt_")] BSTR* callStack);
+};

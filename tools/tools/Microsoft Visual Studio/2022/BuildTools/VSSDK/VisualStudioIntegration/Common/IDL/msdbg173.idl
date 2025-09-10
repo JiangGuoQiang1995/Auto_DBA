@@ -1,0 +1,45 @@
+// msdbg173.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+#ifdef DEBUGGER_PIA_BUILD
+#define XINT32 int
+#else
+#define XINT32 ULONG32
+#endif
+
+//----------------------------------------------------------------------------
+// IAsyncDebugGenerateSymbolsCompletionHandler173
+// Optional interface that can be implemented by objects that also implement
+//  IAsyncDebugGenerateSymbolsCompletionHandler in order to receive more detailed
+//  error information from the debug engine when symbol generation fails.
+//----------------------------------------------------------------------------
+[
+    local,
+    object,
+    uuid(87ACB9A6-52D1-40FE-9C55-5B4F6773FFE5),
+    pointer_default(unique)
+]
+interface IAsyncDebugGenerateSymbolsCompletionHandler173 : IUnknown
+{
+    // Called when symbol generation has failed, if the debug engine can provide
+    //  additional error information.  Engines should call this method BEFORE
+    //  calling IAsyncDebugGenerateSymbolsCompletionHandler.OnComplete.
+    HRESULT SetErrorMessage(
+        [in] BSTR errorMessage
+        );
+};

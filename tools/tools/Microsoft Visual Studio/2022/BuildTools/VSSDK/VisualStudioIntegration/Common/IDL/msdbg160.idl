@@ -1,0 +1,84 @@
+// msdbg160.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+#endif
+
+// Interface implemented by SDM processes objects to support reverse execution.
+[
+    object,
+    uuid(A9BF4FB5-C25E-4FAD-BDC4-AB9D9C72DCE9),
+    pointer_default(unique)
+]
+interface IDebugReversibleSessionProcess160 : IUnknown
+{
+    // Query to determine if reverse execution is possible. S_OK (0) indicates that it is, S_FALSE (1) indicates that it is not.
+    // This value may change when a new program is added or an existing one is removed.
+    HRESULT CanReverse();
+
+    // Step the process in reverse direction.
+    HRESULT ReverseStep([in] IDebugThread2* pThread, [in] STEPKIND sk, [in] STEPUNIT su);
+
+    // Run the process in reverse direction.
+    // This method is similar to IDebugProcess3::Execute but in the reversed direction.
+    HRESULT ReverseExecute([in] IDebugThread2* pThread);
+};
+
+enum ExecuteDirection
+{
+    ExecuteDirection_Forward = 0,
+    ExecuteDirection_Reverse = 1,
+};
+
+// Interface which can implemented by debug engine program objects that are able to execute in reverse (a.k.a. historical execution)
+[
+    object,
+    uuid(7F7A3651-E3D2-4137-8367-56FCCCAAB4DC),
+    pointer_default(unique)
+]
+interface IDebugReversibleEngineProgram160 : IUnknown
+{
+    // Query to determine if reverse execution is possible. S_OK (0) indicates that it is, S_FALSE (1) indicates that it is not.
+    // This value shouldn't change for the lifetime of the program.
+    HRESULT CanReverse();
+
+    // Set which direction the program will execute.
+    // The direction is applied when the program resumes running via continue or step etc.
+    HRESULT SetExecuteDirection([in] enum ExecuteDirection executeDirection);
+};
+
+
+// ------------------------------------------------------------------
+// IDebugProperty160
+// Provides further information when retrieving information related to data breakpoints.
+[
+    object,
+    uuid(C6C64271-4FDE-485A-899B-D00E628F6A82),
+    pointer_default(unique)
+]
+interface IDebugProperty160 : IUnknown
+{
+    // Obtains additional information used to set or remove a data breakpoint on this property. 
+    // This is used, for example, when invoking the 'Break when changed' command on 
+    // a watch window item.
+    // The additional information includes the display name of the property.
+    // To create a breakpoint, the address/size is placed in the fields of a BP_LOCATION_DATA_STRING
+    // structure for a BPLT_DATA_STRING breakpoint.
+    HRESULT GetDataBreakpointInfo160(
+        [out] BSTR* pbstrAddress,
+        [out] DWORD* pSize,
+        [out] BSTR* pbstrDisplayName,
+        [out] BSTR* pbstrError);
+};

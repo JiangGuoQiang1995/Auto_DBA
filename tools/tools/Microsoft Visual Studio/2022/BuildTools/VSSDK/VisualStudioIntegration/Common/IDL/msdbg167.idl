@@ -1,0 +1,177 @@
+// msdbg167.idl
+/********************************************************
+*                                                        *
+*   Copyright (C) Microsoft. All rights reserved.        *
+*                                                        *
+*********************************************************/
+cpp_quote("/********************************************************")
+cpp_quote("*                                                        *")
+cpp_quote("*   Copyright (C) Microsoft. All rights reserved.        *")
+cpp_quote("*                                                        *")
+cpp_quote("*********************************************************/")
+import "oaidl.idl";
+import "ocidl.idl";
+
+#ifndef DEBUGGER_PIA_BUILD
+import "msdbg.idl";
+import "msdbg110.idl";
+#endif
+
+
+// This enum extends enum_FRAMEINFO_FLAGS.  enum_FRAMEINFO_FLAGS has exhausted all the possible bits of a 32-bit integer,
+// so any new flags must use enum_FRAMEINFO_FLAGS_EXTENDED instead.
+enum FRAMEINFO_FLAGS_EX167
+{
+    /******************************************
+    FIF_EX_INCLUDE_ASYNC_FRAMES   = 0x1,
+    FIF_EX_SHOW_TASK_IDS          = 0x2,
+    FIF_EX_FUNCNAME_HIDE_TEMPLATE_ARGS = 0x4, // Hide template arguments
+    ******************************************/
+    FIF_EX_SHOW_CURRENT_TASK_ONLY = 0x8
+};
+
+// Provides information that describes a messagable program.
+typedef struct MessagableProgramInfo
+{
+    // The unique identifier for the messagable program.
+    GUID ProgramId;
+
+    // The PID of the messagable program.
+    DWORD LocalPid;
+
+    // The name of the messagable program.
+    BSTR Name;
+} MessagableProgramInfo;
+
+// Enumerates the current set of programs capable of sending or receiving custom messages.
+[
+    uuid(0B867DB0-C6F9-46F5-BC66-EFA846D5D7FE),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IEnumMessagablePrograms : IUnknown
+{
+    // Returns the specified number of MessagableProgramInfo objects in an enumeration sequence.
+    HRESULT Next(
+        [in] ULONG celt,
+        [out, size_is(celt), length_is(*pceltFetched)] MessagableProgramInfo* rgelt,
+        [in, out] ULONG* pceltFetched);
+
+    // Skips a specified number of MessagableProgramInfo objects in an enumeration sequence.
+    HRESULT Skip(
+        [in] ULONG celt);
+
+    // Resets an enumeration sequence to the beginning.
+    HRESULT Reset(void);
+
+    // Creates an enumerator that contains the same enumeration state as the current enumerator.
+    HRESULT Clone(
+        [out] IEnumMessagablePrograms** ppEnum);
+
+    // Gets the number of MessagableProgramInfo objects in an enumeration sequence.
+    HRESULT GetCount(
+        [out] ULONG* pcelt);
+}
+
+// Provides a handler for the completion of a messagable program operation.
+[
+    uuid(282F3F38-B956-4D38-9412-AA6600882904),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IAsyncDebuggerHostMessageCompletionHandler : IUnknown
+{
+    // Invoked upon completion of a messagable program operation.  NOTE: This method may be invoked on
+    //  an arbitrary background thread unrelated to the thread that made the original call.
+    HRESULT OnComplete(
+        [in] HRESULT hr,
+        [in] struct VsComponentMessage* responseMessage);
+}
+
+// Provides notifications related to messagable programs.
+[
+    uuid(AFFF99BB-15B2-4DF4-8BF8-04F2C71BF1FF),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsDebuggerHostMessageEvents : IUnknown
+{
+    // Invoked when a new messagable program is available.
+    HRESULT OnNewMessagableProgram(
+        [in] MessagableProgramInfo* pMessagableProgramInfo);
+
+    // Invoked when a messagable program is destroyed.
+    HRESULT OnMessagableProgramDestroyed(
+        [in] MessagableProgramInfo* pMessagableProgramInfo);
+
+    // Invoked when a messagable program's information is updated.
+    HRESULT OnMessagableProgramInfoUpdated(
+        [in] MessagableProgramInfo* pMessagableProgramInfo);
+}
+
+// Provides the ability to query information about messagable programs and send messages to them.  Implemented
+//  by the debugger, obtained via the SID_SVsDebuggerHostMessageService service.
+[
+    uuid(EC0906E9-AF59-49EF-896E-A37A100AEF84),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IVsDebuggerHostMessageService : IUnknown
+{
+    // Sends a custom message to the program with the specified ID.  An optional completion handler can be
+    //  provided to receive the reply message from the program, if any.  NOTE: In order to support serialization
+    //  of messages, a limited subset of types are supported for the message parameters.  Supported types
+    //  include: null (VT_EMPTY), string (VT_BSTR), bool (VT_BOOL), sbyte (VT_I1), byte (VT_UI1), Int16 (VT_I2),
+    //  UInt16 (VT_UI2), int (VT_I4 or VT_INT), uint (VT_UI4 or VT_UINT), VT_HRESULT, double (VT_R8), and
+    //  byte[] (VT_ARRAY | VT_UI1).
+    HRESULT SendDebuggerHostMessageAsync(
+        [in] REFGUID messagableProgramId,
+        [in] struct VsComponentMessage message,
+        [in] IAsyncDebuggerHostMessageCompletionHandler *pCompletionHandler);
+
+    // Retrieves the current set of messagable programs.
+    HRESULT EnumMessagablePrograms(
+        [out] IEnumMessagablePrograms** ppEnumMessagablePrograms);
+
+    // Used by a client to receive notifications related to messagable programs.
+    HRESULT AdviseMessagableProgramEvents(
+        [in] IVsDebuggerHostMessageEvents* pEvents,
+        [out] DWORD* cookie);
+
+    // Used by a client to stop receiving notifications related to messagable programs.
+    HRESULT UnadviseMessagableProgramEvents(
+        [in] DWORD cookie);
+}
+
+cpp_quote("#define SID_SVsDebuggerHostMessageService __uuidof(IVsDebuggerHostMessageService)")
+
+// Represents a program running in a process that is capable of sending and receiving custom messages.
+[
+    uuid(EC16D49F-4781-4FC0-826D-C5AE8DA99747),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IDebugMessagableProgram167 : IUnknown
+{
+    // Sends a message to the program.  An optional completion handler can be provided to receive the
+    //  reply message from the program, if any.
+    HRESULT SendDebuggerHostMessageAsync(
+        [in] struct VsComponentMessage message,
+        [in] IAsyncDebuggerHostMessageCompletionHandler* pCompletionHandler);
+
+    // Retrieves information on the messagable program.  If the program is not ready to receive custom
+    //  messages, implementations should return S_FALSE or an error code.
+    HRESULT GetMessagableProgramInfo(
+        [out] MessagableProgramInfo* pMessagableProgramInfo);
+}
+
+// This interface is sent by the debug engine when a program is ready to receive custom messages.  This
+//  is optional if the program is always ready to receive custom messages.
+[
+    uuid(68BDC978-C107-46E1-80AD-29EB7AF9472D),
+    version(1.0),
+    pointer_default(unique)
+]
+interface IDebugMessagableProgramReadyEvent167 : IUnknown
+{
+}
