@@ -1,9 +1,0 @@
-﻿{
-  "$schema": "../../../schemas/servicehub.service.schema.json",
-  "host": "dotnet",
-  "entryPoint": {
-    "assemblyPath": "dotnet\\x64\\Microsoft.VisualStudio.CodeLens.Service.dll",
-    "fullClassName": "Microsoft.VisualStudio.CodeLens.Service.CodeLensServiceHubServiceFactory",
-    "assemblySearchPathsConfig": "CodeLensAssemblyDirectories.x64.json"
-  }
-}
