@@ -7,7 +7,6 @@ class My_Event_Logs(models.Model):
     event_id = models.IntegerField(primary_key=1,verbose_name='故障ID')
     event_code = models.CharField(max_length=30,verbose_name='故障编号')
     event_title = models.CharField(max_length=50,verbose_name='故障标题')
-    #event_describe = models.CharField(max_length=200,blank=True,verbose_name='故障描述')
     event_describe = UEditorField(
         u'描述',                               # 定义该字段在后台管理系统中的别名
         default = '',
@@ -19,11 +18,12 @@ class My_Event_Logs(models.Model):
         upload_settings={"imageMaxSize": 1204000}  # 限制图片大小(1.2MB)
     )
     event_level = models.CharField(max_length=30,blank=True,verbose_name='故障评级')
-    event_model = models.CharField(max_length=30,blank=True,verbose_name='故障模块')
+    event_model = models.CharField(max_length=30,blank=True,choices=[('A', 'MySQL'), ('B', 'Oracle'), ('C', 'PostgreSQL'), ('D', 'Redis'),('E', 'Cassandra'), ('F', 'Others')],verbose_name='故障模块')
     event_range = models.CharField(max_length=50,blank=True,verbose_name='故障影响范围')
     event_time = models.DateTimeField(blank=True,default=timezone.now,verbose_name='故障起止时间')
     event_reason = models.TextField(blank=True,verbose_name='故障原因')
     event_solution = models.TextField(blank=True,verbose_name='解决措施')
+    views = models.PositiveIntegerField('浏览量', default=0)
 
     # def __str__(self)用来配置后台管理系统中故障列表里每条记录显示的名称
     def __str__(self):

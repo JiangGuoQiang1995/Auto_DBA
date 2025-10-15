@@ -32,6 +32,7 @@ urlpatterns = [
     path('Event_Logs/', include('Event_Logs.urls')),                # 故障记录
     path('Task_List/', include('Task_List.urls')),                  # 任务列表
     path('ueditor/', include('DjangoUeditor.urls')),                # UEditor 路由
+    path('search/', include('haystack.urls')),                      # 搜索应用 
 ]
 
 if settings.DEBUG:

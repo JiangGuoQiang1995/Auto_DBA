@@ -6,17 +6,54 @@
 {% endblock %}
 
 {% block content %}
-<div class="main-content">
-    <h2>监控类</h2>
-    <div class="line"></div>
-    <h2>开发类</h2>
-    <div class="line"></div>
-    <h2>数据库相关</h2>
-    <div class="line"></div>
-    <h2>自动化运维相关</h2>
-    <div class="line"></div>
-    <h2>AI应用相关</h2>
-    <div class="line"></div>
-</div>
+<link href="{% static 'css/event.css' %}" rel="stylesheet">
+<div class="main-content d-flex flex-column min-vh-100">
+  <div class="table-responsive">
+    <h2>
+        {{EventName}}
+    </h2>
 
+    <div class="model-details">
+        {% for mylog in LogList %}
+            <div>
+                <a href="{% url 'event_logs:EventDetail' mylog.event_id %}"><b>{{mylog.event_title}}</b></a>
+                <span>【{{mylog.event_time|date:"Y-m-d"}}】</span>
+                <p>
+                    <!-- 添加新闻简要说明 -->
+                    {{mylog.mytxt|truncatechars:"110"}}...
+                </p>
+            </div>
+        {% endfor %}
+		{% if pageData %}
+          <div class="paging">
+            <ul id="pages" class="pagination">
+              {% if pageData.first %}
+              <li><a href="?page=1">1</a></li>
+              {% endif %}
+              {% if pageData.left %}
+              {% if pageData.left_has_more %}
+              <li><span>...</span></li>
+              {% endif %}
+              {% for i in pageData.left %}
+              <li><a href="?page={{i}}">{{i}}</a></li>
+              {% endfor %}
+              {% endif %}
+              <li class="active"><a href="?page={{pageData.page}}">{{pageData.page}}</a></li>
+              {% if pageData.right %}
+              {% for i in pageData.right %}
+              <li><a href="?page={{i}}">{{i}}</a></li>
+              {% endfor %}
+              {% if pageData.right_has_more %}
+              <li><span>...</span></li>
+              {% endif %}
+              {% endif %}
+              {% if pageData.last %}
+              <li><a href="?page={{pageData.total_pages}}">{{pageData.total_pages}}</a></li>
+              {% endif %}
+            </ul>
+          </div>
+		{% endif %}
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+<link href="{% static 'css/event.css' %}" rel="stylesheet">
 <div class="main-content d-flex flex-column min-vh-100">
   <div class="table-responsive">
     <h2>故障列表</h2>
@@ -15,49 +16,86 @@
               <span>新增记录</span>
             </button>
         </div>
+        <div class="model-details-title">
+            {{EventName}}
+            <div class="col-md-7 hidden-xs model-details-title-search">
+                <form method="get" action="{% url 'haystack_search' %}">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="请输入关键词" required />
+                        <span class="input-group-btn">
+                            <input type="submit" class="btn btn-default" value="查询" />
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
         <thead>
             <tr>
               <th scope="col">故障编号</th>
-              <th scope="col">故障描述</th>
+              <th scope="col">故障标题</th>
               <th scope="col" title="致命/严重/一般/无影响">故障评级</th>
               <th scope="col" title="造成故障的模块">故障模块</th>
               <th scope="col">故障影响范围</th>
               <th scope="col" title="故障影响的时间">故障起止时间</th>
-              <th scope="col">故障表象</th>
-              <th scope="col">故障原因</th>
-              <th scope="col">解决措施</th>
               <th scope="col">操作</th>
               <thead>
             <tr>
         </thead>
         <tbody>
-            <tr>
-              <td>Event-001</td>
-              <td>MySQL数据库主键溢出</td>
-              <td>严重</td>
-              <td>RDS MySQL</td>
-              <td>消息推送业务、商城订单业务、设备寻找业务</td>
-              <td>2025-03-18 ~ 2025-03-21</td>
-              <td>业务主数据库可读不可写，用户能够正常使用，能够查询到过往记录，但是无法注册新用户</td>
-              <td>
-                <li>1、MySQL数据库主键使用已经达到int类型支持的最大值，导致业务数据库可读不可写</li>
-                <li>2、业务代码逻辑漏洞：当新增数据时，占用的主键ID一但插入失败，就会跳过该尚未使用的ID，造成</li>
-                <li>   数据库会出现主键ID增长跳跃的现象，而不是线性增长，造成数据库“虚满”。</li>
-              </td>
-              <td>
-                <li>解决措施：</li>
-                <li>    1、完善MySQL相关数据库指标监控，新增对主键ID的使用值、使用率、增长趋势的监控</li>
-                <li>    2、开发更新代码，解决“数据库主键ID非线性增长的‘跳跃’问题”</li>
-              </td>
-              <td class="el-table_2_column_20 is-hidden" rowspan="1" colspan="1">
-                <button class="el-button el-button--primary el-button-mini" type="button">
-                  <span>更新</span>
-                </button>
-                <button class="el-button el-button--primary el-button-mini" type="button">
-                    <span>评价</span>
-                </button>
-              </td>
-            </tr>
+          {% for mylog in LogList %}
+          <tr>
+            <td>{{mylog.event_code}}</td>
+            <td>
+              <a href="{% url 'event_logs:EventDetail' mylog.event_id %}"><b>{{mylog.event_title}}</b></a>
+              <p>{{mylog.mytxt|truncatechars:"110"}}...</p>
+            </td>
+            <td>{{mylog.event_level}}</td>
+            <td>{{mylog.event_model}}</td>
+            <td>{{mylog.event_range}}</td>
+            <td>
+              <span>【{{mylog.event_time|date:"Y-m-d"}}】</span>
+              
+            </td>
+            <td class="el-table_2_column_20 is-hidden" rowspan="1" colspan="1">
+              <button class="el-button el-button--primary el-button-mini" type="button">
+                <span>更新</span>
+              </button>
+              <button class="el-button el-button--primary el-button-mini" type="button">
+                  <span>删除</span>
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+		      {% if pageData %}
+          <div class="paging">
+            <ul id="pages" class="pagination">
+              {% if pageData.first %}
+              <li><a href="?page=1">1</a></li>
+              {% endif %}
+              {% if pageData.left %}
+              {% if pageData.left_has_more %}
+              <li><span>...</span></li>
+              {% endif %}
+              {% for i in pageData.left %}
+              <li><a href="?page={{i}}">{{i}}</a></li>
+              {% endfor %}
+              {% endif %}
+              <li class="active"><a href="?page={{pageData.page}}">{{pageData.page}}</a></li>
+              {% if pageData.right %}
+              {% for i in pageData.right %}
+              <li><a href="?page={{i}}">{{i}}</a></li>
+              {% endfor %}
+              {% if pageData.right_has_more %}
+              <li><span>...</span></li>
+              {% endif %}
+              {% endif %}
+              {% if pageData.last %}
+              <li><a href="?page={{pageData.total_pages}}">{{pageData.total_pages}}</a></li>
+              {% endif %}
+            </ul>
+          </div>
+			    {% endif %}
         </tbody>
     </table>
   </div>

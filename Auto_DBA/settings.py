@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Event_Logs',        # 故障记录
     'Task_List',         # 任务列表
     'DjangoUeditor',     # 注册 UEditor
+    'haystack',          # 添加搜索应用
 ]
 
 MIDDLEWARE = [
@@ -52,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'Auto_DBA.urls'
@@ -87,6 +88,9 @@ DATABASES = {
         'PASSWORD': 'MySQL@3306',  # 数据库用户密码
         'HOST': 'localhost',  # 数据库主机，留空表示本地
         'PORT': '3306',  # 数据库端口，默认为3306
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        }
     }
 }
 
@@ -138,3 +142,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+
+# "记录中心"搜索配置django-haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'Event_Logs.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE  =  10
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

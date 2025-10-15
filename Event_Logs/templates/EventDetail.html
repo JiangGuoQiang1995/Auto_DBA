@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+事件描述
+{% endblock %}
+
+{% block content %}
+<link href="{% static 'css/event.css' %}" rel="stylesheet">
+<!-- 主体内容 -->
+ <div class="main-content d-flex flex-column min-vh-100">
+    <div class="container">
+        <div class="model-details-product-title">
+            {{myevent.event_title}}
+            <div class="model-foot">发布时间：{{myevent.event_time|date:"Y-m-d"}} &nbsp;&nbsp;
+                浏览次数：{{mylog.views}}</div>
+        </div>
+        <div class="model-details">
+            {{ myevent.event_describe | safe }}
+        </div>
+    </div>
+ </div>
+
+
+{% endblock %}

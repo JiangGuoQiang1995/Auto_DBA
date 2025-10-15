@@ -62,8 +62,8 @@
 						<li class="dropdown nav-top"  id="event">
 							<a class="dropdown-toggle on" data-toggle="dropdown" href="#">记录中心</a>
 							<ul class="dropdown-menu">
-								<li><a href="{% url 'Event_Logs:Event_Logs' %} " id="event_log">故障记录</a>
-								<li><a href="{% url 'Event_Logs:Knowledge_Base' %} " id="knowledge">知识库</a>
+								<li><a href="{% url 'event_logs:logs' %}" id="event_log">故障记录</a></li>
+                        		<li><a href="{% url 'event_logs:knowledge' %}" id="knowledge">知识库</a></li>
 							</ul>
 						</li>
 		
@@ -118,8 +118,8 @@
 				<li class="nav-item list-group-item"  id="event">
 					<a class="dropdown-toggle on" data-toggle="dropdown" href="#">记录中心</a>
 					<ul class="dropdown-menu">
-						<li><a href="{% url 'Event_Logs:Event_Logs' %} " id="event_log">故障记录</a>
-                        <li><a href="{% url 'Event_Logs:Knowledge_Base' %} " id="knowledge">知识库</a>
+						<li><a href="{% url 'event_logs:logs' %}" id="event_log">故障记录</a></li>
+                        <li><a href="{% url 'event_logs:knowledge' %}" id="knowledge">知识库</a></li>
 					</ul>
 				</li>
 		
